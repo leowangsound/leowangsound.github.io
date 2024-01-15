@@ -6,55 +6,80 @@
     <title>Leo Wang - Freelancer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #000;
+            margin: 0;
+            overflow: hidden;
         }
 
-        header {
-            text-align: center;
-            padding: 10px;
-            background-color: #f0f0f0;
+        #circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #000;
+            clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0);
         }
 
-        section {
-            max-width: 800px;
-            margin: 20px auto;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
+        .slice {
+            position: absolute;
             width: 100%;
-            background-color: #f0f0f0;
+            height: 100%;
+            clip-path: polygon(50% 50%, 50% 0, 100% 0);
+            transform-origin: 100% 100%;
+        }
+
+        .slice:nth-child(1) { transform: rotate(0deg); }
+        .slice:nth-child(2) { transform: rotate(60deg); }
+        .slice:nth-child(3) { transform: rotate(120deg); }
+        .slice:nth-child(4) { transform: rotate(180deg); }
+        .slice:nth-child(5) { transform: rotate(240deg); }
+        .slice:nth-child(6) { transform: rotate(300deg); }
+
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Leo Wang - Freelancer</h1>
-    </header>
+    <div id="circle">
+        <div class="slice" onclick="navigateTo('SoundDesign')">
+            <div class="text">Sound Design</div>
+        </div>
+        <div class="slice" onclick="navigateTo('FilmSoundrecording')">
+            <div class="text">Film Soundrecording</div>
+        </div>
+        <div class="slice" onclick="navigateTo('Fieldrecording')">
+            <div class="text">Fieldrecording</div>
+        </div>
+        <div class="slice" onclick="navigateTo('Podcast')">
+            <div class="text">Podcast</div>
+        </div>
+        <div class="slice" onclick="navigateTo('AboutMe')">
+            <div class="text">Über mich</div>
+        </div>
+        <div class="slice" onclick="navigateTo('Portfolio')">
+            <div class="text">Portfolio</div>
+        </div>
+    </div>
 
-    <section>
-        <h2>Über mich</h2>
-        <p>Herzlich willkommen auf meiner Website! Ich bin ein Freelancer mit Leidenschaft für...</p>
-        <!-- Füge hier weitere Informationen über dich ein -->
-    </section>
-
-    <section>
-        <h2>Meine Dienstleistungen</h2>
-        <ul>
-            <li>Webentwicklung</li>
-            <li>Design</li>
-            <li>...</li>
-        </ul>
-    </section>
-
-    <footer>
-        &copy; 2024 Leo Wang - Freelancer
-    </footer>
+    <script>
+        function navigateTo(section) {
+            // Hier könntest du zu den entsprechenden Unterseiten navigieren
+            // Zum Beispiel: window.location.href = section + '.html';
+            console.log('Navigiere zu ' + section);
+        }
+    </script>
 
 </body>
 </html>
