@@ -10,7 +10,7 @@
 
     <style>
         body {
-            background-color: #000;
+            background-color: #000; /* Schwarz */
             color: #fff;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -18,36 +18,57 @@
             box-sizing: border-box;
         }
 
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000; /* Schwarz */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            margin-top: 0px; /* Abstand zwischen Logo und Obergrenze der Website */
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background-color: #fff; /* Weiß */
+            margin-top: 30px; /* Abstand zwischen Logo und Navigationsleiste */
+            /* Hier kannst du das Logo einfügen oder den Hintergrund nach Bedarf anpassen */
         }
 
         nav {
             display: flex;
             justify-content: space-around;
+            align-items: center;
             padding: 20px;
-            background-color: #444;
+            background-color: #000; /* Schwarz */
+            position: fixed;
+            top: 130px; /* Größe des Logos plus Abstand */
+            width: 100%;
+            z-index: 1000;
         }
 
         nav a {
+            position: relative;
             color: #ddd; /* Sehr leichte Graufärbung */
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
-            transition: color 0.3s;
+            transition: color 0.3s, font-size 0.3s; /* Übergang für Schriftfarbe und Schriftgröße */
         }
 
         nav a:hover {
             color: #fff; /* Vollständig weiß beim Überfahren */
+            font-size: 18px; /* Größere Schrift beim Überfahren */
         }
 
         section {
             max-width: 800px;
-            margin: 20px auto;
+            margin: 160px auto 20px; /* 160px oben für den festen Header und Logo */
             padding: 20px;
-            background-color: #222;
+            background-color: #000; /* Schwarz */
         }
 
         footer {
@@ -56,15 +77,22 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #333;
+            background: linear-gradient(to bottom, #000, #122657); /* Farbverlauf im Footer von Schwarz zu Blau */
+            color: #fff;
+            display: none; /* Anfangs ausgeblendet */
+        }
+
+        /* Klasse für den Footer, der sichtbar wird, wenn man nach unten gescrollt hat */
+        .visible-footer {
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Leo Wang - Freelancer</h1>
-    </header>
+    <div class="logo-container">
+        <div class="logo"></div>
+    </div>
 
     <nav>
         <a href="#SoundDesign">Sound Design</a>
@@ -77,14 +105,69 @@
 
     <section id="SoundDesign">
         <h2>Sound Design</h2>
-        <!-- Hier kommt der Inhalt für den Bereich "Sound Design" -->
+        <p>Hier steht der Platzhaltertext für den Bereich "Sound Design".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Sound Design">
     </section>
 
-    <!-- Wiederhole das obige Muster für die anderen Abschnitte -->
+    <section id="FilmSoundrecording">
+        <h2>Film Soundrecording</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Film Soundrecording".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Film Soundrecording">
+    </section>
 
-    <footer>
+    <section id="Fieldrecording">
+        <h2>Fieldrecording</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Fieldrecording".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Fieldrecording">
+    </section>
+
+    <section id="Podcast">
+        <h2>Podcast</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Podcast".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Podcast">
+    </section>
+
+    <section id="AboutMe">
+        <h2>Über mich</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Über mich".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Über mich">
+    </section>
+
+    <section id="Portfolio">
+        <h2>Portfolio</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Portfolio".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Portfolio">
+    </section>
+
+    <footer id="site-footer">
         &copy; 2024 Leo Wang - Freelancer
     </footer>
 
+    <script>
+        // Sobald der Benutzer 80px nach unten gescrollt ist, zeige den Footer
+        window.addEventListener('scroll', function() {
+            var footer = document.getElementById('site-footer');
+            if (window.scrollY > 80) {
+                footer.classList.add('visible-footer');
+            } else {
+                footer.classList.remove('visible-footer');
+            }
+        });
+
+        // Smooth Scroll für die Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                const offset = 180;  // Ändere dies auf den gewünschten Abstand
+
+                window.scroll({
+                    top: targetElement.offsetTop - offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
