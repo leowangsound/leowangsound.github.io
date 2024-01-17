@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leo Wang - Freelancer</title>
-    
-    <!-- Füge diese Zeile für die Montserrat Schriftart hinzu -->
+
+    <!-- Google Font: Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Verlinkung zur separaten CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
 
     <style>
         body {
@@ -27,16 +30,9 @@
             width: 100%;
             z-index: 1001; /* Über Zone 1, um die Icons zu überdecken */
             display: flex;
-            justify-content: flex-start; /* Von flex-end zu flex-start ändern */
-            align-items: center; /* Vertikal zentrieren */
-            padding-left: 20px; /* Füge etwas Abstand zum linken Rand hinzu */
-        }
-
-        .language-selector {
-            color: #fff; /* Textfarbe auf Weiß setzen */
-            margin-right: auto; /* Autormatischen rechten Abstand hinzufügen */
-            margin-left: 20px; /* Linken Abstand hinzufügen */
-            font-size: 14px; /* Schriftgröße festlegen */
+            justify-content: flex-end;
+            align-items: center; /* Zentral ausrichten */
+            padding-right: 20px; /* Füge etwas Abstand zum rechten Rand hinzu */
         }
 
         .social-icon {
@@ -142,17 +138,20 @@
 </head>
 <body>
 
-    <!-- Zone 0 -->
-    <div class="zone-0">
-        <!-- Füge hier die Sprachauswahl "en | de" ein -->
-        <div class="language-selector">en | de</div>
-        <!-- Füge hier das Mail-Icon ein -->
-        <div class="mail-icon"></div>
-        <!-- Füge hier das Instagram-Icon ein -->
-        <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
-            <div class="social-icon instagram-icon"></div>
-        </a>
+<!-- Zone 0 -->
+<div class="zone-0">
+    <!-- Sprachauswahl hinzufügen -->
+    <div class="language-selector">
+        en | de
     </div>
+
+    <!-- Vorhandene Icons ... -->
+    <div class="mail-icon"></div>
+    <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon instagram-icon"></div>
+    </a>
+</div>
+
 
     <!-- Zone 1 -->
     <div class="logo-container">
