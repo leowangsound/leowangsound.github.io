@@ -27,9 +27,16 @@
             width: 100%;
             z-index: 1001; /* Über Zone 1, um die Icons zu überdecken */
             display: flex;
-            justify-content: flex-end;
-            align-items: center; /* Zentral ausrichten */
-            padding-right: 20px; /* Füge etwas Abstand zum rechten Rand hinzu */
+            justify-content: flex-start; /* Von flex-end zu flex-start ändern */
+            align-items: center; /* Vertikal zentrieren */
+            padding-left: 20px; /* Füge etwas Abstand zum linken Rand hinzu */
+        }
+
+        .language-selector {
+            color: #fff; /* Textfarbe auf Weiß setzen */
+            margin-right: auto; /* Autormatischen rechten Abstand hinzufügen */
+            margin-left: 20px; /* Linken Abstand hinzufügen */
+            font-size: 14px; /* Schriftgröße festlegen */
         }
 
         .social-icon {
@@ -125,17 +132,11 @@
         footer {
             text-align: center;
             padding: 10px;
-            position: fixed;
+            position: bottom;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to bottom, #000, #122657); /* Farbverlauf im Footer von Schwarz zu Blau */
+            background: linear-gradient(to bottom, #000, #0b0b64); /* Farbverlauf im Footer von Schwarz zu Blau */
             color: #fff;
-            display: none; /* Anfangs ausgeblendet */
-        }
-
-        /* Klasse für den Footer, der sichtbar wird, wenn man nach unten gescrollt hat */
-        .visible-footer {
-            display: block;
         }
     </style>
 </head>
@@ -143,6 +144,8 @@
 
     <!-- Zone 0 -->
     <div class="zone-0">
+        <!-- Füge hier die Sprachauswahl "en | de" ein -->
+        <div class="language-selector">en | de</div>
         <!-- Füge hier das Mail-Icon ein -->
         <div class="mail-icon"></div>
         <!-- Füge hier das Instagram-Icon ein -->
@@ -216,16 +219,6 @@
     </footer>
 
     <script>
-        // Sobald der Benutzer 80px nach unten gescrollt ist, zeige den Footer
-        window.addEventListener('scroll', function() {
-            var footer = document.getElementById('site-footer');
-            if (window.scrollY > 80) {
-                footer.classList.add('visible-footer');
-            } else {
-                footer.classList.remove('visible-footer');
-            }
-        });
-
         // Smooth Scroll für die Navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
