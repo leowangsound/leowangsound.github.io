@@ -18,14 +18,59 @@
             box-sizing: border-box;
         }
 
+        /* Zone 0 */
+        .zone-0 {
+            height: 15px; /* Höhe auf die Höhe der Icons setzen */
+            background-color: #000; /* Hintergrundfarbe auf Schwarz setzen */
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1001; /* Über Zone 1, um die Icons zu überdecken */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center; /* Zentral ausrichten */
+            padding-right: 20px; /* Füge etwas Abstand zum rechten Rand hinzu */
+        }
+
+        .social-icon {
+            width: 13px; /* Breite des Icons */
+            height: 13px; /* Höhe des Icons */
+            margin-left: 2px; /* Abstand zwischen den Icons */
+            cursor: pointer;
+        }
+
+        .mail-icon,
+        .instagram-icon {
+            width: 12px;
+            height: 12px;
+            cursor: pointer;
+            transition: filter 0.5s; /* Übergang für Filtereffekt */
+        }
+
+        .mail-icon:hover,
+        .instagram-icon:hover {
+            filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
+            transform: scale(1.15); /* Vergrößere das Icon um 10% beim Hover */
+        }
+
+        .mail-icon {
+            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true) center/cover no-repeat; /* Mail-Icon */
+        }
+
+        .instagram-icon {
+            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true) center/cover no-repeat; /* Instagram-Icon */
+        }
+
+        /* Zone 1 */
         .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #000; /* Schwarz */
             position: fixed;
-            top: 0;
+            top: 15px; /* Untere Grenze der Zone 0 */
             width: 100%;
+            height: 130px; /* Erhöhe die Höhe des Containers */
             z-index: 1000;
             margin-top: 0px; /* Abstand zwischen Logo und Obergrenze der Website */
         }
@@ -33,9 +78,15 @@
         .logo {
             width: 100px;
             height: 100px;
-            background-color: #fff; /* Weiß */
-            margin-top: 30px; /* Abstand zwischen Logo und Navigationsleiste */
-            /* Hier kannst du das Logo einfügen oder den Hintergrund nach Bedarf anpassen */
+            background: url('https://github.com/leowangsound/leowangsound.github.io/raw/main/logo_200x200.png') center/cover no-repeat; /* Hintergrundbild setzen */
+            margin-top: -5px; /* Verschiebe das Logo um 5 Pixel nach oben */
+            transition: transform 0.3s, filter 0.3s; /* Übergang für Transformation und Filtereffekt */
+            cursor: pointer; /* Ändere den Mauszeiger beim Überfahren des Logos */
+        }
+
+        .logo:hover {
+            transform: scale(1.1); /* Vergrößere das Logo um 10% beim Hover */
+            filter: brightness(150%); /* Erhöhe die Helligkeit um 50% beim Hover */
         }
 
         nav {
@@ -45,7 +96,7 @@
             padding: 20px;
             background-color: #000; /* Schwarz */
             position: fixed;
-            top: 130px; /* Größe des Logos plus Abstand */
+            top: 130px; /* Untere Grenze der Zone 1 */
             width: 100%;
             z-index: 1000;
         }
@@ -66,7 +117,7 @@
 
         section {
             max-width: 800px;
-            margin: 160px auto 20px; /* 160px oben für den festen Header und Logo */
+            margin: 150px auto 20px; /* 150px oben für den festen Header, Logo und Navigationsleiste */
             padding: 20px;
             background-color: #000; /* Schwarz */
         }
@@ -90,8 +141,22 @@
 </head>
 <body>
 
+    <!-- Zone 0 -->
+    <div class="zone-0">
+        <!-- Füge hier das Mail-Icon ein -->
+        <div class="mail-icon"></div>
+        <!-- Füge hier das Instagram-Icon ein -->
+        <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
+            <div class="social-icon instagram-icon"></div>
+        </a>
+    </div>
+
+    <!-- Zone 1 -->
     <div class="logo-container">
-        <div class="logo"></div>
+        <!-- Änderung: Füge einen Link zum Logo hinzu -->
+        <a href="#Tongestaltung">
+            <div class="logo"></div>
+        </a>
     </div>
 
     <nav>
@@ -102,6 +167,13 @@
         <a href="#AboutMe">Über mich</a>
         <a href="#Portfolio">Portfolio</a>
     </nav>
+
+    <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
+    <section id="Tongestaltung">
+        <h2>Tongestaltung ist für mich...</h2>
+        <p>Hier steht der Platzhaltertext für den Bereich "Tongestaltung".</p>
+        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Tongestaltung">
+    </section>
 
     <section id="SoundDesign">
         <h2>Sound Design</h2>
