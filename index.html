@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leo Wang - Freelancer</title>
+    <title>Leo Wang Sound</title>
 
     <!-- Google Font: Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -22,6 +22,25 @@
         }
 
         /* Zone 0 */
+        
+         .language-button {
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+            position: absolute;
+            left: 9px;
+            top: 0px;
+            height: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .language-button:hover {
+            transform: scale(1.2);
+            filter: brightness(150%);
+        }
+        
         .zone-0 {
             height: 15px; /* Höhe auf die Höhe der Icons setzen */
             background-color: #000; /* Hintergrundfarbe auf Schwarz setzen */
@@ -40,6 +59,9 @@
             height: 13px; /* Höhe des Icons */
             margin-left: 2px; /* Abstand zwischen den Icons */
             cursor: pointer;
+            margin-right: 20px;
+            
+            
         }
 
         .mail-icon,
@@ -48,6 +70,7 @@
             height: 12px;
             cursor: pointer;
             transition: filter 0.5s; /* Übergang für Filtereffekt */
+            margin-right: 8px;
         }
 
         .mail-icon:hover,
@@ -73,7 +96,7 @@
             position: fixed;
             top: 15px; /* Untere Grenze der Zone 0 */
             width: 100%;
-            height: 130px; /* Erhöhe die Höhe des Containers */
+            height: 100px; /* Erhöhe die Höhe des Containers */
             z-index: 1000;
             margin-top: 0px; /* Abstand zwischen Logo und Obergrenze der Website */
         }
@@ -91,32 +114,27 @@
             transform: scale(1.1); /* Vergrößere das Logo um 10% beim Hover */
             filter: brightness(150%); /* Erhöhe die Helligkeit um 50% beim Hover */
         }
+        
+.nav-button {
+    background-color: 	#000000
+    color: #ddd; /* Leicht graue Schrift */
+    padding: 5px 10px;
+    margin: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: calc(100% / 6); /* Teile die Breite gleichmäßig auf sechs Knöpfe auf */
+    text-align: center; /* Zentriere den Text */
+}
 
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 20px;
-            background-color: #000; /* Schwarz */
-            position: fixed;
-            top: 130px; /* Untere Grenze der Zone 1 */
-            width: 100%;
-            z-index: 1000;
-        }
+.nav-button:hover {
+    background-color: #fff; /* Weißer Kasten beim Hover */
+    color: #000; /* Schwarze Schrift beim Hover */
+    transform: scale(1.05);
+}
 
-        nav a {
-            position: relative;
-            color: #ddd; /* Sehr leichte Graufärbung */
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: color 0.3s, font-size 0.3s; /* Übergang für Schriftfarbe und Schriftgröße */
-        }
+/* Vorhandene Styles ... */
 
-        nav a:hover {
-            color: #fff; /* Vollständig weiß beim Überfahren */
-            font-size: 18px; /* Größere Schrift beim Überfahren */
-        }
+
 
         section {
             max-width: 800px;
@@ -140,10 +158,8 @@
 
 <!-- Zone 0 -->
 <div class="zone-0">
-    <!-- Sprachauswahl hinzufügen -->
-    <div class="language-selector">
-        en | de
-    </div>
+        <!-- "en" Button hinzufügen -->
+        <div class="language-button">en</div>
 
     <!-- Vorhandene Icons ... -->
     <div class="mail-icon"></div>
@@ -155,20 +171,19 @@
 
     <!-- Zone 1 -->
     <div class="logo-container">
-        <!-- Änderung: Füge einen Link zum Logo hinzu -->
-        <a href="#Tongestaltung">
+        <a href="javascript:void(0);" onclick="smoothScroll('#Tongestaltung', 150)">
             <div class="logo"></div>
         </a>
     </div>
-
-    <nav>
-        <a href="#SoundDesign">Sound Design</a>
-        <a href="#FilmSoundrecording">Film Soundrecording</a>
-        <a href="#Fieldrecording">Fieldrecording</a>
-        <a href="#Podcast">Podcast</a>
-        <a href="#AboutMe">Über mich</a>
-        <a href="#Portfolio">Portfolio</a>
-    </nav>
+    
+<div style="display: flex; justify-content: space-around; align-items: center; background-color: #000; position: fixed; top: 115px; width: 100%; height: 50px; z-index: 1000;">
+        <div class="nav-button" onclick="smoothScroll('#SoundDesign', 30)">Sound Design</div>
+        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 30)">Film Soundrecording</div>
+        <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 30)">Fieldrecording</div>
+        <div class="nav-button" onclick="smoothScroll('#Podcast', 30)">Podcast</div>
+        <div class="nav-button" onclick="smoothScroll('#AboutMe', 30)">Über mich</div>
+        <div class="nav-button" onclick="smoothScroll('#Portfolio', 30)">Portfolio</div>
+    </div>
 
     <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
     <section id="Tongestaltung">
@@ -214,24 +229,18 @@
     </section>
 
     <footer id="site-footer">
-        &copy; 2024 Leo Wang - Freelancer
+        &copy; 2024 Leo Wang Sound
     </footer>
 
     <script>
-        // Smooth Scroll für die Navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetElement = document.querySelector(this.getAttribute('href'));
-                const offset = 180;  // Ändere dies auf den gewünschten Abstand
-
-                window.scroll({
-                    top: targetElement.offsetTop - offset,
-                    behavior: 'smooth'
-                });
+        // Angepasste Smooth Scroll Funktion
+        function smoothScroll(targetId, offset) {
+            const targetElement = document.querySelector(targetId);
+            window.scroll({
+                top: targetElement.offsetTop - 150, // Offset hinzufügen
+                behavior: 'smooth'
             });
-        });
+        }
     </script>
 </body>
 </html>
