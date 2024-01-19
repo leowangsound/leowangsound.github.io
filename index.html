@@ -105,14 +105,14 @@
             width: 100px;
             height: 100px;
             background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat; /* Hintergrundbild setzen */
-            margin-top: -5px; /* Verschiebe das Logo um 5 Pixel nach oben */
+            margin-top: -3px; /* Verschiebe das Logo um 5 Pixel nach oben */
             transition: transform 0.3s, filter 0.3s; /* Übergang für Transformation und Filtereffekt */
             cursor: pointer; /* Ändere den Mauszeiger beim Überfahren des Logos */
         }
 
         .logo:hover {
-            transform: scale(1.1); /* Vergrößere das Logo um 10% beim Hover */
-            filter: brightness(150%); /* Erhöhe die Helligkeit um 50% beim Hover */
+            transform: scale(1.02); /* Vergrößere das Logo um 10% beim Hover */
+            filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
         }
         
 .nav-button {
@@ -149,9 +149,31 @@
             position: bottom;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(to bottom, #000, #0b0b64); /* Farbverlauf im Footer von Schwarz zu Blau */
+            background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
             color: #fff;
         }
+        
+            /* Anpassung für die Tongestaltung-Sektion */
+        #Tongestaltung h2 {
+            text-align: center; /* Zentriert die Überschrift */
+        }
+        
+                .audio-icon {
+            display: block;
+            margin: 20px auto; /* Zentriert das Icon horizontal */
+            margin-top: 100px;
+            width: 300px; /* Größe des Icons */
+            height: 300px; /* Größe des Icons */
+            background: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/Kopfhoerer%20v2.png?raw=true') center/cover no-repeat; /* Platzhalter für das Kopfhörer-Icon */
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s; /* Animation beim Hover */
+        }
+
+        .audio-icon:hover {
+            transform: scale(1.2);
+            filter: brightness(150%);
+        }
+        
     </style>
 </head>
 <body>
@@ -188,8 +210,7 @@
     <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
     <section id="Tongestaltung">
         <h2>Tongestaltung ist für mich...</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Tongestaltung".</p>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Tongestaltung">
+        <div class="audio-icon" onclick="playAudio()"></div>
     </section>
 
     <section id="SoundDesign">
@@ -241,6 +262,12 @@
                 behavior: 'smooth'
             });
         }
+        
+        function playAudio() {
+            var audio = new Audio('https://example.com/path-to-your-audio-file.mp3');
+            audio.play();
+        }
+
     </script>
 </body>
 </html>
