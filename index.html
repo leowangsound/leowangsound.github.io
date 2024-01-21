@@ -211,6 +211,7 @@
     <section id="Tongestaltung">
         <h2>Tongestaltung ist für mich...</h2>
         <div class="audio-icon" onclick="playAudio()"></div>
+        <div class="audio-icon" onclick="toggleAudio()"></div>
     </section>
 
     <section id="SoundDesign">
@@ -264,9 +265,32 @@
         }
         
         function playAudio() {
-            var audio = new Audio('leowangsound.github.io/Tongestaltung_Audioclip_v2.mp3');
+            var audio = new Audio('leowangsound/leowangsound.github.io/Tongestaltung_Audioclip_v2.mp3');
             audio.play();
         }
+        
+            var audio = new Audio('leowangsound/leowangsound.github.io/Tongestaltung_Audioclip_v2.mp3');
+    var isPlaying = false;
+
+    function toggleAudio() {
+        if (!isPlaying) {
+            audio.play();
+            isPlaying = true;
+        } else {
+            audio.pause();
+            audio.currentTime = 0; // Setzt das Audio zurück an den Anfang
+            isPlaying = false;
+        }
+    }
+    
+    // Angepasste Smooth Scroll Funktion
+    function smoothScroll(targetId, offset) {
+        const targetElement = document.querySelector(targetId);
+        window.scroll({
+            top: targetElement.offsetTop - 150, // Offset hinzufügen
+            behavior: 'smooth'
+        });
+    }
 
     </script>
 </body>
