@@ -115,26 +115,22 @@
             filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
         }
         
-.nav-button {
-    background-color: 	#000000
-    color: #ddd; /* Leicht graue Schrift */
-    padding: 5px 10px;
-    margin: 3px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    width: calc(100% / 10); /* Teile die Breite gleichmäßig auf sechs Knöpfe auf */
-    text-align: center; /* Zentriere den Text */
-}
+        .nav-button {
+            background-color: 	#000000
+            color: #ddd; /* Leicht graue Schrift */
+            padding: 5px 10px;
+            margin: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            width: calc(100% / 10); /* Teile die Breite gleichmäßig auf sechs Knöpfe auf */
+            text-align: center; /* Zentriere den Text */
+        }
 
-.nav-button:hover {
-    background-color: #fff; /* Weißer Kasten beim Hover */
-    color: #000; /* Schwarze Schrift beim Hover */
-    transform: scale(1.05);
-}
-
-/* Vorhandene Styles ... */
-
-
+         .nav-button:hover {
+            background-color: #fff; /* Weißer Kasten beim Hover */
+            color: #000; /* Schwarze Schrift beim Hover */
+            transform: scale(1.05);
+        }
 
         section {
             max-width: 800px;
@@ -174,6 +170,39 @@
             filter: brightness(150%);
         }
         
+        /* Style für den Audioplayer */
+        .audio-player {
+            display: none; /* Versteckt den Player zunächst */
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+.audio-control {
+    cursor: pointer;
+    background-size: contain; /* Stellt sicher, dass das gesamte Bild angezeigt wird */
+    background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
+    width: 20px; /* Breite des Buttons */
+    height: 20px; /* Höhe des Buttons */
+}
+
+        .audio-progress-container {
+            width: 200px; /* Breite der Fortschrittsleiste */
+            height: 10px;
+            background-color: darkgray;
+            margin: 0 10px;
+        }
+
+        .audio-progress {
+            width: 0%; /* Startet bei 0% */
+            height: 100%;
+            background-color: white;
+        }
+
+        .audio-timer {
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
@@ -184,10 +213,13 @@
         <div class="language-button">en</div>
 
     <!-- Vorhandene Icons ... -->
-    <div class="mail-icon"></div>
+      <a href="mailto:info@leowangsound.de">
+        <div class="mail-icon"></div>
+    </a>
     <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
         <div class="social-icon instagram-icon"></div>
     </a>
+    
 </div>
 
 
@@ -208,9 +240,16 @@
     </div>
 
     <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
-    <section id="Tongestaltung">
-        <h2>Tongestaltung ist für mich...</h2>
-        <div class="audio-icon" onclick="toggleAudio()"></div>
+<section id="Tongestaltung">
+    <h2>Tongestaltung ist für mich...</h2>
+    <div class="audio-icon" onclick="toggleAudioAndPlayer()"></div>
+    <div class="audio-player">
+        <div class="audio-control" id="play-pause-button" onclick="isPlaying ? pauseAudio() : playAudio()"></div>
+        <div class="audio-progress-container">
+            <div class="audio-progress"></div>
+        </div>
+        <div class="audio-timer">0:00 / 0:40</div>
+    </div>
     </section>
 
     <section id="SoundDesign">
@@ -263,30 +302,55 @@
             });
         }
         
-    var audio = new Audio('https://raw.githubusercontent.com/leowangsound/leowangsound.github.io/main/Tongestaltung_Audioclip_v2.mp3
-');
+ var audio = new Audio('https://raw.githubusercontent.com/leowangsound/leowangsound.github.io/main/Tongestaltung_Audioclip_v2.mp3');
     var isPlaying = false;
+    var playerVisible = false;
 
-    function toggleAudio() {
+    // Diese Funktion wird aufgerufen, wenn auf das Audio-Icon geklickt wird
+    function toggleAudioAndPlayer() {
+        if (!playerVisible) {
+            document.querySelector('.audio-player').style.display = 'flex';
+            playAudio();
+        } else {
+            document.querySelector('.audio-player').style.display = 'none';
+            pauseAudio();
+        }
+        playerVisible = !playerVisible;
+    }
+
+    function playAudio() {
         if (!isPlaying) {
             audio.play();
             isPlaying = true;
-        } else {
-            audio.pause();
-            audio.currentTime = 0; // Setzt das Audio zurück an den Anfang
-            isPlaying = false;
+            document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Pause%20Icon.png?raw=true)';
         }
     }
-    
-    // Angepasste Smooth Scroll Funktion
-    function smoothScroll(targetId, offset) {
-        const targetElement = document.querySelector(targetId);
-        window.scroll({
-            top: targetElement.offsetTop - 150, // Offset hinzufügen
-            behavior: 'smooth'
-        });
+
+    function pauseAudio() {
+        audio.pause();
+        isPlaying = false;
+        document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Play%20Icon.png?raw=true)';
     }
 
+    audio.addEventListener('timeupdate', function() {
+        var currentTime = audio.currentTime;
+        var duration = audio.duration;
+        var progressPercentage = (currentTime / duration) * 100;
+        document.querySelector('.audio-progress').style.width = progressPercentage + '%';
+        document.querySelector('.audio-timer').textContent = formatTime(currentTime) + ' / ' + formatTime(duration);
+    });
+    
+audio.addEventListener('ended', function() {
+    document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Play%20Icon.png?raw=true)';
+    isPlaying = false;
+});
+
+    function formatTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        seconds = Math.floor(seconds % 60);
+        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+    }
+        
     </script>
 </body>
 </html>
