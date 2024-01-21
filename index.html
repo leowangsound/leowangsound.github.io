@@ -210,7 +210,6 @@
     <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
     <section id="Tongestaltung">
         <h2>Tongestaltung ist für mich...</h2>
-        <div class="audio-icon" onclick="playAudio()"></div>
         <div class="audio-icon" onclick="toggleAudio()"></div>
     </section>
 
@@ -262,11 +261,6 @@
                 top: targetElement.offsetTop - 150, // Offset hinzufügen
                 behavior: 'smooth'
             });
-        }
-        
-        function playAudio() {
-            var audio = new Audio('leowangsound/leowangsound.github.io/Tongestaltung_Audioclip_v2.mp3');
-            audio.play();
         }
         
             var audio = new Audio('leowangsound/leowangsound.github.io/Tongestaltung_Audioclip_v2.mp3');
