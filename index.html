@@ -101,20 +101,13 @@
             margin-top: 0px; /* Abstand zwischen Logo und Obergrenze der Website */
         }
 
-        .logo {
-            width: 100px;
-            height: 100px;
-            background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat; /* Hintergrundbild setzen */
-            margin-top: -3px; /* Verschiebe das Logo um 5 Pixel nach oben */
-            transition: transform 0.3s, filter 0.3s; /* Übergang für Transformation und Filtereffekt */
-            cursor: pointer; /* Ändere den Mauszeiger beim Überfahren des Logos */
-        }
+.logo {
+    width: 100px;
+    height: 100px;
+    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    margin-top: -3px;
+}
 
-        .logo:hover {
-            transform: scale(1.02); /* Vergrößere das Logo um 10% beim Hover */
-            filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
-        }
-        
         .nav-button {
             background-color: 	#000000
             color: #ddd; /* Leicht graue Schrift */
@@ -148,61 +141,80 @@
             background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
             color: #fff;
         }
-        
-            /* Anpassung für die Tongestaltung-Sektion */
-        #Tongestaltung h2 {
-            text-align: center; /* Zentriert die Überschrift */
-        }
-        
-                .audio-icon {
-            display: block;
-            margin: 20px auto; /* Zentriert das Icon horizontal */
-            margin-top: 100px;
-            width: 300px; /* Größe des Icons */
-            height: 300px; /* Größe des Icons */
-            background: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/Kopfhoerer%20v2.png?raw=true') center/cover no-repeat; /* Platzhalter für das Kopfhörer-Icon */
-            cursor: pointer;
-            transition: transform 0.3s, filter 0.3s; /* Animation beim Hover */
-        }
-
-        .audio-icon:hover {
-            transform: scale(1.2);
-            filter: brightness(150%);
-        }
-        
-        /* Style für den Audioplayer */
-        .audio-player {
-            display: none; /* Versteckt den Player zunächst */
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-.audio-control {
-    cursor: pointer;
-    background-size: contain; /* Stellt sicher, dass das gesamte Bild angezeigt wird */
-    background-repeat: no-repeat; /* Verhindert das Wiederholen des Bildes */
-    width: 20px; /* Breite des Buttons */
-    height: 20px; /* Höhe des Buttons */
+       .portfolio-button-container {
+    text-align: center; /* Zentriert den Button */
+    margin: 40px 0; /* 40px Abstand oben und unten */
 }
 
-        .audio-progress-container {
-            width: 200px; /* Breite der Fortschrittsleiste */
-            height: 10px;
-            background-color: darkgray;
-            margin: 0 10px;
-        }
+.portfolio-button {
+    background-color: #000; /* Schwarzer Hintergrund */
+    color: #ddd; /* Leicht graue Schrift */
+    padding: 10px 20px; /* Innenabstand des Buttons */
+    border: 1px solid #fff; /* Weißer Rahmen */
+    text-decoration: none; /* Unterstreichung entfernen */
+    display: inline-block; /* Button-Darstellung */
+    transition: all 0.3s ease-in-out; /* Animation beim Hover */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+}
 
-        .audio-progress {
-            width: 0%; /* Startet bei 0% */
-            height: 100%;
-            background-color: white;
-        }
+.portfolio-button:hover {
+    background-color: #fff; /* Weißer Hintergrund beim Hover */
+    color: #000; /* Schwarze Schrift beim Hover */
+    transform: scale(1.05); /* Vergrößerung beim Hover */
+}
+.about-buttons-container {
+    text-align: center;
+    margin: 40px 0;
+}
 
-        .audio-timer {
-            color: white;
-        }
-        
+.about-button {
+    background-color: #000;
+    color: #ddd;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 10px;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.about-button:hover {
+    color: transparent;
+    transform: scale(1.05); /* Vergrößert den Button */
+    border-width: 1px; /* Stellt sicher, dass die Rahmenbreite konstant bleibt */
+}
+
+.about-button::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    transition-delay: 0.1s;
+}
+
+#mail-button:hover::after {
+    background-image: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true');
+    opacity: 1;
+}
+
+#instagram-button:hover::after {
+    background-image: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true');
+    opacity: 1;
+}
+
     </style>
 </head>
 <body>
@@ -224,67 +236,65 @@
 
 
     <!-- Zone 1 -->
-    <div class="logo-container">
-        <a href="javascript:void(0);" onclick="smoothScroll('#Tongestaltung', 150)">
-            <div class="logo"></div>
-        </a>
-    </div>
+<div class="logo-container">
+    <div class="logo"></div>
+</div>
     
 <div style="display: flex; justify-content: space-around; align-items: center; background-color: #000; position: fixed; top: 115px; width: 100%; height: 50px; z-index: 1000;">
         <div class="nav-button" onclick="smoothScroll('#SoundDesign', 30)">Sound Design</div>
-        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 30)">Film Soundrecording</div>
+        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 30)">Location Sound</div>
         <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 30)">Fieldrecording</div>
         <div class="nav-button" onclick="smoothScroll('#Podcast', 30)">Podcast</div>
         <div class="nav-button" onclick="smoothScroll('#AboutMe', 30)">Über mich</div>
         <div class="nav-button" onclick="smoothScroll('#Portfolio', 30)">Portfolio</div>
     </div>
 
-    <!-- Hier wird der Abschnitt "Tongestaltung ist für mich..." ganz oben in Zone 2 eingefügt -->
-<section id="Tongestaltung">
-    <h2>Tongestaltung ist für mich...</h2>
-    <div class="audio-icon" onclick="toggleAudioAndPlayer()"></div>
-    <div class="audio-player">
-        <div class="audio-control" id="play-pause-button" onclick="isPlaying ? pauseAudio() : playAudio()"></div>
-        <div class="audio-progress-container">
-            <div class="audio-progress"></div>
-        </div>
-        <div class="audio-timer">0:00 / 0:40</div>
-    </div>
-    </section>
-
     <section id="SoundDesign">
-        <h2>Sound Design</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Sound Design".</p>
+        <h2>Sound Design – Emotionen hörbar machen</h2>
+        <p>Sound Design bringt Bilder zum Klingen und macht Emotionen hörbar. Es geht darum, eine Welt zu schaffen, in der sich der Zuschauer verliert – sei es durch subtile Geräusche, die eine Szene lebendig wirken lassen, oder kraftvolle Klänge, die Spannung aufbauen. Jeder Sound ist sorgfältig ausgewählt, um den Film auf einer emotionalen Ebene zu bereichern und das Publikum tiefer in die Geschichte zu ziehen. So wird der Klang zum unsichtbaren Helden der Erzählung.</p>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Sound Design">
     </section>
 
     <section id="FilmSoundrecording">
-        <h2>Film Soundrecording</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Film Soundrecording".</p>
+        <h2>Location Sound – Präzision für den perfekten Moment</h2>
+        <p>Bei Indie-Filmen, Interviews, Werbeprojekten und Dokumentationen ist klarer und hochwertiger Ton essenziell, um die Wirkung jeder Szene vollständig auszuschöpfen. Mit professionellem Location Sound sorge ich dafür, dass jedes Detail – von Stimmen bis zu Umgebungsgeräuschen – präzise und klar erfasst wird. So entsteht eine harmonische Einheit von Bild und Ton, die die Geschichte lebendig und eindrucksvoll macht.</p>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Film Soundrecording">
     </section>
 
     <section id="Fieldrecording">
-        <h2>Fieldrecording</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Fieldrecording".</p>
+        <h2>Field Recording – Klänge unserer Welt einfangen</h2>
+        <p>Field Recording ist die Kunst, die Essenz unserer Umgebung akustisch festzuhalten – sei es in der Natur, in Städten oder anderen besonderen Orten. Diese Aufnahmen verleihen Projekten eine besondere Tiefe und fügen unverwechselbare, atmosphärische Elemente hinzu. Mit einem geschulten Gehör und dem richtigen Equipment halte ich Klänge fest, die sonst unbemerkt bleiben, um sie in den Dienst einer fesselnden Erzählung zu stellen.</p>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Fieldrecording">
     </section>
 
     <section id="Podcast">
-        <h2>Podcast</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Podcast".</p>
+        <h2>Podcast – Stimme und Klang perfekt in Szene gesetzt</h2>
+        <p>Podcasts leben von klaren Botschaften und hochwertigem Sound. In der Postproduktion werden die Tonspuren bearbeitet und auf die technischen Anforderungen des Marktes abgestimmt. Zusätzlich stehe ich für die Erstellung von individuellen Intros oder Audio-Logos zur Verfügung, die den Podcast unverwechselbar machen. Für Aufnahmen im Raum Köln steht professionelles Equipment bereit. Aber auch bei Aufnahmen in den eigenen vier Wänden biete ich technische Beratung, um sicherzustellen, dass der Podcast in jeder Hinsicht überzeugt..</p>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Podcast">
     </section>
 
     <section id="AboutMe">
         <h2>Über mich</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Über mich".</p>
+        <p>Meine Faszination für Sound Design begann während meines Regie-Studiums, als ich das Potenzial entdeckte, mit Klang die Aufmerksamkeit des Publikums zu lenken. Diese Leidenschaft verfolge ich seitdem im Rahmen meines Masterstudiums weiter.
+
+Ich arbeite detailverliebt, strukturiert und routiniert und gehe meine Projekte Schritt für Schritt an. Meine umfassende Erfahrung in verschiedenen Gewerken ermöglicht es mir, effizient und zielgerichtet zu arbeiten. Dabei lege ich großen Wert auf den kreativen Austausch mit Regie, Redaktion und Produktion, um das Beste aus jedem Projekt herauszuholen.
+
+Mein Arbeitsplatz verfügt über ein voll ausgestattetes und eingemessenes 5.1 Postproduktions-Studio in der Kölner Nordaltstadt, wo ich mit Pro Tools und hochwertigen Genelec-Monitoren arbeite. Für Field Recordings und Set-Aufnahmen nutze ich professionelles Equipment von Sennheiser und Sound Devices, um schon am Drehort die bestmögliche Grundlage für die Postproduktion zu schaffen.
+
+Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über folgende Kanäle. Ich freue mich auf ein nettes Kennenlerngespräch und eine ergiebige Zusammenarbeit.</p>
+<div class="about-buttons-container">
+    <a href="mailto:info@leowangsound.de" class="about-button" id="mail-button">Mail</a>
+    <a href="https://www.instagram.com/leowangsound/" target="_blank" class="about-button" id="instagram-button">Instagram</a>
+</div>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Über mich">
     </section>
 
     <section id="Portfolio">
         <h2>Portfolio</h2>
-        <p>Hier steht der Platzhaltertext für den Bereich "Portfolio".</p>
+        <p>In meiner Arbeit als Sound Designer, Dialog Editor und Tonmeister habe ich an einer Vielzahl von Projekten mitgewirkt – von Indie-Filmen über Dokumentationen bis hin zu Serien. Jeder Film und jede Szene ist eine einzigartige Herausforderung, die ich mit Leidenschaft und Präzision angehe. Um einen tieferen Einblick in meine Arbeit zu bekommen, werfen Sie einen Blick auf mein vollständiges Portfolio auf Crew United.</p>
+<div class="portfolio-button-container">
+    <a href="https://www.crew-united.com/de/Leo-Wang_533840.html#!searchterm=leo%20wang" target="_blank" class="portfolio-button">Weiter zu Crew United</a>
+</div>
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Portfolio">
     </section>
 
@@ -301,55 +311,6 @@
                 behavior: 'smooth'
             });
         }
-        
- var audio = new Audio('https://raw.githubusercontent.com/leowangsound/leowangsound.github.io/main/Tongestaltung_Audioclip_v2.mp3');
-    var isPlaying = false;
-    var playerVisible = false;
-
-    // Diese Funktion wird aufgerufen, wenn auf das Audio-Icon geklickt wird
-    function toggleAudioAndPlayer() {
-        if (!playerVisible) {
-            document.querySelector('.audio-player').style.display = 'flex';
-            playAudio();
-        } else {
-            document.querySelector('.audio-player').style.display = 'none';
-            pauseAudio();
-        }
-        playerVisible = !playerVisible;
-    }
-
-    function playAudio() {
-        if (!isPlaying) {
-            audio.play();
-            isPlaying = true;
-            document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Pause%20Icon.png?raw=true)';
-        }
-    }
-
-    function pauseAudio() {
-        audio.pause();
-        isPlaying = false;
-        document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Play%20Icon.png?raw=true)';
-    }
-
-    audio.addEventListener('timeupdate', function() {
-        var currentTime = audio.currentTime;
-        var duration = audio.duration;
-        var progressPercentage = (currentTime / duration) * 100;
-        document.querySelector('.audio-progress').style.width = progressPercentage + '%';
-        document.querySelector('.audio-timer').textContent = formatTime(currentTime) + ' / ' + formatTime(duration);
-    });
-    
-audio.addEventListener('ended', function() {
-    document.getElementById('play-pause-button').style.backgroundImage = 'url(https://github.com/leowangsound/leowangsound.github.io/blob/main/Play%20Icon.png?raw=true)';
-    isPlaying = false;
-});
-
-    function formatTime(seconds) {
-        var minutes = Math.floor(seconds / 60);
-        seconds = Math.floor(seconds % 60);
-        return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-    }
         
     </script>
 </body>
