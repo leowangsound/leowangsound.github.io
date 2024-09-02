@@ -108,22 +108,30 @@
     margin-top: -3px;
 }
 
-        .nav-button {
-            background-color: 	#000000
-            color: #ddd; /* Leicht graue Schrift */
-            padding: 5px 10px;
-            margin: 3px;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            width: calc(100% / 10); /* Teile die Breite gleichmäßig auf sechs Knöpfe auf */
-            text-align: center; /* Zentriere den Text */
-        }
+    .nav-button {
+        background-color: #000000;
+        color: #ddd;
+        padding: 5px 10px;
+        margin: 3px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        width: calc(100% / 10);
+        text-align: center;
+    }
 
-         .nav-button:hover {
-            background-color: #fff; /* Weißer Kasten beim Hover */
-            color: #000; /* Schwarze Schrift beim Hover */
-            transform: scale(1.05);
+    .nav-button:hover {
+        background-color: #fff;
+        color: #000;
+        transform: scale(1.05);
+    }
+
+    /* Mobile Navigation - Media Query */
+    @media (max-width: 768px) {
+        .nav-button {
+            width: 100%; /* Buttons nehmen die volle Breite ein */
+            margin: 5px 0; /* Abstand zwischen den Buttons */
         }
+    }
 
         section {
             max-width: 800px;
@@ -132,15 +140,16 @@
             background-color: #000; /* Schwarz */
         }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            position: bottom;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
-            color: #fff;
-        }
+      footer {
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
+    color: #fff;
+}
+
        .portfolio-button-container {
     text-align: center; /* Zentriert den Button */
     margin: 40px 0; /* 40px Abstand oben und unten */
@@ -215,6 +224,68 @@
     opacity: 1;
 }
 
+.slideshow-container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: none;
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.slides img {
+    width: 100%;
+    height: auto;
+}
+
+.active-slide {
+    display: block;
+    animation: slideAnimation 1s ease-in-out;
+}
+
+@keyframes slideAnimation {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.active-slide {
+    display: block;
+    animation: slideIn 1s ease-in-out forwards;
+}
+
+.prev-slide {
+    display: block;
+    animation: slideOut 1s ease-in-out forwards;
+}
+
     </style>
 </head>
 <body>
@@ -258,7 +329,23 @@
     <section id="FilmSoundrecording">
         <h2>Location Sound – Präzision für den perfekten Moment</h2>
         <p>Bei Indie-Filmen, Interviews, Werbeprojekten und Dokumentationen ist klarer und hochwertiger Ton essenziell, um die Wirkung jeder Szene vollständig auszuschöpfen. Mit professionellem Location Sound sorge ich dafür, dass jedes Detail – von Stimmen bis zu Umgebungsgeräuschen – präzise und klar erfasst wird. So entsteht eine harmonische Einheit von Bild und Ton, die die Geschichte lebendig und eindrucksvoll macht.</p>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Film Soundrecording">
+       <div class="slideshow-container">
+    <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_01.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_02.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_03.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_04.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_05.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_06.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_07.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_08.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_09.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_10.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_11.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_12.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_13.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_14.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_15.jpg?raw=true"></div>
+</div>
     </section>
 
     <section id="Fieldrecording">
@@ -311,7 +398,23 @@ Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über fo
                 behavior: 'smooth'
             });
         }
-        
+
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let slides = document.querySelectorAll(".slides");
+    slides.forEach((slide, index) => {
+        slide.classList.remove("active-slide");
+    });
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].classList.add("active-slide");
+    setTimeout(showSlides, 5000); // Wechsle alle 5 Sekunden
+}
+
     </script>
 </body>
 </html>
