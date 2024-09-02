@@ -232,53 +232,30 @@
 }
 
 .slides {
-    display: none;
+    display: none; /* Standardmäßig unsichtbar */
     width: 100%;
     height: auto;
     position: relative;
+    opacity: 0; /* Unsichtbar für die Übergangsanimation */
+    transition: opacity 3s ease-in-out; /* Verlängere die Übergangsdauer auf 2 Sekunden */
 }
+
+.active-slide {
+    display: block;
+    opacity: 1; /* Sichtbar machen */
+}
+
+
 
 .slides img {
     width: 100%;
     height: auto;
+    filter: grayscale(100%); /* Schwarz-Weiß-Bild */
+    transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out; /* Übergangseffekt für Filter und Größe */
 }
-
-.active-slide {
-    display: block;
-    animation: slideAnimation 1s ease-in-out;
-}
-
-@keyframes slideAnimation {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-
-.active-slide {
-    display: block;
-    animation: slideIn 1s ease-in-out forwards;
+.slides img:hover {
+    filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt bei Hover */
+    transform: scale(1.05); /* Vergrößert das Bild leicht bei Hover */
 }
 
 .prev-slide {
@@ -320,11 +297,42 @@
         <div class="nav-button" onclick="smoothScroll('#Portfolio', 30)">Portfolio</div>
     </div>
 
-    <section id="SoundDesign">
-        <h2>Sound Design – Emotionen hörbar machen</h2>
-        <p>Sound Design bringt Bilder zum Klingen und macht Emotionen hörbar. Es geht darum, eine Welt zu schaffen, in der sich der Zuschauer verliert – sei es durch subtile Geräusche, die eine Szene lebendig wirken lassen, oder kraftvolle Klänge, die Spannung aufbauen. Jeder Sound ist sorgfältig ausgewählt, um den Film auf einer emotionalen Ebene zu bereichern und das Publikum tiefer in die Geschichte zu ziehen. So wird der Klang zum unsichtbaren Helden der Erzählung.</p>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Sound Design">
-    </section>
+<section id="SoundDesign">
+    <h2>Sound Design – Emotionen hörbar machen</h2>
+    <p>Sound Design bringt Bilder zum Klingen und macht Emotionen hörbar. Es geht darum, eine Welt zu schaffen, in der sich der Zuschauer verliert – sei es durch subtile Geräusche, die eine Szene lebendig wirken lassen, oder kraftvolle Klänge, die Spannung aufbauen. Jeder Sound ist sorgfältig ausgewählt, um den Film auf einer emotionalen Ebene zu bereichern und das Publikum tiefer in die Geschichte zu ziehen. So wird der Klang zum unsichtbaren Helden der Erzählung.</p>
+    
+    <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
+        <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
+        <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;" muted>
+            <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+    </div>
+</section>
+
+<script>
+    const thumbnail = document.getElementById('videoThumbnail');
+    const video = document.getElementById('video');
+
+    thumbnail.addEventListener('mouseover', function() {
+        thumbnail.style.display = 'none'; // Verstecke das Thumbnail
+        video.style.display = 'block'; // Zeige das Video
+        video.play(); // Starte das Video
+        video.muted = false; // Schalte den Ton an
+        video.style.transform = 'scale(1.01)'; // Leichtes Reinzoomen
+        video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
+    });
+
+    video.addEventListener('mouseleave', function() {
+        video.pause(); // Pausiere das Video
+        video.currentTime = 0; // Setze das Video auf den Anfang zurück
+        video.style.display = 'none'; // Verstecke das Video
+        thumbnail.style.display = 'block'; // Zeige das Thumbnail wieder
+        video.style.transform = 'scale(1)'; // Zoom-Effekt zurücksetzen
+        video.style.filter = 'grayscale(100%)'; // Graufilter wiederherstellen
+    });
+</script>
+
 
     <section id="FilmSoundrecording">
         <h2>Location Sound – Präzision für den perfekten Moment</h2>
@@ -404,15 +412,24 @@ showSlides();
 
 function showSlides() {
     let slides = document.querySelectorAll(".slides");
-    slides.forEach((slide, index) => {
+    
+    // Entferne die aktive Klasse von allen Slides und setze die Sichtbarkeit zurück
+    slides.forEach((slide) => {
         slide.classList.remove("active-slide");
     });
+
     slideIndex++;
+    
+    // Wenn der Index die Anzahl der Slides überschreitet, gehe zurück zur ersten Slide
     if (slideIndex > slides.length) {
         slideIndex = 1;
     }
+
+    // Zeige die aktuelle Slide an
     slides[slideIndex - 1].classList.add("active-slide");
-    setTimeout(showSlides, 5000); // Wechsle alle 5 Sekunden
+    
+    // Wechsle alle 5 Sekunden zur nächsten Slide
+    setTimeout(showSlides, 10000);
 }
 
     </script>
