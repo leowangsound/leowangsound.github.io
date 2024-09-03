@@ -289,12 +289,12 @@
 </div>
     
 <div style="display: flex; justify-content: space-around; align-items: center; background-color: #000; position: fixed; top: 115px; width: 100%; height: 50px; z-index: 1000;">
-        <div class="nav-button" onclick="smoothScroll('#SoundDesign', 30)">Sound Design</div>
-        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 30)">Location Sound</div>
-        <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 30)">Fieldrecording</div>
-        <div class="nav-button" onclick="smoothScroll('#Podcast', 30)">Podcast</div>
-        <div class="nav-button" onclick="smoothScroll('#AboutMe', 30)">Über mich</div>
-        <div class="nav-button" onclick="smoothScroll('#Portfolio', 30)">Portfolio</div>
+<div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
+<div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
+<div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Fieldrecording</div>
+<div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
+<div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">Über mich</div>
+<div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
     </div>
 
 <section id="SoundDesign">
@@ -303,7 +303,7 @@
     
     <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
         <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
-        <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;" muted>
+        <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
             <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
             Dein Browser unterstützt das Video-Tag nicht.
         </video>
@@ -313,31 +313,45 @@
 <script>
     const thumbnail = document.getElementById('videoThumbnail');
     const video = document.getElementById('video');
+    let isVideoPlaying = false;
 
-    thumbnail.addEventListener('mouseover', function() {
-        thumbnail.style.display = 'none'; // Verstecke das Thumbnail
+    // Funktion zum Starten des Videos
+    function playVideo() {
         video.style.display = 'block'; // Zeige das Video
         video.play(); // Starte das Video
         video.muted = false; // Schalte den Ton an
-        video.style.transform = 'scale(1.01)'; // Leichtes Reinzoomen
         video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
+        isVideoPlaying = true;
+    }
+
+    // Funktion zum Pausieren des Videos
+    function pauseVideo() {
+        video.pause(); // Pausiere das Video
+        isVideoPlaying = false;
+    }
+
+    // Startet das Video, wenn die Maus darüber fährt
+    thumbnail.addEventListener('mouseover', function() {
+        thumbnail.style.display = 'none'; // Verstecke das Thumbnail
+        playVideo();
     });
 
-    video.addEventListener('mouseleave', function() {
-        video.pause(); // Pausiere das Video
-        video.currentTime = 0; // Setze das Video auf den Anfang zurück
-        video.style.display = 'none'; // Verstecke das Video
-        thumbnail.style.display = 'block'; // Zeige das Thumbnail wieder
-        video.style.transform = 'scale(1)'; // Zoom-Effekt zurücksetzen
-        video.style.filter = 'grayscale(100%)'; // Graufilter wiederherstellen
+    // Pausiere und starte das Video bei Klick
+    video.addEventListener('click', function() {
+        if (isVideoPlaying) {
+            pauseVideo();
+        } else {
+            playVideo();
+        }
     });
 </script>
 
 
-    <section id="FilmSoundrecording">
-        <h2>Location Sound – Präzision für den perfekten Moment</h2>
-        <p>Bei Indie-Filmen, Interviews, Werbeprojekten und Dokumentationen ist klarer und hochwertiger Ton essenziell, um die Wirkung jeder Szene vollständig auszuschöpfen. Mit professionellem Location Sound sorge ich dafür, dass jedes Detail – von Stimmen bis zu Umgebungsgeräuschen – präzise und klar erfasst wird. So entsteht eine harmonische Einheit von Bild und Ton, die die Geschichte lebendig und eindrucksvoll macht.</p>
-       <div class="slideshow-container">
+
+<section id="FilmSoundrecording">
+    <h2>Location Sound – Präzision für den perfekten Moment</h2>
+    <p>Bei Indie-Filmen, Interviews, Werbeprojekten und Dokumentationen ist klarer und hochwertiger Ton essenziell, um die Wirkung jeder Szene vollständig auszuschöpfen. Mit professionellem Location Sound sorge ich dafür, dass jedes Detail – von Stimmen bis zu Umgebungsgeräuschen – präzise und klar erfasst wird. So entsteht eine harmonische Einheit von Bild und Ton, die die Geschichte lebendig und eindrucksvoll macht.</p>
+    <div class="slideshow-container">
     <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_01.jpg?raw=true"></div>
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_02.jpg?raw=true"></div>
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_03.jpg?raw=true"></div>
@@ -353,14 +367,25 @@
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_13.jpg?raw=true"></div>
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_14.jpg?raw=true"></div>
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_15.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_16.jpg?raw=true"></div>
+
 </div>
     </section>
 
     <section id="Fieldrecording">
-        <h2>Field Recording – Klänge unserer Welt einfangen</h2>
-        <p>Field Recording ist die Kunst, die Essenz unserer Umgebung akustisch festzuhalten – sei es in der Natur, in Städten oder anderen besonderen Orten. Diese Aufnahmen verleihen Projekten eine besondere Tiefe und fügen unverwechselbare, atmosphärische Elemente hinzu. Mit einem geschulten Gehör und dem richtigen Equipment halte ich Klänge fest, die sonst unbemerkt bleiben, um sie in den Dienst einer fesselnden Erzählung zu stellen.</p>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Fieldrecording">
-    </section>
+    <h2>Field Recording – Klänge unserer Welt einfangen</h2>
+    <p>Field Recording ist die Kunst, die Essenz unserer Umgebung akustisch festzuhalten – sei es in der Natur, in Städten oder anderen besonderen Orten. Diese Aufnahmen verleihen Projekten eine besondere Tiefe und fügen unverwechselbare, atmosphärische Elemente hinzu. Mit einem geschulten Gehör und dem richtigen Equipment halte ich Klänge fest, die sonst unbemerkt bleiben, um sie in den Dienst einer fesselnden Erzählung zu stellen.</p>
+    <div class="slideshow-container">
+        <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_01.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_02.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_03.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_04.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_05.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_06.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_07.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_08.jpg?raw=true"></div>
+    </div>
+</section>
 
     <section id="Podcast">
         <h2>Podcast – Stimme und Klang perfekt in Szene gesetzt</h2>
@@ -368,21 +393,29 @@
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Podcast">
     </section>
 
-    <section id="AboutMe">
-        <h2>Über mich</h2>
-        <p>Meine Faszination für Sound Design begann während meines Regie-Studiums, als ich das Potenzial entdeckte, mit Klang die Aufmerksamkeit des Publikums zu lenken. Diese Leidenschaft verfolge ich seitdem im Rahmen meines Masterstudiums weiter.
+   <section id="AboutMe">
+    <h2>Über mich</h2>
+    <p>Meine Faszination für Sound Design begann während meines Regie-Studiums, als ich das Potenzial entdeckte, mit Klang die Aufmerksamkeit des Publikums zu lenken. Diese Leidenschaft verfolge ich seitdem im Rahmen meines Masterstudiums weiter.
 
-Ich arbeite detailverliebt, strukturiert und routiniert und gehe meine Projekte Schritt für Schritt an. Meine umfassende Erfahrung in verschiedenen Gewerken ermöglicht es mir, effizient und zielgerichtet zu arbeiten. Dabei lege ich großen Wert auf den kreativen Austausch mit Regie, Redaktion und Produktion, um das Beste aus jedem Projekt herauszuholen.
+    Ich arbeite detailverliebt, strukturiert und routiniert und gehe meine Projekte Schritt für Schritt an. Meine umfassende Erfahrung in verschiedenen Gewerken ermöglicht es mir, effizient und zielgerichtet zu arbeiten. Dabei lege ich großen Wert auf den kreativen Austausch mit Regie, Redaktion und Produktion, um das Beste aus jedem Projekt herauszuholen.
 
-Mein Arbeitsplatz verfügt über ein voll ausgestattetes und eingemessenes 5.1 Postproduktions-Studio in der Kölner Nordaltstadt, wo ich mit Pro Tools und hochwertigen Genelec-Monitoren arbeite. Für Field Recordings und Set-Aufnahmen nutze ich professionelles Equipment von Sennheiser und Sound Devices, um schon am Drehort die bestmögliche Grundlage für die Postproduktion zu schaffen.
+    Mein Arbeitsplatz verfügt über ein voll ausgestattetes und eingemessenes 5.1 Postproduktions-Studio in der Kölner Nordaltstadt, wo ich mit Pro Tools und hochwertigen Genelec-Monitoren arbeite. Für Field Recordings und Set-Aufnahmen nutze ich professionelles Equipment von Sennheiser und Sound Devices, um schon am Drehort die bestmögliche Grundlage für die Postproduktion zu schaffen.
 
-Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über folgende Kanäle. Ich freue mich auf ein nettes Kennenlerngespräch und eine ergiebige Zusammenarbeit.</p>
-<div class="about-buttons-container">
-    <a href="mailto:info@leowangsound.de" class="about-button" id="mail-button">Mail</a>
-    <a href="https://www.instagram.com/leowangsound/" target="_blank" class="about-button" id="instagram-button">Instagram</a>
-</div>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Über mich">
-    </section>
+    Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über folgende Kanäle. Ich freue mich auf ein nettes Kennenlerngespräch und eine ergiebige Zusammenarbeit.</p>
+    
+    <div class="slideshow-container">
+        <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_01.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_02.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_03.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_04.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_05.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_06.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_07.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_08.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_09.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_10.jpg?raw=true"></div>
+    </div>
+</section>
 
     <section id="Portfolio">
         <h2>Portfolio</h2>
@@ -393,45 +426,108 @@ Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über fo
         <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Portfolio">
     </section>
 
-    <footer id="site-footer">
-        &copy; 2024 Leo Wang Sound
-    </footer>
 
-    <script>
-        // Angepasste Smooth Scroll Funktion
-        function smoothScroll(targetId, offset) {
-            const targetElement = document.querySelector(targetId);
-            window.scroll({
-                top: targetElement.offsetTop - 150, // Offset hinzufügen
-                behavior: 'smooth'
-            });
-        }
+<footer id="site-footer">
+    &copy; 2024 Leo Wang Sound
+</footer>
 
-let slideIndex = 0;
-showSlides();
-
-function showSlides() {
-    let slides = document.querySelectorAll(".slides");
-    
-    // Entferne die aktive Klasse von allen Slides und setze die Sichtbarkeit zurück
-    slides.forEach((slide) => {
-        slide.classList.remove("active-slide");
+<script>
+function smoothScroll(targetId, offset) {
+    const targetElement = document.querySelector(targetId);
+    window.scrollTo({
+        top: targetElement.offsetTop - offset,
+        behavior: 'smooth'
     });
-
-    slideIndex++;
-    
-    // Wenn der Index die Anzahl der Slides überschreitet, gehe zurück zur ersten Slide
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-
-    // Zeige die aktuelle Slide an
-    slides[slideIndex - 1].classList.add("active-slide");
-    
-    // Wechsle alle 5 Sekunden zur nächsten Slide
-    setTimeout(showSlides, 10000);
 }
 
-    </script>
+// Allgemeine Slideshow-Funktion
+function createSlideshow(slideContainerSelector, interval = 7000) {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(`${slideContainerSelector} .slides`);
+    let slideInterval;
+    let slideOrder = [];
+    let isMouseDown = false;
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function initSlideOrder() {
+        slideOrder = Array.from(Array(slides.length).keys());
+        shuffle(slideOrder);
+        slideIndex = 0;
+    }
+
+    function showSlides(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active-slide");
+            slide.style.display = "none";
+        });
+
+        if (index >= slideOrder.length) {
+            initSlideOrder();
+        }
+
+        slides[slideOrder[slideIndex]].classList.add("active-slide");
+        slides[slideOrder[slideIndex]].style.display = "block";
+    }
+
+    function nextSlide() {
+        if (!isMouseDown) {
+            slideIndex++;
+            showSlides(slideIndex);
+        }
+    }
+
+    function startSlideShow() {
+        slideInterval = setInterval(nextSlide, interval);
+    }
+
+    function resetSlideShow() {
+        clearInterval(slideInterval);
+        nextSlide();
+        startSlideShow();
+    }
+
+    slides.forEach(slide => {
+        const img = slide.querySelector('img');
+
+        img.addEventListener("mouseover", () => {
+            img.style.transition = "transform 0.5s ease-in-out";
+            img.style.transform = "scale(1.05)";
+        });
+
+        img.addEventListener("mousedown", () => {
+            isMouseDown = true;
+            img.style.transition = "transform 0.2s ease-in-out";
+            img.style.transform = "scale(1)";
+        });
+
+        img.addEventListener("mouseup", () => {
+            isMouseDown = false;
+            resetSlideShow();
+        });
+
+        img.addEventListener("mouseleave", () => {
+            img.style.transform = "scale(1)";
+        });
+    });
+
+    initSlideOrder();
+    showSlides(slideIndex);
+    startSlideShow();
+}
+
+// Initialisiere Slideshows für jede Sektion
+createSlideshow("#FilmSoundrecording");
+createSlideshow("#Fieldrecording");
+createSlideshow("#AboutMe");
+
+</script>
+
+
 </body>
 </html>
