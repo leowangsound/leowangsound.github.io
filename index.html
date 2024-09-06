@@ -9,13 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-    <!-- Verlinkung zur separaten CSS-Datei -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Courier Final Draft Font -->
+    <link href="https://fonts.cdnfonts.com/css/courier-final-draft" rel="stylesheet">
 
     <style>
         body {
             background-color: #000; /* Schwarz */
-            color: #fff;
+            color: #F4F2F0;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
 h1, h2, h3 {
     font-family: 'Bebas Neue', sans-serif; /* Verwende die neue Schriftart */
     font-size: 36px; /* Optional: Passe die Schriftgröße an */
-    color:#ff9500; /* Wähle eine auffällige Farbe */
+    color:#C8D7D2; /* Wähle eine auffällige Farbe */
     letter-spacing: 2px; /* Optional: Erhöhe den Zeichenabstand für einen markanteren Look */
     text-transform: uppercase; /* Optional: Alle Buchstaben groß schreiben */
 }
@@ -146,13 +146,13 @@ h1, h2, h3 {
 }
 
 .nav-button.active {
-    background-color: #fff;
+    background-color: #F4F2F0;
     color: #000;
     transition: all 0.5s ease-in-out;
 }
 
 .nav-button:not(.active):hover {
-    background-color: #ddd;
+    background-color: #C8D7D2;
     color: #000;
     transform: scale(1.05);
 }
@@ -306,6 +306,13 @@ h1, h2, h3 {
     filter: grayscale(0%) !important; /* Beim Hover wird das Video farbig */
 }
 
+/* Video-Umrandung beim Hover */
+#video:hover {
+    border: 1px solid #fff; /* 1px weiße Umrandung */
+    box-sizing: border-box; /* Stellt sicher, dass die Umrandung nicht das Video überdeckt */
+    transition: border 0.3s ease; /* Sanfter Übergang der Umrandung */
+}
+
 #videoControlIcon {
     transition: opacity 0.25s ease-in-out;
 }
@@ -394,16 +401,23 @@ h1, h2, h3 {
 </div>
 
 <section id="SoundDesign">
-    <h2>Sound Design, das</h2>
+    <h2>Sound Design</h2>
 
-    <div style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 18px; line-height: 1.5; margin-top: 20px;">
-        <strong>Wortart:</strong> Substantiv, Neutrum<br>
-        <strong>Aussprache:</strong> [saʊnd dɪˈzaɪn]<br>
-        <strong>Bedeutung:</strong><br>
-        Die kreative Gestaltung und Manipulation von Klängen in audiovisuellen Medien, um Emotionen, Atmosphäre und narrative Tiefe zu erzeugen.
-    </div>    
+    <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 18px; line-height: 1.6; margin-top: 20px;">
     
-    <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
+     <p>
+    1 INT. TONSTUDIO - DAY
+    </p>
+        <p>
+            Das Licht der Monitore reflektiert auf den Schaltflächen des Mischpults. Die Regler bewegen sich präzise und sorgen dafür, dass jeder Ton perfekt sitzt.
+        </p>
+        <p>
+          Sound Design ist mehr als nur Geräusche zusammenfügen – es ist das Handwerk, Klänge so zu formen, dass sie deine Geschichte untermalen, Emotionen wecken und Welten erschaffen.
+        </p>
+
+    </div>
+    
+    <div class="video-container" style="position: relative; max-width: 100%; height: 400px; overflow: hidden; margin-top: 15px;">
         <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
         <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
             <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
@@ -426,27 +440,36 @@ h1, h2, h3 {
 </section>
 
 <script>
-    const thumbnail = document.getElementById('videoThumbnail');
-    const video = document.getElementById('video');
-    const videoControlIcon = document.getElementById('videoControlIcon');
-    let isVideoPlaying = false;
+const thumbnail = document.getElementById('videoThumbnail');
+const video = document.getElementById('video');
+const videoControlIcon = document.getElementById('videoControlIcon');
+let isVideoPlaying = false;
 
-    // Funktion zum Starten des Videos
-    function playVideo() {
-        video.style.display = 'block'; // Zeige das Video
-        video.play(); // Starte das Video
-        video.muted = false; // Schalte den Ton an
-        video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
-        isVideoPlaying = true;
+// Stelle sicher, dass das Video geladen ist
+video.addEventListener('loadeddata', function() {
+    video.style.display = 'block'; // Zeige das Video an, wenn es geladen ist
+});
+
+// Funktion zum Starten des Videos
+function playVideo() {
+    if (video.readyState >= 2) { // Video ist bereit zum Abspielen
+        video.muted = true; // Autoplay erfordert stummgeschaltetes Video
+        video.play().then(() => {
+            video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
+            isVideoPlaying = true;
+        }).catch(error => {
+            console.error("Video konnte nicht abgespielt werden: ", error);
+        });
     }
+}
 
-    // Funktion zum Pausieren des Videos
-    function pauseVideo() {
-        video.pause(); // Pausiere das Video
-        isVideoPlaying = false;
-    }
+// Funktion zum Pausieren des Videos
+function pauseVideo() {
+    video.pause(); // Pausiere das Video
+    isVideoPlaying = false;
+}
 
-    // Funktion zum Anzeigen des Icons
+// Funktion zum Anzeigen des Icons
 function showIcon(type) {
     if (type === 'pause') {
         videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_pause.png?raw=true';
@@ -460,31 +483,45 @@ function showIcon(type) {
     }, 1000);
 }
 
+// Event Listener für das Thumbnail (Startet das Video nach dem Hover)
+thumbnail.addEventListener('mouseover', function() {
+    thumbnail.style.display = 'none'; // Verstecke das Thumbnail
+    playVideo(); // Starte das Video automatisch
+});
 
-    // Event Listener für das Thumbnail
-    thumbnail.addEventListener('mouseover', function() {
-        thumbnail.style.display = 'none'; // Verstecke das Thumbnail
+// Event Listener für das Video (Ton anschalten beim Klick)
+video.addEventListener('click', function() {
+    if (isVideoPlaying) {
+        pauseVideo();
+        showIcon('pause');
+    } else {
         playVideo();
-    });
+        video.muted = false; // Schalte den Ton an, wenn der Benutzer klickt
+        showIcon('play');
+    }
+});
 
-    // Event Listener für das Video
-    video.addEventListener('click', function() {
-        if (isVideoPlaying) {
-            pauseVideo();
-            showIcon('pause');
-        } else {
-            playVideo();
-            showIcon('play');
-        }
-    });
+
 </script>
 
 
 
 
 <section id="FilmSoundrecording">
-    <h2>Location Sound – Präzision für den perfekten Moment</h2>
-    <p>Bei Indie-Filmen, Interviews, Werbeprojekten und Dokumentationen ist klarer und hochwertiger Ton essenziell, um die Wirkung jeder Szene vollständig auszuschöpfen. Mit professionellem Location Sound sorge ich dafür, dass jedes Detail – von Stimmen bis zu Umgebungsgeräuschen – präzise und klar erfasst wird. So entsteht eine harmonische Einheit von Bild und Ton, die die Geschichte lebendig und eindrucksvoll macht.</p>
+    <h2>Location Sound</h2>
+
+    <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 18px; line-height: 1.6; margin-top: 20px;">
+     <p>
+    2 EXT. STADT - DAY
+      </p>
+        <p>
+            Die Geräusche der Stadt sind allgegenwärtig. Stimmen, Schritte und das Summen des Verkehrs vermischen sich zu einem lebendigen Klangteppich. Umsowichtiger: Eine klare Aufnahme des Tons, der wirklich wichtig ist für das Projekt.
+        </p>
+        <p>
+Location Sound setzt den Grundpfeiler der erzählten Welt. Ich sorge dafür, dass jede Stimme und jedes Geräusch sauber und präzise eingefangen wird – egal, ob Film, Interview oder Doku.
+        </p>
+
+    </div>
     <div class="slideshow-container">
     <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_01.jpg?raw=true"></div>
     <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_02.jpg?raw=true"></div>
@@ -507,8 +544,17 @@ function showIcon(type) {
     </section>
 
     <section id="Fieldrecording">
-    <h2>Field Recording – Klänge unserer Welt einfangen</h2>
-    <p>Field Recording ist die Kunst, die Essenz unserer Umgebung akustisch festzuhalten – sei es in der Natur, in Städten oder anderen besonderen Orten. Diese Aufnahmen verleihen Projekten eine besondere Tiefe und fügen unverwechselbare, atmosphärische Elemente hinzu. Mit einem geschulten Gehör und dem richtigen Equipment halte ich Klänge fest, die sonst unbemerkt bleiben, um sie in den Dienst einer fesselnden Erzählung zu stellen.</p>
+    <h2>Field Recording</h2>
+   <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 18px; line-height: 1.6; margin-top: 20px;">
+         <p>3 EXT. WALD - NIGHT   </p>
+       <p>
+            Die Nacht ist still, aber in der Ferne hört man das Rauschen des Windes und das Knistern der Blätter. Das Mikrofon fängt jedes Detail auf, selbst das Flüstern der Natur.
+        </p>
+        <p>
+Field Recording ist die Kunst, Klänge in ihrer reinsten Form zu erfassen – ob in der Stadt oder in der Natur. Ich nehme Geräusche auf, die sonst im Verborgenen bleiben, und bringe sie in deine Projekte ein.
+        </p>
+
+   
     <div class="slideshow-container">
         <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_01.jpg?raw=true"></div>
         <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_02.jpg?raw=true"></div>
@@ -519,7 +565,6 @@ function showIcon(type) {
         <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_07.jpg?raw=true"></div>
         <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_08.jpg?raw=true"></div>
     </div>
-</section>
 
 <section id="Podcast">
     <h2>Podcast – Stimme und Klang perfekt in Szene gesetzt</h2>
@@ -544,6 +589,11 @@ function showIcon(type) {
     Mein Arbeitsplatz verfügt über ein voll ausgestattetes und eingemessenes 5.1 Postproduktions-Studio in der Kölner Nordaltstadt, wo ich mit Pro Tools und hochwertigen Genelec-Monitoren arbeite. Für Field Recordings und Set-Aufnahmen nutze ich professionelles Equipment von Sennheiser und Sound Devices, um schon am Drehort die bestmögliche Grundlage für die Postproduktion zu schaffen.
 
     Um mehr über mich und meine Arbeit zu erfahren, kontaktiere mich gerne über folgende Kanäle. Ich freue mich auf ein nettes Kennenlerngespräch und eine ergiebige Zusammenarbeit.</p>
+
+<div class="about-buttons-container">
+    <a href="mailto:info@leowangsound.de" class="about-button" id="mail-button">Mail</a>
+    <a href="https://www.instagram.com/leowangsound/" target="_blank" class="about-button" id="instagram-button">Instagram</a>
+</div>
     
     <div class="slideshow-container">
         <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_01.jpg?raw=true"></div>
@@ -563,6 +613,10 @@ function showIcon(type) {
     <h2>Portfolio</h2>
     <p>In meiner Arbeit als Sound Designer, Dialog Editor und Tonmeister habe ich an einer Vielzahl von Projekten mitgewirkt – von Indie-Filmen über Dokumentationen bis hin zu Serien. Jeder Film und jede Szene ist eine einzigartige Herausforderung, die ich mit Leidenschaft und Präzision angehe. Um einen tieferen Einblick in meine Arbeit zu bekommen, werfen Sie einen Blick auf mein vollständiges Portfolio auf Crew United.</p>
     
+    <div class="portfolio-button-container">
+        <a href="https://www.crew-united.com/de/Leo-Wang_533840.html#!searchterm=leo%20wang" target="_blank" class="portfolio-button">Weiter zu Crew United</a>
+    </div> <!-- Hier fehlt das schließende div -->
+
     <div class="slideshow-container">
         <div class="slides active-slide">
             <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_01.png?raw=true">
@@ -587,6 +641,7 @@ function showIcon(type) {
         </div>
     </div>
 </section>
+
 
 
 
@@ -780,7 +835,5 @@ function updateActiveButtonOnScroll() {
 
 
 </script>
-
-
 </body>
 </html>
