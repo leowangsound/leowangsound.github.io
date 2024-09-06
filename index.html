@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leo Wang Sound</title>
 
-    <!-- Google Font: Montserrat -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <!-- Verlinkung zur separaten CSS-Datei -->
     <link rel="stylesheet" href="style.css">
@@ -20,6 +21,15 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+
+h1, h2, h3 {
+    font-family: 'Bebas Neue', sans-serif; /* Verwende die neue Schriftart */
+    font-size: 36px; /* Optional: Passe die Schriftgröße an */
+    color:#ff9500; /* Wähle eine auffällige Farbe */
+    letter-spacing: 2px; /* Optional: Erhöhe den Zeichenabstand für einen markanteren Look */
+    text-transform: uppercase; /* Optional: Alle Buchstaben groß schreiben */
+}
 
         /* Zone 0 */
         
@@ -108,22 +118,30 @@
     margin-top: -3px;
 }
 
-    .nav-button {
-        background-color: #000000;
-        color: #ddd;
-        padding: 5px 10px;
-        margin: 3px;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        width: calc(100% / 10);
-        text-align: center;
-    }
+.nav-button {
+    background-color: #000000;
+    color: #ddd;
+    padding: 5px 10px;
+    margin: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: calc(100% / 10);
+    text-align: center;
+    position: relative;
+}
 
-    .nav-button:hover {
-        background-color: #fff;
-        color: #000;
-        transform: scale(1.05);
-    }
+.nav-button.active {
+    background-color: #fff; /* Weißer Hintergrund für aktiven Button */
+    color: #000; /* Schwarzer Text für aktiven Button */
+    transition: all 0.5s ease-in-out; /* Smoothe Transition für den aktiven Button */
+}
+
+
+.nav-button:not(.active):hover {
+    background-color: #ddd; /* Hellgrauer Hintergrund beim Hover */
+    color: #000; /* Schwarzer Text beim Hover */
+    transform: scale(1.05);
+}
 
     /* Mobile Navigation - Media Query */
     @media (max-width: 768px) {
@@ -263,6 +281,45 @@
     animation: slideOut 1s ease-in-out forwards;
 }
 
+#podcastVideo {
+    filter: grayscale(100%) !important; /* Erzwinge Farbe */
+    transition: filter 0.5s ease, transform 0.5s ease; /* Sanfter Übergang bei Hover */
+    z-index: 1; /* Sicherstellen, dass es sichtbar ist */
+}
+
+#podcastVideo:hover {
+    filter: grayscale(0%) !important; /* Beim Hover wird das Video farbig */
+}
+
+#videoControlIcon {
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Portfolio-spezifische Anpassungen */
+#Portfolio .slideshow-container {
+    max-width: 800px; /* Maximale Breite des Containers */
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+#Portfolio .slides img {
+    width: 100%; /* Die Bilder passen sich der vollen Breite des Containers an */
+    height: auto; /* Die Höhe der Bilder wird automatisch entsprechend ihrer Auflösung angepasst */
+    filter: grayscale(100%); /* Schwarz-Weiß-Effekt standardmäßig */
+    transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out; /* Gleiche Hover-Effekte wie in Location Sound */
+}
+
+#Portfolio .slides img:hover {
+    filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt bei Hover */
+    transform: scale(1.05); /* Vergrößert das Bild leicht bei Hover */
+}
+
+/* Entferne die Scroll-Animation */
+#Portfolio .slides img {
+    animation: none; /* Keine Animation */
+}
+
     </style>
 </head>
 <body>
@@ -298,8 +355,14 @@
     </div>
 
 <section id="SoundDesign">
-    <h2>Sound Design – Emotionen hörbar machen</h2>
-    <p>Sound Design bringt Bilder zum Klingen und macht Emotionen hörbar. Es geht darum, eine Welt zu schaffen, in der sich der Zuschauer verliert – sei es durch subtile Geräusche, die eine Szene lebendig wirken lassen, oder kraftvolle Klänge, die Spannung aufbauen. Jeder Sound ist sorgfältig ausgewählt, um den Film auf einer emotionalen Ebene zu bereichern und das Publikum tiefer in die Geschichte zu ziehen. So wird der Klang zum unsichtbaren Helden der Erzählung.</p>
+    <h2>Sound Design, das</h2>
+
+    <div style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 18px; line-height: 1.5; margin-top: 20px;">
+        <strong>Wortart:</strong> Substantiv, Neutrum<br>
+        <strong>Aussprache:</strong> [saʊnd dɪˈzaɪn]<br>
+        <strong>Bedeutung:</strong><br>
+        Die kreative Gestaltung und Manipulation von Klängen in audiovisuellen Medien, um Emotionen, Atmosphäre und narrative Tiefe zu erzeugen.
+    </div>    
     
     <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
         <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
@@ -307,12 +370,26 @@
             <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
             Dein Browser unterstützt das Video-Tag nicht.
         </video>
+        <!-- Hinzufügen des Control-Icons -->
+<img id="videoControlIcon" src="" alt="Control Icon" style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+">
+
     </div>
 </section>
 
 <script>
     const thumbnail = document.getElementById('videoThumbnail');
     const video = document.getElementById('video');
+    const videoControlIcon = document.getElementById('videoControlIcon');
     let isVideoPlaying = false;
 
     // Funktion zum Starten des Videos
@@ -330,21 +407,39 @@
         isVideoPlaying = false;
     }
 
-    // Startet das Video, wenn die Maus darüber fährt
+    // Funktion zum Anzeigen des Icons
+function showIcon(type) {
+    if (type === 'pause') {
+        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_pause.png?raw=true';
+    } else if (type === 'play') {
+        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_play.png?raw=true';
+    }
+    videoControlIcon.style.opacity = '1';
+    // Verstecke das Icon nach 1 Sekunde
+    setTimeout(() => {
+        videoControlIcon.style.opacity = '0';
+    }, 1000);
+}
+
+
+    // Event Listener für das Thumbnail
     thumbnail.addEventListener('mouseover', function() {
         thumbnail.style.display = 'none'; // Verstecke das Thumbnail
         playVideo();
     });
 
-    // Pausiere und starte das Video bei Klick
+    // Event Listener für das Video
     video.addEventListener('click', function() {
         if (isVideoPlaying) {
             pauseVideo();
+            showIcon('pause');
         } else {
             playVideo();
+            showIcon('play');
         }
     });
 </script>
+
 
 
 
@@ -387,11 +482,19 @@
     </div>
 </section>
 
-    <section id="Podcast">
-        <h2>Podcast – Stimme und Klang perfekt in Szene gesetzt</h2>
-        <p>Podcasts leben von klaren Botschaften und hochwertigem Sound. In der Postproduktion werden die Tonspuren bearbeitet und auf die technischen Anforderungen des Marktes abgestimmt. Zusätzlich stehe ich für die Erstellung von individuellen Intros oder Audio-Logos zur Verfügung, die den Podcast unverwechselbar machen. Für Aufnahmen im Raum Köln steht professionelles Equipment bereit. Aber auch bei Aufnahmen in den eigenen vier Wänden biete ich technische Beratung, um sicherzustellen, dass der Podcast in jeder Hinsicht überzeugt..</p>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Podcast">
-    </section>
+<section id="Podcast">
+    <h2>Podcast – Stimme und Klang perfekt in Szene gesetzt</h2>
+    <p>Podcasts leben von klaren Botschaften und hochwertigem Sound. In der Postproduktion werden die Tonspuren bearbeitet und auf die technischen Anforderungen des Marktes abgestimmt. Zusätzlich stehe ich für die Erstellung von individuellen Intros oder Audio-Logos zur Verfügung, die den Podcast unverwechselbar machen. Für Aufnahmen im Raum Köln steht professionelles Equipment bereit. Aber auch bei Aufnahmen in den eigenen vier Wänden biete ich technische Beratung, um sicherzustellen, dass der Podcast in jeder Hinsicht überzeugt..</p>
+    
+    <!-- Video mit Loop und Hover-Effekt -->
+    <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
+        <video id="podcastVideo" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); z-index: 1;" autoplay muted loop>
+            <source src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Videos%20Website/Podcast.mp4?raw=true" type="video/mp4">
+            Dein Browser unterstützt das Video-Tag nicht.
+        </video>
+    </div>
+</section>
+
 
    <section id="AboutMe">
     <h2>Über mich</h2>
@@ -417,14 +520,35 @@
     </div>
 </section>
 
-    <section id="Portfolio">
-        <h2>Portfolio</h2>
-        <p>In meiner Arbeit als Sound Designer, Dialog Editor und Tonmeister habe ich an einer Vielzahl von Projekten mitgewirkt – von Indie-Filmen über Dokumentationen bis hin zu Serien. Jeder Film und jede Szene ist eine einzigartige Herausforderung, die ich mit Leidenschaft und Präzision angehe. Um einen tieferen Einblick in meine Arbeit zu bekommen, werfen Sie einen Blick auf mein vollständiges Portfolio auf Crew United.</p>
-<div class="portfolio-button-container">
-    <a href="https://www.crew-united.com/de/Leo-Wang_533840.html#!searchterm=leo%20wang" target="_blank" class="portfolio-button">Weiter zu Crew United</a>
-</div>
-        <img src="https://via.placeholder.com/800x400" alt="Platzhalterbild für Portfolio">
-    </section>
+<section id="Portfolio">
+    <h2>Portfolio</h2>
+    <p>In meiner Arbeit als Sound Designer, Dialog Editor und Tonmeister habe ich an einer Vielzahl von Projekten mitgewirkt – von Indie-Filmen über Dokumentationen bis hin zu Serien. Jeder Film und jede Szene ist eine einzigartige Herausforderung, die ich mit Leidenschaft und Präzision angehe. Um einen tieferen Einblick in meine Arbeit zu bekommen, werfen Sie einen Blick auf mein vollständiges Portfolio auf Crew United.</p>
+    
+    <div class="slideshow-container">
+        <div class="slides active-slide">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_01.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_02.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_03.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_04.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_05.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_06.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_07.png?raw=true">
+        </div>
+    </div>
+</section>
+
 
 
 <footer id="site-footer">
@@ -434,11 +558,21 @@
 <script>
 function smoothScroll(targetId, offset) {
     const targetElement = document.querySelector(targetId);
+    const buttons = document.querySelectorAll('.nav-button');
+    
+    // Starte das Scrollen
     window.scrollTo({
         top: targetElement.offsetTop - offset,
         behavior: 'smooth'
     });
+
+    // Smoothe Animation für den weißen Kasten
+    buttons.forEach(button => {
+        button.style.transition = "transform 0.5s ease-in-out";
+    });
 }
+
+
 
 // Allgemeine Slideshow-Funktion
 function createSlideshow(slideContainerSelector, interval = 7000) {
@@ -525,6 +659,84 @@ function createSlideshow(slideContainerSelector, interval = 7000) {
 createSlideshow("#FilmSoundrecording");
 createSlideshow("#Fieldrecording");
 createSlideshow("#AboutMe");
+createSlideshow("#Portfolio", 7000); // Bildwechsel alle 7 Sekunden
+
+
+
+
+
+
+
+// Funktion, um den aktiven Button zu setzen
+function setActiveButton(targetButton) {
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach(button => button.classList.remove('active'));
+    targetButton.classList.add('active');
+}
+
+// Funktion, um den aktiven Button bei Klick zu ändern
+function handleButtonClick(targetId) {
+    const targetButton = document.querySelector(`[onclick="smoothScroll('${targetId}', 150)"]`);
+    setActiveButton(targetButton);
+}
+
+
+
+// Event-Listener für Scroll und Klick
+window.addEventListener('scroll', updateActiveButtonOnScroll);
+
+const navButtons = document.querySelectorAll('.nav-button');
+navButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const targetId = this.getAttribute('onclick').match(/#\w+/)[0];
+        handleButtonClick(targetId);
+    });
+});
+
+// Setze den "Sound Design"-Button als aktiv beim Laden der Seite
+document.addEventListener('DOMContentLoaded', () => {
+    const soundDesignButton = document.querySelector(`[onclick="smoothScroll('#SoundDesign', 150)"]`);
+    setActiveButton(soundDesignButton);
+});
+
+
+
+
+
+function updateActiveButtonOnScroll() {
+    const sections = document.querySelectorAll('section');
+    const scrollPos = window.scrollY || window.pageYOffset;
+    const windowBottom = scrollPos + window.innerHeight;
+    let lastButton = null;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const sectionBottom = sectionTop + sectionHeight;
+
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+            const targetButton = document.querySelector(`[onclick="smoothScroll('#${sectionId}', 150)"]`);
+            setActiveButton(targetButton);
+            lastButton = targetButton;
+        }
+    });
+
+    // Logik für den "Portfolio"-Button
+    const portfolioSection = document.querySelector('#Portfolio');
+    const portfolioButton = document.querySelector(`[onclick="smoothScroll('#Portfolio', 150)"]`);
+
+    // Wenn das Scrollen das Ende der Seite erreicht oder der "Portfolio"-Abschnitt vollständig sichtbar ist
+    if (portfolioSection && (windowBottom >= document.body.scrollHeight || scrollPos >= portfolioSection.offsetTop - 150)) {
+        setActiveButton(portfolioButton);
+    } else if (lastButton) {
+        setActiveButton(lastButton);
+    }
+}
+
+
+
+
 
 </script>
 
