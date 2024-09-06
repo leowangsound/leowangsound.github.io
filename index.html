@@ -97,29 +97,44 @@ h1, h2, h3 {
             background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true) center/cover no-repeat; /* Instagram-Icon */
         }
 
-        /* Zone 1 */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000; /* Schwarz */
-            position: fixed;
-            top: 30px; /* Untere Grenze der Zone 0 */
-            width: 100%;
-            height: 100px; /* Erhöhe die Höhe des Containers */
-            z-index: 1000;
-            margin-top: 0px; /* Abstand zwischen Logo und Obergrenze der Website */
-        }
+/* Zone 1 (Logo) */
+.zone-1 {
+    background-color: #000;
+    position: fixed;
+    top: 30px; /* Oberer Abstand zur Zone 0 */
+    width: 100%;
+    height: 120px; /* Erhöhe die Höhe um 20px, damit das Logo mehr Platz hat */
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
 .logo {
     width: 100px;
     height: 100px;
     background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
-    margin-top: -3px;
+}
+
+/* Zone 2 (Navigation) */
+.zone-2 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #000;
+    position: fixed;
+    top: 150px; /* Verschiebe die Navigation um 20px nach unten */
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
 }
 
 .nav-button {
-    background-color: #000000;
+    background-color: #000;
     color: #ddd;
     padding: 5px 10px;
     margin: 3px;
@@ -131,17 +146,17 @@ h1, h2, h3 {
 }
 
 .nav-button.active {
-    background-color: #fff; /* Weißer Hintergrund für aktiven Button */
-    color: #000; /* Schwarzer Text für aktiven Button */
-    transition: all 0.5s ease-in-out; /* Smoothe Transition für den aktiven Button */
+    background-color: #fff;
+    color: #000;
+    transition: all 0.5s ease-in-out;
 }
-
 
 .nav-button:not(.active):hover {
-    background-color: #ddd; /* Hellgrauer Hintergrund beim Hover */
-    color: #000; /* Schwarzer Text beim Hover */
+    background-color: #ddd;
+    color: #000;
     transform: scale(1.05);
 }
+
 
     /* Mobile Navigation - Media Query */
     @media (max-width: 768px) {
@@ -320,39 +335,63 @@ h1, h2, h3 {
     animation: none; /* Keine Animation */
 }
 
+/* Footer */
+#site-footer {
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
+    color: #fff; /* Weiße Schrift */
+}
+
+/* Footer-Link für das Impressum */
+.footer-link {
+    color: #fff; /* Weiße Schrift wie der Rest des Footers */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.footer-link:hover {
+    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+}
+
     </style>
 </head>
 <body>
 
 <!-- Zone 0 -->
 <div class="zone-0">
-        <!-- "en" Button hinzufügen -->
-        <div class="language-button">en</div>
+    <!-- "en" Button hinzufügen -->
+    <div class="language-button">en</div>
 
-    <!-- Vorhandene Icons ... -->
-      <a href="mailto:info@leowangsound.de">
+    <!-- Vorhandene Icons -->
+    <a href="mailto:info@leowangsound.de">
         <div class="mail-icon"></div>
     </a>
     <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
         <div class="social-icon instagram-icon"></div>
     </a>
-    
 </div>
 
-
-    <!-- Zone 1 -->
-<div class="logo-container">
-    <div class="logo"></div>
-</div>
-    
-<div style="display: flex; justify-content: space-around; align-items: center; background-color: #000; position: fixed; top: 115px; width: 100%; height: 50px; z-index: 1000;">
-<div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
-<div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
-<div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Fieldrecording</div>
-<div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
-<div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">Über mich</div>
-<div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+    <div class="logo-container">
+        <div class="logo"></div>
     </div>
+</div>
+
+<!-- Zone 2 (Navigation) -->
+<div class="zone-2">
+    <div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
+    <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
+    <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Fieldrecording</div>
+    <div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
+    <div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">Über mich</div>
+    <div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
+</div>
 
 <section id="SoundDesign">
     <h2>Sound Design, das</h2>
@@ -553,7 +592,9 @@ function showIcon(type) {
 
 <footer id="site-footer">
     &copy; 2024 Leo Wang Sound
+    <p><a href="https://leowangsound.de/impressum" class="footer-link">Impressum</a></p>
 </footer>
+
 
 <script>
 function smoothScroll(targetId, offset) {
