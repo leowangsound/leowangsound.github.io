@@ -364,6 +364,13 @@ h1, h2, h3 {
 .footer-link:hover {
     color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
 }
+.highlight {
+    background-color: #fff;  /* Weißer Kasten */
+    color: #000;  /* Schwarze Schrift */
+    padding: 2px 4px;  /* Etwas Innenabstand für den Kasten */
+    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
+    font-weight: bold;  /* Optional: Mach den Text fett */
+}
 
     </style>
 </head>
@@ -405,15 +412,22 @@ h1, h2, h3 {
 
     <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 18px; line-height: 1.6; margin-top: 20px;">
     
-     <p>
-    1 INT. TONSTUDIO - DAY
-    </p>
-        <p>
-            Das Licht der Monitore reflektiert auf den Schaltflächen des Mischpults. Die Regler bewegen sich präzise und sorgen dafür, dass jeder Ton perfekt sitzt.
-        </p>
-        <p>
-          Sound Design ist mehr als nur Geräusche zusammenfügen – es ist das Handwerk, Klänge so zu formen, dass sie deine Geschichte untermalen, Emotionen wecken und Welten erschaffen.
-        </p>
+<p>
+    EXT. LONDON SKYLINE - NIGHT<br>
+    <br>
+    Die Kamera blickt über die Skyline von London. In der Ferne rollt ein 
+    <span class="highlight">Zug</span> langsam über die Themse, vorbei am 
+    <span class="highlight">Big Ben</span>. Eine kleine Gruppe von 
+    <span class="highlight">Raben</span> flattert durch den Nachthimmel.<br><br> 
+    Die Kamera sinkt tiefer auf Straßenebene. Die Stadt beginnt zum Leben zu erwachen. 
+    <span class="highlight">Stimmen</span> hallen durch die leeren Gassen, als ein 
+    <span class="highlight">Auto</span> um eine Ecke biegt. Ein 
+    <span class="highlight">Zeitungsverkäufer</span> ruft die Schlagzeilen der Abendzeitung aus. 
+    <span class="highlight">Passanten</span> flanieren durch das 
+    <span class="highlight">pulsierende Nachtleben</span> der Stadt [...]. 
+</p>
+
+ 
 
     </div>
     
@@ -483,11 +497,6 @@ function showIcon(type) {
     }, 1000);
 }
 
-// Event Listener für das Thumbnail (Startet das Video nach dem Hover)
-thumbnail.addEventListener('mouseover', function() {
-    thumbnail.style.display = 'none'; // Verstecke das Thumbnail
-    playVideo(); // Starte das Video automatisch
-});
 
 // Event Listener für das Video (Ton anschalten beim Klick)
 video.addEventListener('click', function() {
