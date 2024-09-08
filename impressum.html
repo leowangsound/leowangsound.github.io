@@ -15,23 +15,28 @@
             padding: 0;
         }
 
-        h1, h2 {
-            font-family: 'Bebas Neue', sans-serif; /* Verwende die gleiche Schriftart wie auf der Hauptseite */
-            color: #ff9500; /* Auffälliges Orange wie auf der Hauptseite */
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+h1, h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: #C8D7D2; /* Gleiche Farbe wie bei der Datenschutzerklärung */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
+p, a {
+    color: #F4F2F0; /* Weiß wie auf der Datenschutzerklärung */
+    font-size: 16px;
+    line-height: 1.6;
+}
 
-        p, a {
-            color: #ddd; /* Helle graue Schrift für den normalen Text */
-            font-size: 16px;
-            line-height: 1.6; /* Erhöht den Zeilenabstand für bessere Lesbarkeit */
-        }
+a {
+    color: #C8D7D2; /* Verlinkungen gleiche Farbe wie bei der Datenschutzerklärung */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+
 
         strong {
             color: #fff; /* Fett gedruckter Text in weiß */
@@ -39,7 +44,7 @@
 
         a {
             text-decoration: none;
-            color: #ff9500; /* Orange Links */
+            color: #F4F2F0; /* Orange Links */
             transition: color 0.3s ease;
         }
 
@@ -47,39 +52,55 @@
             color: #fff; /* Weißer Text beim Hover */
         }
 
-        .impressum {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #111; /* Dunkles Grau für den Textbereich */
-            border: 1px solid #ff9500; /* Orange Umrandung */
-            border-radius: 10px;
-        }
+.impressum {
+    max-width: 800px;
+    margin: 150px auto 50px;
+    padding: 20px;
+    background-color: #000; /* Schwarz wie der Rest der Seite */
+}
 
-        /* Zurück zur Startseite-Button */
-        .back-button {
-            text-align: center;
-            margin: 20px 0;
-        }
+/* Zone 1 (Logo) */
+.zone-1 {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1000;
+}
 
-        .back-button a {
-            background-color: #000;
-            color: #ddd;
-            padding: 10px 20px;
-            border: 1px solid #fff;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
 
-        .back-button a:hover {
-            background-color: #ff9500; /* Orange Hintergrund beim Hover */
-            color: #000;
-        }
+.logo {
+    width: 100px;
+    height: 100px;
+    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
 
     </style>
 </head>
 <body>
+
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+    <div class="logo-container">
+        <a href="https://leowangsound.de/" target="_self">
+            <div class="logo"></div>
+        </a>
+    </div>
+</div>
 
     <section id="impressum">
         <div class="impressum">
@@ -128,10 +149,6 @@ Diese Website benutzt Google Adsense, einen Webanzeigendienst der Google Inc., U
             <p>Website Impressum von <a href="https://www.impressum-generator.de">impressum-generator.de</a></p>
         </div>
 
-        <!-- Zurück zur Startseite-Button -->
-        <div class="back-button">
-            <a href="https://leowangsound.de/">Zurück zur Startseite</a>
-        </div>
     </section>
 
 </body>
