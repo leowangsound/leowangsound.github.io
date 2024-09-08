@@ -2,7 +2,8 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
     <title>Leo Wang Sound</title>
 
     <!-- Google Fonts -->
@@ -25,7 +26,7 @@
 
 h1, h2, h3 {
     font-family: 'Bebas Neue', sans-serif; /* Verwende die neue Schriftart */
-    font-size: 36px; /* Optional: Passe die Schriftgröße an */
+    font-size: 2.25rem; /* Optional: Passe die Schriftgröße an */
     color:#C8D7D2; /* Wähle eine auffällige Farbe */
     letter-spacing: 2px; /* Optional: Erhöhe den Zeichenabstand für einen markanteren Look */
     text-transform: uppercase; /* Optional: Alle Buchstaben groß schreiben */
@@ -35,7 +36,7 @@ h1, h2, h3 {
         
          .language-button {
             color: #fff;
-            font-size: 13px;
+            font-size: 0.813rem;
             cursor: pointer;
             transition: transform 0.3s, filter 0.3s;
             position: absolute;
@@ -51,25 +52,26 @@ h1, h2, h3 {
             filter: brightness(150%);
         }
         
-        .zone-0 {
-            height: 30px; /* Höhe auf die Höhe der Icons setzen */
-            background-color: #000; /* Hintergrundfarbe auf Schwarz setzen */
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1001; /* Über Zone 1, um die Icons zu überdecken */
-            display: flex;
-            justify-content: flex-end;
-            align-items: center; /* Zentral ausrichten */
-            padding-right: 20px; /* Füge etwas Abstand zum rechten Rand hinzu */
-        }
+/* Zone 0 (Icons und Sprache) */
+.zone-0 {
+    height: 1.875rem;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1.25rem;
+}
 
         .social-icon {
             width: 13px; /* Breite des Icons */
             height: 13px; /* Höhe des Icons */
-            margin-left: 2px; /* Abstand zwischen den Icons */
+            margin-left: 0.125rem; /* Abstand zwischen den Icons */
             cursor: pointer;
-            margin-right: 20px;
+            margin-right: 1.25rem;
             
             
         }
@@ -80,7 +82,7 @@ h1, h2, h3 {
             height: 20px;
             cursor: pointer;
             transition: filter 0.5s; /* Übergang für Filtereffekt */
-            margin-right: 8px;
+            margin-right: 0.5rem;
         }
 
         .mail-icon:hover,
@@ -99,25 +101,32 @@ h1, h2, h3 {
 
 /* Zone 1 (Logo) */
 .zone-1 {
-    background-color: #000;
-    position: fixed;
-    top: 30px; /* Oberer Abstand zur Zone 0 */
-    width: 100%;
-    height: 120px; /* Erhöhe die Höhe um 20px, damit das Logo mehr Platz hat */
-    z-index: 1000;
-}
-
-.logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    background-color: #000;
+    position: fixed; /* Position fixiert */
+    top: 1.875rem; /* Startet direkt unter Zone 0 */
+    width: 100%;
+    height: 150px; /* Höhe von Zone 1 */
+    z-index: 1000;
 }
 
+/* Logo-Container */
+.logo-container {
+    display: flex;
+    justify-content: center;  /* Horizontale Zentrierung des Logos */
+    align-items: center;      /* Vertikale Zentrierung des Logos */
+    height: 100%;             /* Nimmt die gesamte Höhe der Zone 1 ein */
+
+}
+
+/* Logo */
 .logo {
-    width: 100px;
-    height: 100px;
-    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    max-width: 90%;           /* Das Logo nimmt maximal 90% der Breite der Zone ein */
+    max-height: 90%;          /* Das Logo nimmt maximal 90% der Höhe der Zone ein */
+    width: auto;              /* Seitenverhältnis des Logos beibehalten */
+    height: auto;             /* Höhe proportional zur Breite */
 }
 
 /* Zone 2 (Navigation) */
@@ -127,7 +136,7 @@ h1, h2, h3 {
     align-items: center;
     background-color: #000;
     position: fixed;
-    top: 150px; /* Verschiebe die Navigation um 20px nach unten */
+    top: calc(1.875rem + 150px); /* Startet direkt unter Zone 1 */
     width: 100%;
     height: 50px;
     z-index: 1000;
@@ -136,8 +145,8 @@ h1, h2, h3 {
 .nav-button {
     background-color: #000;
     color: #ddd;
-    padding: 5px 10px;
-    margin: 3px;
+    padding: 0.313rem 0.625rem;
+    margin: 0.188rem;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     width: calc(100% / 10);
@@ -162,20 +171,20 @@ h1, h2, h3 {
     @media (max-width: 768px) {
         .nav-button {
             width: 100%; /* Buttons nehmen die volle Breite ein */
-            margin: 5px 0; /* Abstand zwischen den Buttons */
+            margin: 0.313rem 0; /* Abstand zwischen den Buttons */
         }
     }
 
         section {
             max-width: 800px;
-            margin: 150px auto 20px; /* 150px oben für den festen Header, Logo und Navigationsleiste */
-            padding: 20px;
+            margin: 9.375rem auto 1.25rem; /* 150px oben für den festen Header, Logo und Navigationsleiste */
+            padding: 1.25rem;
             background-color: #000; /* Schwarz */
         }
 
       footer {
     text-align: center;
-    padding: 10px;
+    padding: 0.625rem;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -185,13 +194,13 @@ h1, h2, h3 {
 
        .portfolio-button-container {
     text-align: center; /* Zentriert den Button */
-    margin: 40px 0; /* 40px Abstand oben und unten */
+    margin: 2.5rem 0; /* 40px Abstand oben und unten */
 }
 
 .portfolio-button {
     background-color: #000; /* Schwarzer Hintergrund */
     color: #ddd; /* Leicht graue Schrift */
-    padding: 10px 20px; /* Innenabstand des Buttons */
+    padding: 0.625rem 1.25rem; /* Innenabstand des Buttons */
     border: 1px solid #fff; /* Weißer Rahmen */
     text-decoration: none; /* Unterstreichung entfernen */
     display: inline-block; /* Button-Darstellung */
@@ -206,17 +215,17 @@ h1, h2, h3 {
 }
 .about-buttons-container {
     text-align: center;
-    margin: 40px 0;
+    margin: 2.5rem 0;
 }
 
 .about-button {
     background-color: #000;
     color: #ddd;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     border: 1px solid #fff;
     text-decoration: none;
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 0.625rem;
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
     font-family: 'Montserrat', sans-serif;
     position: relative;
@@ -345,7 +354,7 @@ h1, h2, h3 {
 /* Footer */
 #site-footer {
     text-align: center;
-    padding: 10px;
+    padding: 0.625rem;
     position: relative;
     bottom: 0;
     width: 100%;
@@ -367,11 +376,106 @@ h1, h2, h3 {
 .highlight {
     background-color: #fff;  /* Weißer Kasten */
     color: #000;  /* Schwarze Schrift */
-    padding: 2px 4px;  /* Etwas Innenabstand für den Kasten */
+    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
     border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
     font-weight: bold;  /* Optional: Mach den Text fett */
 }
 
+
+
+img, video {
+    max-width: 100%; /* Bilder und Videos passen sich der Container-Breite an */
+    height: auto; /* Höhe proportional zur Breite */
+}
+
+
+
+
+
+/* Breakpoints für unterschiedliche Bildschirmgrößen */
+
+@media only screen and (max-width: 480px) {
+    body {
+        font-size: 1rem; /* Verkleinere die Schriftgröße für kleinere Bildschirme */
+    }
+
+    .nav-button {
+        width: 100%; /* Buttons nehmen die volle Breite ein */
+        padding: 12px 0; /* Mehr Platz für die Buttons */
+        margin: 10px 0; /* Mehr Abstand zwischen den Buttons */
+    }
+
+    .zone-1 {
+        margin-bottom: 2rem; /* Füge hier die Bottom-Margin hinzu */
+    }
+
+    .logo {
+        width: 80px; /* Verkleinere das Logo für kleinere Bildschirme */
+        height: 80px;
+    }
+    
+    .zone-2 {
+        top: 130px; /* Anpassung für kleinere Geräte */
+    }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 1.125rem; /* Etwas größere Schrift für Tablets */
+    }
+
+    .logo {
+        width: 90px; /* Logo etwas kleiner als auf dem Desktop */
+        height: 90px;
+    }
+
+    .zone-2 {
+        justify-content: space-between; /* Navigation leicht umverteilen */
+    }
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    body {
+        font-size: 1.25rem; /* Leicht größere Schriftgröße für Tablets quer */
+    }
+
+    .logo {
+        width: 100px; /* Standardgröße für das Logo, falls du es für Tablets anpassen möchtest */
+        height: 100px;
+    }
+
+    .nav-button {
+        width: 50%; /* Navigation in zwei Spalten für Tablets im Querformat */
+    }
+
+    .zone-2 {
+        justify-content: space-around; /* Navigation etwas umverteilen */
+    }
+}
+
+
+@media only screen and (max-width: 1280px) {
+    body {
+        font-size: 1.375rem; /* Etwas größere Schrift für kleinere Laptops */
+    }
+
+    .logo {
+        width: 120px; /* Größeres Logo für kleine Laptops */
+        height: 120px;
+    }
+
+    .nav-button {
+        width: calc(100% / 6); /* Navigation über sechs gleiche Spalten für kleinere Laptops */
+    }
+
+    .zone-2 {
+        justify-content: space-between; /* Etwas mehr Platz zwischen den Navigations-Buttons */
+    }
+}
     </style>
 </head>
 <body>
@@ -395,6 +499,11 @@ h1, h2, h3 {
     <div class="logo-container">
         <div class="logo"></div>
     </div>
+    
+    <div class="logo-container">
+    <img class="logo" src="https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true" alt="Logo">
+</div>
+
 </div>
 
 <!-- Zone 2 (Navigation) -->
@@ -410,7 +519,7 @@ h1, h2, h3 {
 <section id="SoundDesign">
     <h2>Sound Design</h2>
 
-    <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 18px; line-height: 1.6; margin-top: 20px;">
+    <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 1.125rem; line-height: 1.6; margin-top: 1.25rem;">
     
 <p>
     EXT. LONDON SKYLINE - NIGHT<br>
@@ -431,7 +540,7 @@ h1, h2, h3 {
 
     </div>
     
-    <div class="video-container" style="position: relative; max-width: 100%; height: 400px; overflow: hidden; margin-top: 15px;">
+    <div class="video-container" style="position: relative; max-width: 100%; height: 400px; overflow: hidden; margin-top: 0.938;">
         <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
         <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
             <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
@@ -452,7 +561,7 @@ h1, h2, h3 {
 
     </div>
     
-    <div style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 18px; line-height: 1.5; margin-top: 20px;">
+    <div style="font-family: 'Montserrat', sans-serif; color: #fff; font-size: 18px; line-height: 1.5; margin-top: 1.25rem;">
     <p>
         Sound Design beschreibt das Handwerk, Bilder zum Leben zu erwecken – durch Geräusche die Wahrnehmung zu manipulieren, Atmosphäre zu schaffen und Geschichten Tiefe zu verleihen. Es ist nicht nur ein Hintergrundgeräusch dass das Bild untermalt – es zieht die Zuhörer mitten in die Emotionen der Geschichte hinein. Mit professionellem Sound Design wird jede Szene etwas ganz besonderes.
     </p>
