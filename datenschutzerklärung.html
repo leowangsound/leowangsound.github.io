@@ -48,19 +48,61 @@
             list-style-type: square;
             margin-left: 20px;
         }
-
+        
         .container {
             max-width: 800px;
             margin: 150px auto 50px;
             padding: 20px;
             background-color: #000;
         }
+        
+        /* Zone 1 (Logo) */
+        .zone-1 {
+            background-color: #000;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+       .logo {
+    width: 100px;
+    height: 100px;
+    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Animation für Hover-Effekte */
+}
+
+.logo:hover {
+    transform: scale(1.1); /* Vergrößerung um 10% */
+    filter: brightness(1.2); /* Leuchtet auf */
+}
+
+        
     </style>
 </head>
 <body>
 
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+    <div class="logo-container">
+        <a href="https://leowangsound.de/" target="_blank">
+            <div class="logo"></div>
+        </a>
+    </div>
+</div>
+
+
 <div class="container">
     <h1>Datenschutzerklärung</h1>
+
 
 <p>Personenbezogene Daten (nachfolgend zumeist nur „Daten“ genannt) werden von uns nur im Rahmen der Erforderlichkeit sowie zum Zwecke der Bereitstellung eines funktionsfähigen und nutzerfreundlichen Internetauftritts, inklusive seiner Inhalte und der dort angebotenen Leistungen, verarbeitet.</p>
 
