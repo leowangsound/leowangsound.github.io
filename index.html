@@ -660,7 +660,7 @@ img, video {
     }
 }
 
-/* Iphone SE und Ipad*/
+/* Iphone SE und Ipad */
 @media only screen and (max-width: 1280px) {
     body {
         font-size: 1.375rem; /* Etwas größere Schrift für kleinere Laptops */
@@ -671,27 +671,33 @@ img, video {
         height: 120px;
     }
 
-        .nav-button {
+    /* Entferne zusätzliche Abstände für die Nav-Buttons */
+    .nav-button {
         width: 100%; /* Buttons nehmen die volle Breite ein */
-        margin-bottom: 0.5rem; /* Abstand zwischen den Buttons */
-            padding: 0.5rem 1rem; /* Verkleinere das Padding für die Buttons */
-    box-sizing: border-box; /* Damit die Buttons sich innerhalb der Zone-2-Größe anpassen */
+        margin-bottom: 0; /* Entferne Abstand zwischen den Buttons */
+        padding: 0.2rem 0.5rem; /* Verringere das Padding der Buttons */
+        box-sizing: border-box; /* Berechne Padding innerhalb der Höhe/Breite */
     }
+
     .zone-0 {
-    height: 3vh;
-}
-.zone-1 {
-    height: 9vh; /* Anpassung der Höhe je nach Bildschirmgröße */
-     top: 2.9vh;
-}
+        height: 3vh;
+    }
+
+    .zone-1 {
+        height: 9vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+        top: 2.9vh;
+    }
+
     .zone-2 {
         justify-content: space-between; /* Etwas mehr Platz zwischen den Navigations-Buttons */
         height: 4vh; /* Dynamische Anpassung der Navigation */
         top: 11.8vh;
         background-color: #023246; /* Schwarzer Hintergrund */
-
+        padding: 0; /* Entferne zusätzliches Padding */
+        box-sizing: border-box; /* Padding in der Höhe berücksichtigt */
     }
 }
+
     </style>
 </head>
 <body>
