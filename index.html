@@ -425,7 +425,7 @@ img, video {
         padding-right: 1.25rem;
     }
 
-    /* Zone 1 - Logo-Ausrichtung */
+    /* Zone 1 - Logo-Ausrichtung und Hamburger-Icon */
     .zone-1 {
         height: 9vh;
         top: 2.9vh; /* Startet direkt unter Zone 0 */
@@ -436,47 +436,39 @@ img, video {
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative; /* Damit das Hamburger-Icon innerhalb von Zone 1 positioniert werden kann */
     }
 
-    /* Zone 2 - Navigation */
-    .zone-2 {
-        min-height: 4vh; /* Mindesthöhe für die Zone */
-        height: auto; /* Dynamische Höhe, um das Menü nicht zu begrenzen */
-        top: 11.8vh; /* Direkt unter Zone 1 */
-        width: 100%;
-        z-index: 998; /* Setze einen niedrigeren Z-Index, um das Menü darüber zu platzieren */
-        background-color: #000;
-        position: fixed;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    /* Hamburger-Icon für mobile Navigation */
+    /* Hamburger-Icon in Zone 1 platzieren */
     .hamburger-icon {
         display: block;
         width: 30px;
         height: auto;
         cursor: pointer;
         position: absolute;
-        left: 10px;
+        left: 10px; /* Links in Zone 1 platzieren */
+        top: 50%;
+        transform: translateY(-50%); /* Vertikal zentrieren */
+    }
+
+    /* Zone 2 wird unsichtbar oder komplett entfernt */
+    .zone-2 {
+        display: none; /* Zone 2 ausblenden */
     }
 
     /* Navigation - Menü */
     .nav-menu {
         display: none; /* Standardmäßig ausgeblendet */
         background-color: #000;
-        position: fixed; /* Fixiere das Menü unabhängig von zone-2 */
+        position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
         top: 0;
         left: 0;
         width: 100%;
         height: auto; /* Dynamische Höhe, abhängig von den Buttons */
         max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
-        z-index: 999; /* Höher als zone-2 */
+        z-index: 999; /* Höher als Zone 1 */
         overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
-        padding-top: 11.8vh; /* Platz für zone-1 lassen */
+        padding-top: 9vh; /* Platz für Zone 1 lassen */
         box-sizing: border-box;
     }
 
@@ -504,9 +496,9 @@ img, video {
         transform: scale(1.05);
     }
 
-    /* Abstände für die Hauptinhalte nach Zone 2 */
+    /* Abstände für die Hauptinhalte nach Zone 1 */
     #SoundDesign {
-        margin-top: 16vh; /* Abstand zwischen Zone 2 und der ersten Überschrift */
+        margin-top: 16vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
     }
 
     /* Anpassungen für kleinere Tablets oder iPads */
@@ -520,17 +512,12 @@ img, video {
             height: 80px;
         }
 
-        .zone-2 {
-            height: auto;
-            min-height: 12vh;
-            flex-direction: column; /* Navigation vertikal anordnen */
-        }
-
         .nav-button {
             padding: 0.5rem 1rem;
         }
     }
 }
+
 
 
 
