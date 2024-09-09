@@ -179,66 +179,6 @@ h1, h2, h3 {
     z-index: 9; /* Z-Index, wenn der Button aktiv ist */
 }
 
-
-/* Mobile Navigation - Media Queries */
-@media (max-width: 768px) {
-    .zone-2 {
-        flex-direction: column; /* Buttons vertikal anordnen */
-        justify-content: flex-start;
-        height: auto; /* Höhe anpassen */
-    }
-
-    .hamburger-icon {
-        display: block; /* Hamburger-Icon sichtbar machen */
-        width: 30px;
-        height: auto;
-        cursor: pointer;
-        margin-left: 10px;
-    }
-
-    .nav-menu {
-        display: none; /* Standardmäßig ausgeblendet */
-        background-color: #000;
-        position: absolute;
-        top: 3vh;
-        left: 0;
-        width: 100%;
-        z-index: 999;
-    }
-
-    .nav-menu.active {
-        display: block; /* Zeige Menü bei aktivem Zustand */
-        position: relative;
-        padding: 1rem 0;
-    }
-
-    .nav-button {
-        width: 100%; /* Buttons nehmen die volle Breite ein */
-        padding: 1rem 0;
-        margin: 0;
-        text-align: center;
-    }
-}
-
-@media (min-width: 769px) {
-    .nav-menu {
-        display: flex; /* Für größere Bildschirme sichtbar */
-    }
-
-    .hamburger-icon {
-        display: none; /* Hamburger-Icon verstecken */
-    }
-
-    .nav-button {
-        display: inline-block;
-        width: auto;
-    }
-}
-
-
-
-
-
         section {
             max-width: 800px;
             margin: 9.375rem auto 1.25rem; /* 150px oben für den festen Header, Logo und Navigationsleiste */
@@ -561,6 +501,22 @@ img, video {
             margin-bottom: 0.5rem; /* Abstand zwischen den Buttons */
         }
     }
+    
+    @media (min-width: 769px) {
+    .nav-menu {
+        display: flex; /* Für größere Bildschirme sichtbar */
+    }
+
+    .hamburger-icon {
+        display: none; /* Hamburger-Icon verstecken */
+    }
+
+    .nav-button {
+        display: inline-block;
+        width: auto;
+    }
+}
+
     
     /* Weitere Media Query Anpassungen für größere Tablets */
     @media only screen and (max-width: 1024px) {
