@@ -132,48 +132,112 @@ h1, h2, h3 {
 /* Zone 2 (Navigation) */
 .zone-2 {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; /* Buttons gleichmäßig über die Breite verteilen */
     align-items: center;
     background-color: #000;
     position: fixed;
-    top: calc(11vh); /* Startet direkt unter Zone 1 */
+    top: calc(11vh);
     width: 100%;
     height: 4vh;
     z-index: 1000;
 }
 
+/* Sicherstellen, dass der Container die volle Breite einnimmt */
+.nav-menu {
+    display: flex;
+    width: 100%;
+}
+
+/* Nav-Button Styles */
 .nav-button {
+    flex: 0 0 16.66%; /* Jeder Button nimmt ein Sechstel der Breite ein */
     background-color: #000;
     color: #ddd;
     padding: 0.313rem 0.625rem;
-    margin: 0.188rem;
+    margin: 0; /* Kein zusätzliches Margin */
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    width: calc(100% / 10);
     text-align: center;
     position: relative;
+    box-sizing: border-box; /* Berechnet Padding und Breite korrekt */
+    z-index: 1; /* Standard Z-Index */
 }
 
+/* Gehoverter Button */
+.nav-button:hover {
+    background-color: #D4D4CE; /* Hintergrundfarbe beim Hover */
+    color: #000; /* Textfarbe beim Hover */
+    transform: scale(1.05); /* Leichtes Vergrößern */
+    z-index: 10; /* Höherer Z-Index, um über allem zu liegen */
+}
+
+/* Aktiver Button */
 .nav-button.active {
     background-color: #F4F2F0;
     color: #000;
     transition: all 0.5s ease-in-out;
-}
-
-.nav-button:not(.active):hover {
-    background-color: #C8D7D2;
-    color: #000;
-    transform: scale(1.05);
+    z-index: 9; /* Z-Index, wenn der Button aktiv ist */
 }
 
 
-    /* Mobile Navigation - Media Query */
-    @media (max-width: 768px) {
-        .nav-button {
-            width: 100%; /* Buttons nehmen die volle Breite ein */
-            margin: 0.313rem 0; /* Abstand zwischen den Buttons */
-        }
+/* Mobile Navigation - Media Queries */
+@media (max-width: 768px) {
+    .zone-2 {
+        flex-direction: column; /* Buttons vertikal anordnen */
+        justify-content: flex-start;
+        height: auto; /* Höhe anpassen */
     }
+
+    .hamburger-icon {
+        display: block; /* Hamburger-Icon sichtbar machen */
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .nav-menu {
+        display: none; /* Standardmäßig ausgeblendet */
+        background-color: #000;
+        position: absolute;
+        top: 3vh;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: block; /* Zeige Menü bei aktivem Zustand */
+        position: relative;
+        padding: 1rem 0;
+    }
+
+    .nav-button {
+        width: 100%; /* Buttons nehmen die volle Breite ein */
+        padding: 1rem 0;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-menu {
+        display: flex; /* Für größere Bildschirme sichtbar */
+    }
+
+    .hamburger-icon {
+        display: none; /* Hamburger-Icon verstecken */
+    }
+
+    .nav-button {
+        display: inline-block;
+        width: auto;
+    }
+}
+
+
+
+
 
         section {
             max-width: 800px;
@@ -389,6 +453,10 @@ img, video {
     max-width: 100%; /* Bilder und Videos passen sich der Container-Breite an */
     height: auto; /* Höhe proportional zur Breite */
 }
+.hamburger-icon {
+    display: none; /* Standardmäßig ausblenden */
+}
+
 
 
 
@@ -397,66 +465,111 @@ img, video {
 /* Breakpoints für unterschiedliche Bildschirmgrößen */
 @media only screen and (max-width: 320px) {
     body {
-        font-size: 0.875rem; /* Kleinere Schriftgröße für sehr kleine Bildschirme */
+        font-size: 0.875rem;
     }
+
     .zone-0 {
-    height: 3vh;
-}
-.zone-1 {
-    top: 2.9vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
-    height: 9vh;
-}
-    .zone-2 {
-        display: block; /* Macht die Navigationsleiste zu einem Blockelement */
-        text-align: center; /* Zentriert die Buttons */
-        height: 6vh; /* Dynamische Anpassung der Navigation */
-         top: 11.8vh;
-         background-color: #000; /* Schwarzer Hintergrund */
-        padding: 1rem 0; /* Zusätzlicher Abstand innen */
-        min-height: 12vh; /* Stelle sicher, dass genug Platz für die gestapelten Buttons ist */
+        height: 3vh;
     }
-      .nav-button {
-        width: 100%; /* Buttons nehmen die volle Breite ein */
-        margin-bottom: 0.5rem; /* Abstand zwischen den Buttons */
-          padding: 0.5rem 1rem; /* Verkleinere das Padding für die Buttons */
-    box-sizing: border-box; /* Damit die Buttons sich innerhalb der Zone-2-Größe anpassen */
+
+    .zone-1 {
+        top: 2.9vh;
+        height: 9vh;
+    }
+
+    .zone-2 {
+        position: relative;
+        height: 3vh;
+    }
+
+    /* Hamburger-Icon nur auf kleinen Bildschirmen anzeigen */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    /* Nav-Leiste standardmäßig verstecken */
+    .nav-menu {
+        display: none;
+        background-color: #000;
+        position: absolute;
+        top: 3vh;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+    }
+
+    /* Aktivierte Nav-Leiste */
+    .nav-menu.active {
+        display: block;
+        position: relative;
+        padding: 1rem 0;
+    }
+
+    .nav-menu .nav-button {
+        width: 100%;
+        padding: 1rem 0;
+        margin: 0;
+        text-align: center;
     }
 }
 
 @media only screen and (max-width: 480px) {
     body {
-        font-size: 1rem; /* Verkleinere die Schriftgröße für kleinere Bildschirme */
+        font-size: 1rem;
     }
 
-    .nav-button {
-        display: inline-block; /* Lässt die Buttons nebeneinander laufen */
-            padding: 0.5rem 1rem; /* Verkleinere das Padding für die Buttons */
-      width: 100%; /* Buttons nehmen die volle Breite ein */
-              margin-bottom: 0.5rem; /* Abstand zwischen den Buttons */
-                  box-sizing: border-box; /* Damit die Buttons sich innerhalb der Zone-2-Größe anpassen */
-    }
     .zone-0 {
-    height: 3vh;
-}
+        height: 3vh;
+    }
+
     .zone-1 {
-        margin-bottom: 0; /* Füge hier die Bottom-Margin hinzu */
-        top: 2.9vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
-    height: 9vh;
+        top: 2.9vh;
+        height: 9vh;
     }
+
     .zone-2 {
-        display: block; /* Macht die Navigationsleiste zu einem Blockelement */
-        text-align: center; /* Zentriert die Buttons */
-        height: 6vh; /* Dynamische Anpassung der Navigation */
-         top: 11.8vh;
-                  background-color: #000; /* Schwarzer Hintergrund */
-        padding: 1rem 0; /* Zusätzlicher Abstand innen */
-        min-height: 12vh; /* Stelle sicher, dass genug Platz für die gestapelten Buttons ist */
+        position: relative;
+        height: 3vh;
     }
-    .logo {
-        max-width: 60%; /* Reduziere das Logo, sodass es maximal 60% des Bildschirms einnimmt */
+
+    /* Hamburger-Icon nur auf kleinen Bildschirmen anzeigen */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
         height: auto;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    .nav-menu {
+        display: none;
+        background-color: #000;
+        position: absolute;
+        top: 3vh;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+    }
+
+    .nav-menu.active {
+        display: block;
+        position: relative;
+        padding: 1rem 0;
+    }
+
+    .nav-menu .nav-button {
+        width: 100%;
+        padding: 1rem 0;
+        margin: 0;
+        text-align: center;
     }
 }
+
+
 
 
 
@@ -592,13 +705,17 @@ img, video {
 
 <!-- Zone 2 (Navigation) -->
 <div class="zone-2">
-    <div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
-    <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
-    <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Fieldrecording</div>
-    <div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
-    <div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">Über mich</div>
-    <div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
+    <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_burger.png?raw=true" class="hamburger-icon" alt="Menu" onclick="toggleMenu()">
+    <div class="nav-menu">
+        <div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
+        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
+        <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Field Recording</div>
+        <div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
+        <div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">Über mich</div>
+        <div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
+    </div>
 </div>
+
 
 <section id="SoundDesign">
     <h2>Sound Design</h2>
@@ -709,6 +826,11 @@ video.addEventListener('click', function() {
         showIcon('play');
     }
 });
+
+function toggleMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('active');
+}
 
 
 </script>
@@ -1041,6 +1163,10 @@ function updateActiveButtonOnScroll() {
     }
 }
 
+function toggleMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('active');
+}
 
 
 
