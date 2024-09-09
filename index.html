@@ -405,12 +405,6 @@ img, video {
         font-size: 1.375rem;
     }
 
-    /* Logo-Größenanpassung für verschiedene Bildschirmgrößen */
-    .logo {
-        width: 100px;
-        height: 100px;
-    }
-
     /* Zone 0 - Anpassungen für Icons und Sprachbutton */
     .zone-0 {
         height: 3vh;
@@ -439,6 +433,13 @@ img, video {
         position: relative; /* Damit das Hamburger-Icon innerhalb von Zone 1 positioniert werden kann */
     }
 
+    /* Zone 2 - Unsichtbar machen */
+    .zone-2 {
+        display: none; /* Zone 2 wird unsichtbar gemacht */
+        width: 100%;
+        height: 4vh;
+    }
+
     /* Hamburger-Icon in Zone 1 platzieren */
     .hamburger-icon {
         display: block;
@@ -449,6 +450,7 @@ img, video {
         right: 10px; /* Rechts in Zone 1 platzieren */
         top: 50%;
         transform: translateY(-50%); /* Vertikal zentrieren */
+        z-index: 1002; /* Sicherstellen, dass es sichtbar ist */
     }
 
     /* Navigation - Menü */
@@ -512,13 +514,6 @@ img, video {
         }
     }
 }
-
-
-
-
-
-
-
 
 
     </style>
