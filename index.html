@@ -472,7 +472,8 @@ img, video {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh; /* Vollbild-Menü */
+        height: auto; /* Dynamische Höhe, abhängig von den Buttons */
+        max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
         z-index: 999; /* Höher als zone-2 */
         overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
         padding-top: 11.8vh; /* Platz für zone-1 lassen */
@@ -482,6 +483,7 @@ img, video {
     /* Navigation - Aktives Menü */
     .nav-menu.active {
         display: block; /* Zeige das Menü */
+        max-height: none; /* Setze keine Begrenzung für die Höhe */
     }
 
     /* Navigation - Buttons */
@@ -529,6 +531,7 @@ img, video {
         }
     }
 }
+
 
 
 
@@ -1028,6 +1031,13 @@ function toggleMenu() {
     const navMenu = document.querySelector('.nav-menu');
     navMenu.classList.toggle('active');
 }
+
+document.querySelectorAll('.nav-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.remove('active'); // Menü schließt sich nach Klick
+    });
+});
 
 
 
