@@ -406,6 +406,12 @@ img, video {
     top: 3vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
     height: 9vh;
 }
+    .zone-2 {
+        display: block; /* Macht die Navigationsleiste zu einem Blockelement */
+        text-align: center; /* Zentriert die Buttons */
+        height: 6vh; /* Dynamische Anpassung der Navigation */
+         top: 12vh;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -422,7 +428,7 @@ img, video {
     height: 3vh;
 }
     .zone-1 {
-        margin-bottom: 2rem; /* Füge hier die Bottom-Margin hinzu */
+        margin-bottom: 0; /* Füge hier die Bottom-Margin hinzu */
         top: 3vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
     height: 9vh;
     }
@@ -451,12 +457,17 @@ img, video {
         width: 90px; /* Logo etwas kleiner als auf dem Desktop */
         height: 90px;
     }
+        .zone-0 {
+    height: 3vh;
+}
 .zone-1 {
     height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+    top: 3vh;
 }
     .zone-2 {
         justify-content: space-between; /* Navigation leicht umverteilen */
         height: 8vh; /* Dynamische Anpassung der Navigation */
+        top: 13vh;
     }
 }
 
