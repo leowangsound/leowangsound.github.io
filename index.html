@@ -440,7 +440,8 @@ img, video {
 
     /* Zone 2 - Navigation */
     .zone-2 {
-        height: 4vh;
+        min-height: 4vh; /* Mindesthöhe für die Zone */
+        height: auto; /* Dynamische Höhe, um das Menü nicht zu begrenzen */
         top: 11.8vh; /* Direkt unter Zone 1 */
         width: 100%;
         z-index: 999;
@@ -464,23 +465,27 @@ img, video {
         left: 10px;
     }
 
-    /* Navigation - Menü versteckt sich hinter dem Hamburger-Icon */
-    .nav-menu {
-        display: none; /* Standardmäßig ausgeblendet */
-        background-color: #000;
-        position: absolute;
-        top: 4vh;
-        left: 0;
-        width: 100%;
-        z-index: 999;
-    }
+/* Navigation - Menü */
+.nav-menu {
+    display: none; /* Standardmäßig ausgeblendet */
+    background-color: #000;
+    position: absolute;
+    top: 4vh;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: auto; /* Stelle sicher, dass die Höhe dynamisch ist */
+    max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
+    overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
+}
 
-    /* Menü wird sichtbar, wenn es aktiv ist */
-    .nav-menu.active {
-        display: block;
-        position: relative;
-        padding: 1rem 0;
-    }
+/* Navigation - Aktives Menü */
+.nav-menu.active {
+    display: block; /* Zeige das Menü */
+    max-height: calc(100vh - 4vh); /* Vermeide Überschneidungen, abzüglich der Höhe von zone-2 */
+    overflow-y: auto; /* Ermögliche Scrollen, falls es zu viel Inhalt gibt */
+}
+
 
     /* Navigation - Buttons */
     .nav-button {
