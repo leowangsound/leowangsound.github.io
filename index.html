@@ -463,6 +463,7 @@ img, video {
 
 
 /* Breakpoints für unterschiedliche Bildschirmgrößen */
+/* Breakpoints für iPhone (max-width 320px) */
 @media only screen and (max-width: 320px) {
     body {
         font-size: 0.875rem;
@@ -473,27 +474,30 @@ img, video {
     }
 
     .zone-1 {
-        top: 2.9vh;
+        top: 3vh;
         height: 9vh;
     }
 
     .zone-2 {
-        position: relative;
+        position: fixed; /* Fixiere Zone 2 */
+        top: 12vh; /* Direkt unter Zone 1 */
         height: 3vh;
+        width: 100%;
+        z-index: 1000; /* Fixierung sicherstellen */
     }
 
-    /* Hamburger-Icon nur auf kleinen Bildschirmen anzeigen */
     .hamburger-icon {
         display: block;
         width: 30px;
         height: auto;
         cursor: pointer;
         margin-left: 10px;
+        position: absolute;
+        left: 0; /* Hamburger-Icon ganz links */
     }
 
-    /* Nav-Leiste standardmäßig verstecken */
     .nav-menu {
-        display: none;
+        display: none; /* Standardmäßig ausgeblendet */
         background-color: #000;
         position: absolute;
         top: 3vh;
@@ -502,9 +506,8 @@ img, video {
         z-index: 999;
     }
 
-    /* Aktivierte Nav-Leiste */
     .nav-menu.active {
-        display: block;
+        display: block; /* Menü wird sichtbar */
         position: relative;
         padding: 1rem 0;
     }
@@ -515,8 +518,13 @@ img, video {
         margin: 0;
         text-align: center;
     }
+
+    #SoundDesign {
+        margin-top: 15vh; /* Reduziere den Abstand zwischen Zone 2 und der Überschrift */
+    }
 }
 
+/* Breakpoints für iPhone (max-width 480px) */
 @media only screen and (max-width: 480px) {
     body {
         font-size: 1rem;
@@ -527,36 +535,40 @@ img, video {
     }
 
     .zone-1 {
-        top: 2.9vh;
+        top: 3vh;
         height: 9vh;
     }
 
     .zone-2 {
-        position: relative;
-        height: 3vh;
+        position: fixed; /* Fixiere Zone 2 */
+        top: 12vh;
+        height: 4vh;
+        width: 100%;
+        z-index: 1000; /* Fixierung sicherstellen */
     }
 
-    /* Hamburger-Icon nur auf kleinen Bildschirmen anzeigen */
     .hamburger-icon {
         display: block;
         width: 30px;
         height: auto;
         cursor: pointer;
         margin-left: 10px;
+        position: absolute;
+        left: 0; /* Hamburger-Icon ganz links */
     }
 
     .nav-menu {
-        display: none;
+        display: none; /* Standardmäßig ausgeblendet */
         background-color: #000;
         position: absolute;
-        top: 3vh;
+        top: 4vh;
         left: 0;
         width: 100%;
         z-index: 999;
     }
 
     .nav-menu.active {
-        display: block;
+        display: block; /* Menü wird sichtbar */
         position: relative;
         padding: 1rem 0;
     }
@@ -567,7 +579,12 @@ img, video {
         margin: 0;
         text-align: center;
     }
+
+    #SoundDesign {
+        margin-top: 14vh; /* Reduziere den Abstand zwischen Zone 2 und der Überschrift */
+    }
 }
+
 
 
 
