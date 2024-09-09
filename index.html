@@ -395,6 +395,11 @@ img, video {
 
 
 /* Breakpoints für unterschiedliche Bildschirmgrößen */
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 0.875rem; /* Kleinere Schriftgröße für sehr kleine Bildschirme */
+    }
+}
 
 @media only screen and (max-width: 480px) {
     body {
@@ -402,22 +407,25 @@ img, video {
     }
 
     .nav-button {
-        width: 100%; /* Buttons nehmen die volle Breite ein */
-        padding: 12px 0; /* Mehr Platz für die Buttons */
-        margin: 10px 0; /* Mehr Abstand zwischen den Buttons */
+        display: inline-block; /* Lässt die Buttons nebeneinander laufen */
+        padding: 10px; /* Etwas mehr Padding für mobile Geräte */
+        width: auto; /* Entfernt die feste Breite */
     }
 
     .zone-1 {
         margin-bottom: 2rem; /* Füge hier die Bottom-Margin hinzu */
+        height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
     }
 
     .logo {
-        width: 80px; /* Verkleinere das Logo für kleinere Bildschirme */
-        height: 80px;
+        max-width: 60%; /* Reduziere das Logo, sodass es maximal 60% des Bildschirms einnimmt */
+        height: auto;
     }
     
     .zone-2 {
-        top: 130px; /* Anpassung für kleinere Geräte */
+        display: block; /* Macht die Navigationsleiste zu einem Blockelement */
+        text-align: center; /* Zentriert die Buttons */
+        height: 8vh; /* Dynamische Anpassung der Navigation */
     }
 }
 
@@ -432,9 +440,12 @@ img, video {
         width: 90px; /* Logo etwas kleiner als auf dem Desktop */
         height: 90px;
     }
-
+.zone-1 {
+    height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+}
     .zone-2 {
         justify-content: space-between; /* Navigation leicht umverteilen */
+        height: 8vh; /* Dynamische Anpassung der Navigation */
     }
 }
 
@@ -453,9 +464,12 @@ img, video {
     .nav-button {
         width: 50%; /* Navigation in zwei Spalten für Tablets im Querformat */
     }
-
+.zone-1 {
+    height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+}
     .zone-2 {
         justify-content: space-around; /* Navigation etwas umverteilen */
+        height: 8vh; /* Dynamische Anpassung der Navigation */
     }
 }
 
@@ -473,9 +487,12 @@ img, video {
     .nav-button {
         width: calc(100% / 6); /* Navigation über sechs gleiche Spalten für kleinere Laptops */
     }
-
+.zone-1 {
+    height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+}
     .zone-2 {
         justify-content: space-between; /* Etwas mehr Platz zwischen den Navigations-Buttons */
+        height: 8vh; /* Dynamische Anpassung der Navigation */
     }
 }
     </style>
