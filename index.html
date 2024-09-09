@@ -399,6 +399,13 @@ img, video {
     body {
         font-size: 0.875rem; /* Kleinere Schriftgröße für sehr kleine Bildschirme */
     }
+    .zone-0 {
+    height: 3vh;
+}
+.zone-1 {
+    top: 3vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
+    height: 9vh;
+}
 }
 
 @media only screen and (max-width: 480px) {
@@ -411,10 +418,13 @@ img, video {
         padding: 10px; /* Etwas mehr Padding für mobile Geräte */
         width: auto; /* Entfernt die feste Breite */
     }
-
+    .zone-0 {
+    height: 3vh;
+}
     .zone-1 {
         margin-bottom: 2rem; /* Füge hier die Bottom-Margin hinzu */
-        height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+        top: 3vh; /* Stelle sicher, dass sie direkt unter Zone 0 sitzt */
+    height: 9vh;
     }
 
     .logo {
@@ -425,7 +435,8 @@ img, video {
     .zone-2 {
         display: block; /* Macht die Navigationsleiste zu einem Blockelement */
         text-align: center; /* Zentriert die Buttons */
-        height: 8vh; /* Dynamische Anpassung der Navigation */
+        height: 6vh; /* Dynamische Anpassung der Navigation */
+         top: 12vh;
     }
 }
 
@@ -464,11 +475,16 @@ img, video {
     .nav-button {
         width: 50%; /* Navigation in zwei Spalten für Tablets im Querformat */
     }
+    .zone-0 {
+    height: 3vh;
+}
 .zone-1 {
     height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+      top: 3vh;
 }
     .zone-2 {
         justify-content: space-around; /* Navigation etwas umverteilen */
+          top: 13vh;
         height: 8vh; /* Dynamische Anpassung der Navigation */
     }
 }
@@ -487,12 +503,17 @@ img, video {
     .nav-button {
         width: calc(100% / 6); /* Navigation über sechs gleiche Spalten für kleinere Laptops */
     }
+    .zone-0 {
+    height: 3vh;
+}
 .zone-1 {
     height: 10vh; /* Anpassung der Höhe je nach Bildschirmgröße */
+     top: 3vh;
 }
     .zone-2 {
         justify-content: space-between; /* Etwas mehr Platz zwischen den Navigations-Buttons */
         height: 8vh; /* Dynamische Anpassung der Navigation */
+         top: 13vh;
     }
 }
     </style>
