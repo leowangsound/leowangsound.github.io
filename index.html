@@ -428,7 +428,7 @@ img, video {
     /* Zone 1 - Logo-Ausrichtung */
     .zone-1 {
         height: 9vh;
-        top: 3vh; /* Startet direkt unter Zone 0 */
+        top: 2.9vh; /* Startet direkt unter Zone 0 */
         position: fixed;
         width: 100%;
         z-index: 1000;
@@ -441,10 +441,11 @@ img, video {
     /* Zone 2 - Navigation */
     .zone-2 {
         height: 4vh;
-        top: 12vh; /* Direkt unter Zone 1 */
+        max-height: 4vh;
+        top: 11.8vh; /* Direkt unter Zone 1 */
         width: 100%;
         z-index: 999;
-        background-color: #023246;
+        background-color: #000;
         position: fixed;
         display: flex;
         justify-content: space-between;
