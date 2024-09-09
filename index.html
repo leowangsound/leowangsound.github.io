@@ -398,43 +398,60 @@ img, video {
 }
 
 
-/* Iphone SE, iPad und andere Geräte bis zu einer max-width von 1280px */
+/* Media Queries für Bildschirme mit einer maximalen Breite von 1280px (Iphone SE, Ipad, kleine Laptops) */
 @media only screen and (max-width: 1280px) {
+    /* Schriftgröße für kleinere Geräte anpassen */
     body {
-        font-size: 1.375rem; /* Etwas größere Schrift für diese Bildschirmgrößen */
+        font-size: 1.375rem;
     }
 
-    /* Logo-Anpassung */
+    /* Logo-Größenanpassung für verschiedene Bildschirmgrößen */
     .logo {
-        width: 120px; /* Größeres Logo für kleinere Laptops und iPads */
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 
-    /* Zone 0 - für Icons und Sprachbutton */
+    /* Zone 0 - Anpassungen für Icons und Sprachbutton */
     .zone-0 {
         height: 3vh;
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1001;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 1.25rem;
     }
 
-    /* Zone 1 - für das Logo */
+    /* Zone 1 - Logo-Ausrichtung */
     .zone-1 {
-        height: 9vh; /* Anpassung der Höhe je nach Bildschirmgröße */
-        top: 2.9vh;
-    }
-
-    /* Zone 2 - für die Navigation */
-    .zone-2 {
-        position: fixed; /* Fixiere Zone 2 */
-        top: 11.8vh; /* Direkt unter Zone 1 */
-        height: 4vh; /* Stelle sicher, dass die Höhe korrekt ist */
+        height: 9vh;
+        top: 3vh; /* Startet direkt unter Zone 0 */
+        position: fixed;
         width: 100%;
         z-index: 1000;
-        background-color: #023246; /* Hintergrundfarbe */
-        margin: 0; /* Entferne jegliches Margin */
-        padding: 0; /* Entferne zusätzliches Padding */
-        box-sizing: border-box; /* Padding innerhalb der Höhe berücksichtigen */
-        overflow: hidden; /* Verhindere Überlaufen */
+        background-color: #000;
         display: flex;
-        justify-content: space-between; /* Navigation leicht umverteilen */
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Zone 2 - Navigation */
+    .zone-2 {
+        height: 4vh;
+        top: 12vh; /* Direkt unter Zone 1 */
+        width: 100%;
+        z-index: 999;
+        background-color: #023246;
+        position: fixed;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
     /* Hamburger-Icon für mobile Navigation */
@@ -443,12 +460,11 @@ img, video {
         width: 30px;
         height: auto;
         cursor: pointer;
-        margin-left: 10px;
         position: absolute;
-        left: 0; /* Hamburger-Icon ganz links */
+        left: 10px;
     }
 
-    /* Navigation - Menü */
+    /* Navigation - Menü versteckt sich hinter dem Hamburger-Icon */
     .nav-menu {
         display: none; /* Standardmäßig ausgeblendet */
         background-color: #000;
@@ -459,8 +475,9 @@ img, video {
         z-index: 999;
     }
 
+    /* Menü wird sichtbar, wenn es aktiv ist */
     .nav-menu.active {
-        display: block; /* Menü wird sichtbar */
+        display: block;
         position: relative;
         padding: 1rem 0;
     }
@@ -468,78 +485,49 @@ img, video {
     /* Navigation - Buttons */
     .nav-button {
         width: 100%; /* Buttons nehmen die volle Breite ein */
-        margin: 0; /* Kein zusätzlicher Abstand */
-        padding: 1rem 0; /* Vergrößertes Padding für mehr Klickfläche */
+        padding: 1rem 0;
+        margin: 0;
         text-align: center;
-        box-sizing: border-box; /* Berechne das Padding innerhalb der Höhe/Breite */
+        box-sizing: border-box;
+        background-color: #000;
+        color: #ddd;
+        border-bottom: 1px solid #444;
     }
 
-    /* Abstandsanpassungen für Sound Design Abschnitt */
+    .nav-button:hover {
+        background-color: #D4D4CE;
+        color: #000;
+        transform: scale(1.05);
+    }
+
+    /* Abstände für die Hauptinhalte nach Zone 2 */
     #SoundDesign {
-        margin-top: 14vh; /* Abstand zwischen Zone 2 und der ersten Überschrift */
+        margin-top: 16vh; /* Abstand zwischen Zone 2 und der ersten Überschrift */
     }
 
-    /* Weitere Media Query Anpassungen für kleinere Geräte */
+    /* Anpassungen für kleinere Tablets oder iPads */
     @media only screen and (max-width: 768px) {
         body {
-            font-size: 1.125rem; /* Etwas kleinere Schrift für Tablets */
+            font-size: 1.125rem;
         }
 
         .logo {
-            width: 90px; /* Kleinere Logos für Tablets */
-            height: 90px;
+            width: 80px;
+            height: 80px;
         }
 
         .zone-2 {
-            height: 4vh; /* Stelle sicher, dass Zone 2 klein bleibt */
-            min-height: 12vh; /* Stelle sicher, dass Platz für Hamburger Menü und Nav-Buttons bleibt */
-            padding: 1rem 0; /* Zusätzlicher Abstand */
+            height: auto;
+            min-height: 12vh;
+            flex-direction: column; /* Navigation vertikal anordnen */
         }
 
         .nav-button {
-            padding: 0.5rem 1rem; /* Verkleinere das Padding für die Buttons */
-            margin-bottom: 0.5rem; /* Abstand zwischen den Buttons */
-        }
-    }
-    
-    @media (min-width: 769px) {
-    .nav-menu {
-        display: flex; /* Für größere Bildschirme sichtbar */
-    }
-
-    .hamburger-icon {
-        display: none; /* Hamburger-Icon verstecken */
-    }
-
-    .nav-button {
-        display: inline-block;
-        width: auto;
-    }
-}
-
-    
-    /* Weitere Media Query Anpassungen für größere Tablets */
-    @media only screen and (max-width: 1024px) {
-        body {
-            font-size: 1.25rem; /* Leicht größere Schriftgröße für Tablets */
-        }
-
-        .logo {
-            width: 100px; /* Standardgröße für das Logo */
-            height: 100px;
-        }
-
-        .zone-2 {
-            height: 4vh; /* Sicherstellen, dass die Höhe korrekt bleibt */
-            padding: 1rem 0; /* Zusätzlicher Innenabstand */
-        }
-
-        .nav-button {
-            width: 100%; /* Buttons nehmen die volle Breite ein */
-            padding: 0.5rem 1rem; /* Verkleinere das Padding */
+            padding: 0.5rem 1rem;
         }
     }
 }
+
 
 
 
