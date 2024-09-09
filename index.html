@@ -444,7 +444,7 @@ img, video {
         height: auto; /* Dynamische Höhe, um das Menü nicht zu begrenzen */
         top: 11.8vh; /* Direkt unter Zone 1 */
         width: 100%;
-        z-index: 999;
+        z-index: 998; /* Setze einen niedrigeren Z-Index, um das Menü darüber zu platzieren */
         background-color: #000;
         position: fixed;
         display: flex;
@@ -452,7 +452,6 @@ img, video {
         align-items: center;
         padding: 0;
         box-sizing: border-box;
-        overflow: hidden;
     }
 
     /* Hamburger-Icon für mobile Navigation */
@@ -465,27 +464,25 @@ img, video {
         left: 10px;
     }
 
-/* Navigation - Menü */
-.nav-menu {
-    display: none; /* Standardmäßig ausgeblendet */
-    background-color: #000;
-    position: absolute;
-    top: 4vh;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    height: auto; /* Stelle sicher, dass die Höhe dynamisch ist */
-    max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
-    overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
-}
+    /* Navigation - Menü */
+    .nav-menu {
+        display: none; /* Standardmäßig ausgeblendet */
+        background-color: #000;
+        position: fixed; /* Fixiere das Menü unabhängig von zone-2 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Vollbild-Menü */
+        z-index: 999; /* Höher als zone-2 */
+        overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
+        padding-top: 11.8vh; /* Platz für zone-1 lassen */
+        box-sizing: border-box;
+    }
 
-/* Navigation - Aktives Menü */
-.nav-menu.active {
-    display: block; /* Zeige das Menü */
-    max-height: calc(100vh - 4vh); /* Vermeide Überschneidungen, abzüglich der Höhe von zone-2 */
-    overflow-y: auto; /* Ermögliche Scrollen, falls es zu viel Inhalt gibt */
-}
-
+    /* Navigation - Aktives Menü */
+    .nav-menu.active {
+        display: block; /* Zeige das Menü */
+    }
 
     /* Navigation - Buttons */
     .nav-button {
@@ -532,6 +529,7 @@ img, video {
         }
     }
 }
+
 
 
 
