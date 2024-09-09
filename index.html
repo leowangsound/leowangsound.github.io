@@ -446,14 +446,9 @@ img, video {
         height: auto;
         cursor: pointer;
         position: absolute;
-        left: 10px; /* Links in Zone 1 platzieren */
+        right: 10px; /* Rechts in Zone 1 platzieren */
         top: 50%;
         transform: translateY(-50%); /* Vertikal zentrieren */
-    }
-
-    /* Zone 2 wird unsichtbar oder komplett entfernt */
-    .zone-2 {
-        display: none; /* Zone 2 ausblenden */
     }
 
     /* Navigation - Menü */
@@ -498,7 +493,8 @@ img, video {
 
     /* Abstände für die Hauptinhalte nach Zone 1 */
     #SoundDesign {
-        margin-top: 16vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
+        margin-top: 13vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
+        z-index: 20
     }
 
     /* Anpassungen für kleinere Tablets oder iPads */
@@ -517,6 +513,7 @@ img, video {
         }
     }
 }
+
 
 
 
