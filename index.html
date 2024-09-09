@@ -671,12 +671,12 @@ img, video {
         height: 120px;
     }
 
-    /* Entferne zusätzliche Abstände für die Nav-Buttons */
+    /* Sicherstellen, dass Buttons keine zusätzlichen Abstände haben */
     .nav-button {
         width: 100%; /* Buttons nehmen die volle Breite ein */
-        margin-bottom: 0; /* Entferne Abstand zwischen den Buttons */
-        padding: 0.2rem 0.5rem; /* Verringere das Padding der Buttons */
-        box-sizing: border-box; /* Berechne Padding innerhalb der Höhe/Breite */
+        margin: 0; /* Kein zusätzlicher Abstand zwischen den Buttons */
+        padding: 0.2rem 0.5rem; /* Verringere das Padding */
+        box-sizing: border-box;
     }
 
     .zone-0 {
@@ -689,14 +689,18 @@ img, video {
     }
 
     .zone-2 {
-        justify-content: space-between; /* Etwas mehr Platz zwischen den Navigations-Buttons */
-        height: 4vh; /* Dynamische Anpassung der Navigation */
+        display: flex;
+        justify-content: space-between;
+        height: 4vh; /* Sicherstellen, dass die Höhe korrekt ist */
         top: 11.8vh;
         background-color: #023246; /* Schwarzer Hintergrund */
+        margin: 0; /* Entferne jegliches Margin */
         padding: 0; /* Entferne zusätzliches Padding */
-        box-sizing: border-box; /* Padding in der Höhe berücksichtigt */
+        box-sizing: border-box; /* Berechne die Höhe korrekt */
+        overflow: hidden; /* Verhindert, dass Inhalte die Zone erweitern */
     }
 }
+
 
     </style>
 </head>
