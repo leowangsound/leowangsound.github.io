@@ -533,16 +533,6 @@ img, video {
     #SoundDesign {
         margin-top: 13vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
     }
-    
-        /* Initiale Sichtbarkeit des Play Icons auf Mobilgeräten */
-    #videoControlIcon {
-        opacity: 1; /* Play-Icon anzeigen */
-    }
-
-    /* Entferne den weißen Kasten um das Video auf Mobilgeräten */
-    #video {
-        border: none; /* Kein Rahmen auf mobilen Geräten */
-    }
 
 }
 
@@ -708,63 +698,9 @@ function toggleMenu() {
     navMenu.classList.toggle('active');
 }
 
-const videoControlIcon = document.getElementById('videoControlIcon');
-const isMobile = window.innerWidth <= 1280; // Check für mobile Geräte
 
-// Funktion zum Starten des Videos und Ausblenden des Play-Icons (nur für mobile)
-function playVideo() {
-    if (video.readyState >= 2) { // Video ist bereit zum Abspielen
-        video.muted = true; // Autoplay erfordert stummgeschaltetes Video
-        video.play().then(() => {
-            video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
-            isVideoPlaying = true;
-            if (isMobile) { // Nur auf mobilen Geräten Play-Icon ausblenden
-                videoControlIcon.style.opacity = '0'; // Blende das Play-Icon aus
-            }
-        }).catch(error => {
-            console.error("Video konnte nicht abgespielt werden: ", error);
-        });
-    }
-}
 
-// Funktion zum Pausieren des Videos
-function pauseVideo() {
-    video.pause(); // Pausiere das Video
-    isVideoPlaying = false;
-}
 
-// Funktion zum Anzeigen des Icons
-function showIcon(type) {
-    if (type === 'pause') {
-        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_pause.png?raw=true';
-    } else if (type === 'play') {
-        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_play.png?raw=true';
-    }
-    videoControlIcon.style.opacity = '1';
-    // Verstecke das Icon nach 1 Sekunde (nur auf Desktop)
-    if (!isMobile) {
-        setTimeout(() => {
-            videoControlIcon.style.opacity = '0';
-        }, 1000);
-    }
-}
-
-// Event Listener für das Video (Ton anschalten beim Klick)
-video.addEventListener('click', function() {
-    if (isVideoPlaying) {
-        pauseVideo();
-        showIcon('pause');
-    } else {
-        playVideo();
-        video.muted = false; // Schalte den Ton an, wenn der Benutzer klickt
-        showIcon('play');
-    }
-});
-
-// Event Listener für das Play-Icon (auch das Play-Icon startet das Video)
-videoControlIcon.addEventListener('click', function() {
-    playVideo(); // Starte das Video und blende das Icon aus (nur auf mobilen Geräten)
-});
 
 
 </script>
