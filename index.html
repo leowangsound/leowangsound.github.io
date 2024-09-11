@@ -432,47 +432,64 @@ img, video {
         align-items: center;
     }
 
-/* Zone 2 (Navigation) */
-.zone-2 {
-    display: flex;
-    justify-content: flex-start; /* Hamburger-Icon links platzieren */
-    align-items: center;
-    background-color: #000;
-    position: fixed;
-    top: 11.7vh; /* Direkt unter Zone 1 */
-    width: 100%;
-    height: 4vh;
-    z-index: 1000;
-}
+    /* Logo-Container in Zone 1 */
+    .logo-container {
+        display: flex;
+        justify-content: center;  /* Horizontale Zentrierung des Logos */
+        align-items: center;      /* Vertikale Zentrierung des Logos */
+        height: 100%;             /* Nimmt die gesamte Höhe der Zone 1 ein */
+        z-index: 1001;            /* Sicherstellen, dass es sichtbar ist */
+    }
 
-/* Hamburger-Icon links in Zone 2 platzieren */
-.hamburger-icon {
-    display: block;
-    width: 30px;
-    height: auto;
-    cursor: pointer;
-    position: fixed;
-    left: 10px; /* Links in Zone 2 platzieren */
-    top: 5.5vh; /* Vertikal zentriert in Zone 2 */
-    z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    /* Logo */
+    .logo {
+        max-height: 80%;  /* Das Logo nimmt maximal 80% der Höhe der Zone 1 ein */
+        max-width: auto;  /* Seitenverhältnis wird beibehalten */
+        height: auto;     /* Proportionale Höhe des Logos */
+        width: auto;      /* Proportionale Breite des Logos */
+        z-index: 1001;    /* Höherer z-index, damit es über anderen Elementen liegt */
+    }
 
-}
+    /* Zone 2 (Navigation) */
+    .zone-2 {
+        display: flex;
+        justify-content: flex-start; /* Hamburger-Icon links platzieren */
+        align-items: center;
+        background-color: #000;
+        position: fixed;
+        top: 11.7vh; /* Direkt unter Zone 1 */
+        width: 100%;
+        height: 4vh;
+        z-index: 1000;
+    }
 
-/* Navigation - Menü */
-.nav-menu {
-    display: none; /* Standardmäßig ausgeblendet */
-    background-color: #000;
-    position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto; /* Dynamische Höhe, abhängig von den Buttons */
-    max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
-    z-index: 999; /* Höher als Zone 1 */
-    overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
-    padding-top: 12vh; /* Platz für Zone 2 lassen */
-    box-sizing: border-box;
-}
+    /* Hamburger-Icon links in Zone 2 platzieren */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        position: fixed;
+        left: 10px; /* Links in Zone 2 platzieren */
+        top: 5.5vh; /* Vertikal zentriert in Zone 2 */
+        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    }
+
+    /* Navigation - Menü */
+    .nav-menu {
+        display: none; /* Standardmäßig ausgeblendet */
+        background-color: #000;
+        position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto; /* Dynamische Höhe, abhängig von den Buttons */
+        max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
+        z-index: 999; /* Höher als Zone 1 */
+        overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
+        padding-top: 12vh; /* Platz für Zone 2 lassen */
+        box-sizing: border-box;
+    }
 
     /* Navigation - Aktives Menü */
     .nav-menu.active {
@@ -502,23 +519,8 @@ img, video {
     #SoundDesign {
         margin-top: 13vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
     }
-
-    /* Anpassungen für kleinere Tablets oder iPads */
-    @media only screen and (max-width: 768px) {
-        body {
-            font-size: 1.125rem;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-        }
-
-        .nav-button {
-            padding: 0.5rem 1rem;
-        }
-    }
 }
+
 
 
 
