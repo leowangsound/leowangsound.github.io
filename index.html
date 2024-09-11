@@ -450,6 +450,18 @@ img, video {
         z-index: 1001;    /* Höherer z-index, damit es über anderen Elementen liegt */
     }
 
+    /* Hamburger-Icon links in Zone 1 platzieren */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        position: fixed;
+        left: 10px; /* Links in Zone 1 platzieren */
+        top: 5.5vh; /* Vertikal zentriert in Zone 1 */
+        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    }
+    
     /* Zone 2 (Navigation) */
     .zone-2 {
         display: none;
@@ -463,17 +475,7 @@ img, video {
         z-index: 1000;
     }
 
-    /* Hamburger-Icon links in Zone 2 platzieren */
-    .hamburger-icon {
-        display: block;
-        width: 30px;
-        height: auto;
-        cursor: pointer;
-        position: fixed;
-        left: 10px; /* Links in Zone 2 platzieren */
-        top: 5.5vh; /* Vertikal zentriert in Zone 2 */
-        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
-    }
+
 
     /* Navigation - Menü */
     .nav-menu {
