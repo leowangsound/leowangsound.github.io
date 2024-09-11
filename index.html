@@ -433,42 +433,45 @@ img, video {
         position: relative; /* Damit das Hamburger-Icon innerhalb von Zone 1 positioniert werden kann */
     }
 
-    /* Zone 2 - Unsichtbar machen */
-    .zone-2 {
-        display: none; /* Zone 2 wird unsichtbar gemacht */
-        width: 100%;
-        height: 4vh;
-    }
+/* Zone 2 (Navigation) */
+.zone-2 {
+    display: flex;
+    justify-content: flex-start; /* Hamburger-Icon links platzieren */
+    align-items: center;
+    background-color: #000;
+    position: fixed;
+    top: calc(12vh); /* Direkt unter Zone 1 */
+    width: 100%;
+    height: 4vh;
+    z-index: 1000;
+}
 
-    /* Hamburger-Icon in Zone 1 platzieren */
-    .hamburger-icon {
-        display: block;
-        width: 30px;
-        height: auto;
-        cursor: pointer;
-        position: absolute;
-        right: 10px; /* Rechts in Zone 1 platzieren */
-        top: 50%;
-        transform: translateY(-50%); /* Vertikal zentrieren */
-        z-index: 1002; /* Sicherstellen, dass es über Zone 1 und Zone 0 ist */
-        background-color: #ff0000; /* Testweise eine Hintergrundfarbe hinzufügen, um zu sehen, ob es sichtbar ist */
-    }
+/* Hamburger-Icon links in Zone 2 platzieren */
+.hamburger-icon {
+    display: block;
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+    position: relative;
+    left: 10px; /* Links in Zone 2 platzieren */
+    z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+}
 
-    /* Navigation - Menü */
-    .nav-menu {
-        display: none; /* Standardmäßig ausgeblendet */
-        background-color: #000;
-        position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: auto; /* Dynamische Höhe, abhängig von den Buttons */
-        max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
-        z-index: 999; /* Höher als Zone 1 */
-        overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
-        padding-top: 9vh; /* Platz für Zone 1 lassen */
-        box-sizing: border-box;
-    }
+/* Navigation - Menü */
+.nav-menu {
+    display: none; /* Standardmäßig ausgeblendet */
+    background-color: #000;
+    position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto; /* Dynamische Höhe, abhängig von den Buttons */
+    max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
+    z-index: 999; /* Höher als Zone 1 */
+    overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
+    padding-top: 12vh; /* Platz für Zone 2 lassen */
+    box-sizing: border-box;
+}
 
     /* Navigation - Aktives Menü */
     .nav-menu.active {
@@ -543,7 +546,7 @@ img, video {
     </div>
     
     <div class="logo-container">
-    <img class="logo" src="https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true" alt="Logo">
+    <img class="logo" src="https://github.com/leowangsound/leowangsound.github.io/blob/main/LOGO%20v4.png?raw=true" alt="Logo">
 </div>
 
 </div>
