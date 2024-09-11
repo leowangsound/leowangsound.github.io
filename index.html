@@ -464,17 +464,28 @@ img, video {
     
     /* Zone 2 (Navigation) */
     .zone-2 {
-        display: none;
+        display: flex;
         justify-content: flex-start; /* Hamburger-Icon links platzieren */
         align-items: center;
         background-color: #000;
         position: fixed;
         top: 11.7vh; /* Direkt unter Zone 1 */
         width: 100%;
-        height: 4vh;
+        height: 1vh;
         z-index: 1000;
     }
 
+    /* Hamburger-Icon links in Zone 1 platzieren */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        position: fixed;
+        left: 10px; /* Links in Zone 1 platzieren */
+        top: 5.5vh; /* Vertikal zentriert in Zone 1 */
+        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    }
 
 
     /* Navigation - Menü */
