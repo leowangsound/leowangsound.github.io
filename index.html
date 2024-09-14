@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <!-- Corurier Final Draft Font -->
+  <!-- Courier Final Draft Font -->
 <link href="https://fonts.cdnfonts.com/css/courier-final-draft" rel="stylesheet">
 
 
@@ -32,26 +32,26 @@ h1, h2, h3 {
     text-transform: uppercase; /* Optional: Alle Buchstaben groß schreiben */
 }
 
-        /* Zone 0 */
+/* Zone 0 */
         
-         .language-button {
-            color: #fff;
-            font-size: 0.813rem;
-            cursor: pointer;
-            transition: transform 0.3s, filter 0.3s;
-            position: absolute;
-            left: 9px;
-            top: 0px;
-            height: 15px;
-            display: flex;
-            align-items: center;
-        }
+.language-button {
+    color: #fff;
+    font-size: 0.813rem;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    position: absolute;
+    left: 9px;
+    top: 0px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
 
-        .language-button:hover {
-            transform: scale(1.2);
-            filter: brightness(150%);
-        }
-        
+.language-button:hover {
+    transform: scale(1.2);
+    filter: brightness(150%);
+}
+
 /* Zone 0 (Icons und Sprache) */
 .zone-0 {
     height: 3vh;
@@ -106,7 +106,7 @@ h1, h2, h3 {
     align-items: center;
     background-color: #000;
     position: fixed; /* Position fixiert */
-    top: 1.875rem; /* Startet direkt unter Zone 0 */
+    top: 2.9vh; /* Startet direkt unter Zone 0 */
     width: 100%;
     height: 9vh; /* Höhe von Zone 1 */
     z-index: 1000;
@@ -136,7 +136,7 @@ h1, h2, h3 {
     align-items: center;
     background-color: #000;
     position: fixed;
-    top: calc(11vh);
+    top: 11.8vh;
     width: 100%;
     height: 4vh;
     z-index: 1000;
@@ -196,7 +196,7 @@ h1, h2, h3 {
     color: #fff;
 }
 
-       .portfolio-button-container {
+   .portfolio-button-container {
     text-align: center; /* Zentriert den Button */
     margin: 2.5rem 0; /* 40px Abstand oben und unten */
 }
@@ -299,9 +299,16 @@ h1, h2, h3 {
     filter: grayscale(100%); /* Schwarz-Weiß-Bild */
     transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out; /* Übergangseffekt für Filter und Größe */
 }
+
 .slides img:hover {
     filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt bei Hover */
     transform: scale(1.05); /* Vergrößert das Bild leicht bei Hover */
+}
+
+@media (hover: none) {
+    .slides img.clicked {
+        filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt nach Klick auf mobilen Geräten */
+    }
 }
 
 .prev-slide {
@@ -320,10 +327,12 @@ h1, h2, h3 {
 }
 
 /* Video-Umrandung beim Hover */
-#video:hover {
-    border: 1px solid #fff; /* 1px weiße Umrandung */
-    box-sizing: border-box; /* Stellt sicher, dass die Umrandung nicht das Video überdeckt */
-    transition: border 0.3s ease; /* Sanfter Übergang der Umrandung */
+@media (hover: hover) {
+    #video:hover {
+        border: 1px solid #fff; /* 1px weiße Umrandung */
+        box-sizing: border-box; /* Stellt sicher, dass die Umrandung nicht das Video überdeckt */
+        transition: border 0.3s ease; /* Sanfter Übergang der Umrandung */
+    }
 }
 
 #videoControlIcon {
@@ -469,7 +478,7 @@ img, video {
         align-items: center;
         background-color: #000;
         position: fixed;
-        top: 11.7vh; /* Direkt unter Zone 1 */
+        top: 11.8vh; /* Direkt unter Zone 1 */
         width: 100%;
         height: 1vh;
         z-index: 1000;
@@ -831,7 +840,7 @@ Field Recording ist die Profession, Klänge direkt in ihrer natürlichen Umgebun
     
     <div class="portfolio-button-container">
         <a href="https://www.crew-united.com/de/Leo-Wang_533840.html#!searchterm=leo%20wang" target="_blank" class="portfolio-button">Weiter zu Crew United</a>
-    </div> <!-- Hier fehlt das schließende div -->
+    </div>
 
     <div class="slideshow-container">
         <div class="slides active-slide">
@@ -971,7 +980,21 @@ function createSlideshow(slideContainerSelector, interval = 7000) {
         img.addEventListener("mouseleave", () => {
             img.style.transform = "scale(1)";
         });
+
+        // Hinzufügen des Klick-Events für mobile Geräte
+        img.addEventListener("click", () => {
+            if (isMobileDevice()) {
+                slides.forEach(slide => {
+                    const img = slide.querySelector('img');
+                    img.classList.add('clicked');
+                });
+            }
+        });
     });
+
+    function isMobileDevice() {
+        return window.matchMedia("(hover: none)").matches;
+    }
 
     initSlideOrder();
     showSlides(slideIndex);
@@ -983,7 +1006,6 @@ createSlideshow("#FilmSoundrecording");
 createSlideshow("#Fieldrecording");
 createSlideshow("#AboutMe");
 createSlideshow("#Portfolio", 7000); // Bildwechsel alle 7 Sekunden
-
 
 
 
