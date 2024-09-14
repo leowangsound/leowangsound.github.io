@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>Leo Wang Sound</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <!-- Courier Final Draft Font -->
+<link href="https://fonts.cdnfonts.com/css/courier-final-draft" rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: #000; /* Schwarz */
+            color: #F4F2F0;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+h1, h2, h3 {
+    font-family: 'Bebas Neue', sans-serif; /* Verwende die neue Schriftart */
+    font-size: 2.25rem; /* Optional: Passe die Schriftgröße an */
+    color:#C8D7D2; /* Wähle eine auffällige Farbe */
+    letter-spacing: 2px; /* Optional: Erhöhe den Zeichenabstand für einen markanteren Look */
+    text-transform: uppercase; /* Optional: Alle Buchstaben groß schreiben */
+}
+
+/* Zone 0 */
+        
+.language-button {
+    color: #fff;
+    font-size: 0.813rem;
+    cursor: pointer;
+    transition: transform 0.3s, filter 0.3s;
+    position: absolute;
+    left: 9px;
+    top: 0px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.language-button:hover {
+    transform: scale(1.2);
+    filter: brightness(150%);
+}
+
+/* Zone 0 (Icons und Sprache) */
+.zone-0 {
+    height: 3vh;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1.25rem;
+}
+
+        .social-icon {
+            width: 13px; /* Breite des Icons */
+            height: 13px; /* Höhe des Icons */
+            margin-left: 0.125rem; /* Abstand zwischen den Icons */
+            cursor: pointer;
+            margin-right: 1.25rem;
+            
+            
+        }
+
+        .mail-icon,
+        .instagram-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            transition: filter 0.5s; /* Übergang für Filtereffekt */
+            margin-right: 0.5rem;
+        }
+
+        .mail-icon:hover,
+        .instagram-icon:hover {
+            filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
+            transform: scale(1.15); /* Vergrößere das Icon um 10% beim Hover */
+        }
+
+        .mail-icon {
+            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true) center/cover no-repeat; /* Mail-Icon */
+        }
+
+        .instagram-icon {
+            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true) center/cover no-repeat; /* Instagram-Icon */
+        }
+
+/* Zone 1 (Logo) */
+.zone-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    position: fixed; /* Position fixiert */
+    top: 2.9vh; /* Startet direkt unter Zone 0 */
+    width: 100%;
+    height: 9vh; /* Höhe von Zone 1 */
+    z-index: 1000;
+}
+
+/* Logo-Container */
+.logo-container {
+    display: flex;
+    justify-content: center;  /* Horizontale Zentrierung des Logos */
+    align-items: center;      /* Vertikale Zentrierung des Logos */
+    height: 100%;             /* Nimmt die gesamte Höhe der Zone 1 ein */
+
+}
+
+/* Logo */
+.logo {
+    max-width: 90%;           /* Das Logo nimmt maximal 90% der Breite der Zone ein */
+    max-height: 90%;          /* Das Logo nimmt maximal 90% der Höhe der Zone ein */
+    width: auto;              /* Seitenverhältnis des Logos beibehalten */
+    height: auto;             /* Höhe proportional zur Breite */
+}
+
+/* Zone 2 (Navigation) */
+.zone-2 {
+    display: flex;
+    justify-content: space-between; /* Buttons gleichmäßig über die Breite verteilen */
+    align-items: center;
+    background-color: #000;
+    position: fixed;
+    top: 11.8vh;
+    width: 100%;
+    height: 4vh;
+    z-index: 1000;
+}
+
+/* Sicherstellen, dass der Container die volle Breite einnimmt */
+.nav-menu {
+    display: flex;
+    width: 100%;
+}
+
+/* Nav-Button Styles */
+.nav-button {
+    flex: 0 0 16.66%; /* Jeder Button nimmt ein Sechstel der Breite ein */
+    background-color: #000;
+    color: #ddd;
+    padding: 0.313rem 0.625rem;
+    margin: 0; /* Kein zusätzliches Margin */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box; /* Berechnet Padding und Breite korrekt */
+    z-index: 1; /* Standard Z-Index */
+}
+
+/* Gehoverter Button */
+.nav-button:hover {
+    background-color: #D4D4CE; /* Hintergrundfarbe beim Hover */
+    color: #000; /* Textfarbe beim Hover */
+    transform: scale(1.05); /* Leichtes Vergrößern */
+    z-index: 10; /* Höherer Z-Index, um über allem zu liegen */
+}
+
+/* Aktiver Button */
+.nav-button.active {
+    background-color: #F4F2F0;
+    color: #000;
+    transition: all 0.5s ease-in-out;
+    z-index: 9; /* Z-Index, wenn der Button aktiv ist */
+}
+
+        section {
+            max-width: 800px;
+            margin: 9.375rem auto 1.25rem; /* 150px oben für den festen Header, Logo und Navigationsleiste */
+            padding: 1.25rem;
+            background-color: #000; /* Schwarz */
+        }
+
+      footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
+    color: #fff;
+}
+
+   .portfolio-button-container {
+    text-align: center; /* Zentriert den Button */
+    margin: 2.5rem 0; /* 40px Abstand oben und unten */
+}
+
+.portfolio-button {
+    background-color: #000; /* Schwarzer Hintergrund */
+    color: #ddd; /* Leicht graue Schrift */
+    padding: 0.625rem 1.25rem; /* Innenabstand des Buttons */
+    border: 1px solid #fff; /* Weißer Rahmen */
+    text-decoration: none; /* Unterstreichung entfernen */
+    display: inline-block; /* Button-Darstellung */
+    transition: all 0.3s ease-in-out; /* Animation beim Hover */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+}
+
+.portfolio-button:hover {
+    background-color: #fff; /* Weißer Hintergrund beim Hover */
+    color: #000; /* Schwarze Schrift beim Hover */
+    transform: scale(1.05); /* Vergrößerung beim Hover */
+}
+.about-buttons-container {
+    text-align: center;
+    margin: 2.5rem 0;
+}
+
+.about-button {
+    background-color: #000;
+    color: #ddd;
+    padding: 0.625rem 1.25rem;
+    border: 1px solid #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 0.625rem;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.about-button:hover {
+    color: transparent;
+    transform: scale(1.05); /* Vergrößert den Button */
+    border-width: 1px; /* Stellt sicher, dass die Rahmenbreite konstant bleibt */
+}
+
+.about-button::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    transition-delay: 0.1s;
+}
+
+#mail-button:hover::after {
+    background-image: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true');
+    opacity: 1;
+}
+
+#instagram-button:hover::after {
+    background-image: url('https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true');
+    opacity: 1;
+}
+
+.slideshow-container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slides {
+    display: none; /* Standardmäßig unsichtbar */
+    width: 100%;
+    height: auto;
+    position: relative;
+    opacity: 0; /* Unsichtbar für die Übergangsanimation */
+    transition: opacity 3s ease-in-out; /* Verlängere die Übergangsdauer auf 2 Sekunden */
+}
+
+.active-slide {
+    display: block;
+    opacity: 1; /* Sichtbar machen */
+}
+
+
+
+.slides img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%); /* Schwarz-Weiß-Bild */
+    transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out; /* Übergangseffekt für Filter und Größe */
+}
+
+.slides img:hover {
+    filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt bei Hover */
+    transform: scale(1.05); /* Vergrößert das Bild leicht bei Hover */
+}
+
+@media (hover: none) {
+    .slides img.clicked {
+        filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt nach Klick auf mobilen Geräten */
+    }
+}
+
+.prev-slide {
+    display: block;
+    animation: slideOut 1s ease-in-out forwards;
+}
+
+#podcastVideo {
+    filter: grayscale(100%) !important; /* Erzwinge Farbe */
+    transition: filter 0.5s ease, transform 0.5s ease; /* Sanfter Übergang bei Hover */
+    z-index: 1; /* Sicherstellen, dass es sichtbar ist */
+}
+
+#podcastVideo:hover {
+    filter: grayscale(0%) !important; /* Beim Hover wird das Video farbig */
+}
+
+/* Video-Umrandung beim Hover */
+@media (hover: hover) {
+    #video:hover {
+        border: 1px solid #fff; /* 1px weiße Umrandung */
+        box-sizing: border-box; /* Stellt sicher, dass die Umrandung nicht das Video überdeckt */
+        transition: border 0.3s ease; /* Sanfter Übergang der Umrandung */
+    }
+}
+
+#videoControlIcon {
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Portfolio-spezifische Anpassungen */
+#Portfolio .slideshow-container {
+    max-width: 800px; /* Maximale Breite des Containers */
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+#Portfolio .slides img {
+    width: 100%; /* Die Bilder passen sich der vollen Breite des Containers an */
+    height: auto; /* Die Höhe der Bilder wird automatisch entsprechend ihrer Auflösung angepasst */
+    filter: grayscale(100%); /* Schwarz-Weiß-Effekt standardmäßig */
+    transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out; /* Gleiche Hover-Effekte wie in Location Sound */
+}
+
+#Portfolio .slides img:hover {
+    filter: grayscale(0%); /* Entfernt den Schwarz-Weiß-Effekt bei Hover */
+    transform: scale(1.05); /* Vergrößert das Bild leicht bei Hover */
+}
+
+/* Entferne die Scroll-Animation */
+#Portfolio .slides img {
+    animation: none; /* Keine Animation */
+}
+
+/* Footer */
+#site-footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
+    color: #fff; /* Weiße Schrift */
+}
+
+/* Footer-Link für das Impressum */
+.footer-link {
+    color: #fff; /* Weiße Schrift wie der Rest des Footers */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.footer-link:hover {
+    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+}
+.highlight {
+    background-color: #fff;  /* Weißer Kasten */
+    color: #000;  /* Schwarze Schrift */
+    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
+    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
+    font-weight: bold;  /* Optional: Mach den Text fett */
+}
+
+#SoundDesign {
+    margin-top: 16vh;
+}
+
+img, video {
+    max-width: 100%; /* Bilder und Videos passen sich der Container-Breite an */
+    height: auto; /* Höhe proportional zur Breite */
+}
+.hamburger-icon {
+    display: none; /* Standardmäßig ausblenden */
+}
+
+
+/* Media Queries für Bildschirme mit einer maximalen Breite von 1280px (Iphone SE, Ipad, kleine Laptops) */
+@media only screen and (max-width: 1280px) {
+    /* Schriftgröße für kleinere Geräte anpassen */
+    body {
+        font-size: 1.375rem;
+    }
+
+    /* Zone 0 - Anpassungen für Icons und Sprachbutton */
+    .zone-0 {
+        height: 3vh;
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1001;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 1.25rem;
+    }
+
+    /* Zone 1 - Logo-Ausrichtung und Hamburger-Icon */
+    .zone-1 {
+        height: 9vh;
+        top: 2.9vh; /* Direkt unter Zone 0 */
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Logo-Container in Zone 1 */
+    .logo-container {
+        display: flex;
+        justify-content: center;  /* Horizontale Zentrierung des Logos */
+        align-items: center;      /* Vertikale Zentrierung des Logos */
+        height: 100%;             /* Nimmt die gesamte Höhe der Zone 1 ein */
+        z-index: 1001;            /* Sicherstellen, dass es sichtbar ist */
+    }
+
+    /* Logo */
+    .logo {
+        max-height: 80%;  /* Das Logo nimmt maximal 80% der Höhe der Zone 1 ein */
+        max-width: auto;  /* Seitenverhältnis wird beibehalten */
+        height: auto;     /* Proportionale Höhe des Logos */
+        width: auto;      /* Proportionale Breite des Logos */
+        z-index: 1001;    /* Höherer z-index, damit es über anderen Elementen liegt */
+    }
+
+    /* Hamburger-Icon links in Zone 1 platzieren */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        position: fixed;
+        left: 10px; /* Links in Zone 1 platzieren */
+        top: 5.5vh; /* Vertikal zentriert in Zone 1 */
+        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    }
+    
+    /* Zone 2 (Navigation) */
+    .zone-2 {
+        display: flex;
+        justify-content: flex-start; /* Hamburger-Icon links platzieren */
+        align-items: center;
+        background-color: #000;
+        position: fixed;
+        top: 11.8vh; /* Direkt unter Zone 1 */
+        width: 100%;
+        height: 1vh;
+        z-index: 1000;
+    }
+
+    /* Hamburger-Icon links in Zone 1 platzieren */
+    .hamburger-icon {
+        display: block;
+        width: 30px;
+        height: auto;
+        cursor: pointer;
+        position: fixed;
+        left: 10px; /* Links in Zone 1 platzieren */
+        top: 5.5vh; /* Vertikal zentriert in Zone 1 */
+        z-index: 1001; /* Sicherstellen, dass es sichtbar ist */
+    }
+
+
+    /* Navigation - Menü */
+    .nav-menu {
+        display: none; /* Standardmäßig ausgeblendet */
+        background-color: #000;
+        position: fixed; /* Fixiere das Menü unabhängig von Zone 1 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto; /* Dynamische Höhe, abhängig von den Buttons */
+        max-height: 100vh; /* Erlaube dem Menü die gesamte Höhe des Bildschirms zu nutzen */
+        z-index: 999; /* Höher als Zone 1 */
+        overflow-y: auto; /* Falls es mehr Inhalt gibt, kann gescrollt werden */
+        padding-top: 12vh; /* Platz für Zone 2 lassen */
+        box-sizing: border-box;
+    }
+
+    /* Navigation - Aktives Menü */
+    .nav-menu.active {
+        display: block; /* Zeige das Menü */
+        max-height: none; /* Setze keine Begrenzung für die Höhe */
+        z-index: 999; /* Höher als Zone 1 */
+    }
+
+    /* Navigation - Buttons */
+    .nav-button {
+        width: 100%; /* Buttons nehmen die volle Breite ein */
+        padding: 1rem 0;
+        margin: 0;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #000;
+        color: #ddd;
+        border-bottom: 1px solid #444;
+    }
+
+    .nav-button:hover {
+        background-color: #D4D4CE;
+        color: #000;
+        transform: scale(1.05);
+    }
+
+    /* Abstände für die Hauptinhalte nach Zone 1 */
+    #SoundDesign {
+        margin-top: 13vh; /* Abstand zwischen Zone 1 und der ersten Überschrift */
+    }
+
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- Zone 0 -->
+<div class="zone-0">
+    <!-- "de" Button als Link -->
+    <a href="https://www.leowangsound.de" class="language-button">de</a>
+
+
+    <!-- Vorhandene Icons -->
+    <a href="mailto:info@leowangsound.de">
+        <div class="mail-icon"></div>
+    </a>
+    <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
+        <div class="social-icon instagram-icon"></div>
+    </a>
+</div>
+
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+    <div class="logo-container">
+        <div class="logo"></div>
+    </div>
+    
+    <div class="logo-container">
+    <img class="logo" src="https://github.com/leowangsound/leowangsound.github.io/blob/main/LOGO%20v4.png?raw=true" alt="Logo">
+</div>
+
+</div>
+
+<!-- Zone 2 (Navigation) -->
+<div class="zone-2">
+    <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_burger.png?raw=true" class="hamburger-icon" alt="Menu" onclick="toggleMenu()">
+    <div class="nav-menu">
+        <div class="nav-button" onclick="smoothScroll('#SoundDesign', 150)">Sound Design</div>
+        <div class="nav-button" onclick="smoothScroll('#FilmSoundrecording', 150)">Location Sound</div>
+        <div class="nav-button" onclick="smoothScroll('#Fieldrecording', 150)">Field Recording</div>
+        <div class="nav-button" onclick="smoothScroll('#Podcast', 150)">Podcast</div>
+        <div class="nav-button" onclick="smoothScroll('#AboutMe', 150)">About me</div>
+        <div class="nav-button" onclick="smoothScroll('#Portfolio', 150)">Portfolio</div>
+    </div>
+</div>
+
+
+<section id="SoundDesign">
+    <h2>Sound Design</h2>
+
+    <div style="font-family: 'Courier Final Draft', monospace; color: #fff; font-size: 1.125rem; line-height: 1.6; margin-top: 1.25rem;">
+    
+<p>
+    EXT. LONDON SKYLINE - NIGHT<br>
+    <br>
+    The camera looks out over the London skyline. In the distance, a 
+    <span class="highlight">train</span> slowly rolls over the Thames, passing 
+    <span class="highlight">Big Ben</span>. A small group of 
+    <span class="highlight">ravens</span> flutters through the night sky.<br><br> 
+    The camera descends down to street level. The city is beginning to come to life. 
+    <span class="highlight">Voices</span> echo through the empty alleyways as a 
+    <span class="highlight">car</span> turns a corner. A 
+    <span class="highlight">newspaper vendor</span> calls out the evening headlines. 
+    <span class="highlight">Pedestrians</span> stroll through the 
+    <span class="highlight">vibrant nightlife</span> of the city [...].
+</p>
+
+
+ 
+
+    </div>
+    
+    <div class="video-container" style="position: relative; max-width: 100%; height: 400px; overflow: hidden; margin-top: 0.938;">
+        <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
+<video id="video" playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
+    <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+</video>
+
+        <!-- Hinzufügen des Control-Icons -->
+<img id="videoControlIcon" src="" alt="Control Icon" style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+">
+
+    </div>
+    
+
+<p>
+    Sound design is the craft of bringing images to life – manipulating perception through sound, creating atmosphere, and adding depth to stories. It's not just background noise that complements the visuals – it pulls the audience right into the emotions of the story. With professional sound design, every scene becomes something truly special.
+</p>
+
+
+
+</section>
+
+<script>
+const thumbnail = document.getElementById('videoThumbnail');
+const video = document.getElementById('video');
+const videoControlIcon = document.getElementById('videoControlIcon');
+let isVideoPlaying = false;
+
+// Event Listener für das Thumbnail-Bild hinzufügen
+thumbnail.addEventListener('click', function() {
+    playVideo();
+});
+
+
+// Stelle sicher, dass das Video geladen ist
+video.addEventListener('loadeddata', function() {
+    video.style.display = 'block'; // Zeige das Video an, wenn es geladen ist
+});
+
+// Funktion zum Starten des Videos
+function playVideo() {
+    video.style.display = 'block'; // Zeige das Video an
+    thumbnail.style.display = 'none'; // Verberge das Thumbnail
+    video.muted = false; // Schalte den Ton an
+    video.play().then(() => {
+        video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
+        isVideoPlaying = true;
+    }).catch(error => {
+        console.error("Video konnte nicht abgespielt werden: ", error);
+    });
+}
+// Wenn das Video endet, zeige das Thumbnail wieder an
+video.addEventListener('ended', function() {
+    video.style.display = 'none';
+    thumbnail.style.display = 'block';
+    isVideoPlaying = false;
+});
+
+
+// Funktion zum Pausieren des Videos
+function pauseVideo() {
+    video.pause(); // Pausiere das Video
+    isVideoPlaying = false;
+}
+
+// Funktion zum Anzeigen des Icons
+function showIcon(type) {
+    if (type === 'pause') {
+        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_pause.png?raw=true';
+    } else if (type === 'play') {
+        videoControlIcon.src = 'https://github.com/leowangsound/leowangsound.github.io/blob/main/Icons/icon_play.png?raw=true';
+    }
+    videoControlIcon.style.opacity = '1';
+    // Verstecke das Icon nach 1 Sekunde
+    setTimeout(() => {
+        videoControlIcon.style.opacity = '0';
+    }, 1000);
+}
+
+
+// Event Listener für das Video (Ton anschalten beim Klick)
+video.addEventListener('click', function() {
+    if (isVideoPlaying) {
+        pauseVideo();
+        showIcon('pause');
+    } else {
+        playVideo();
+        video.muted = false; // Schalte den Ton an, wenn der Benutzer klickt
+        showIcon('play');
+    }
+});
+
+function toggleMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('active');
+}
+
+
+// Versuch das Podcast-Video beim Laden der Seite abzuspielen
+window.addEventListener('load', function() {
+    const podcastVideo = document.getElementById('podcastVideo');
+    podcastVideo.play().catch(function(error) {
+        console.error("Podcast-Video konnte nicht automatisch abgespielt werden:", error);
+    });
+});
+
+
+
+
+</script>
+
+
+
+
+<section id="FilmSoundrecording">
+    <h2>Location Sound</h2>
+
+
+<p>
+    Urban sounds are ever-present. Voices, footsteps, and the hum of traffic blend into a vibrant soundscape. Even more important: a clear recording of the dialogue, which drives almost every story forward.
+</p>
+<p>
+    Location sound lays the foundation for the world being told. I ensure that every voice and sound is captured cleanly and precisely – whether for film, interview, or documentary.
+</p>
+
+
+   
+    <div class="slideshow-container">
+    <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_01.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_02.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_03.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_04.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_05.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_06.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_07.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_08.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_09.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_10.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_11.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_12.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_13.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_14.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_15.jpg?raw=true"></div>
+    <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_set/set_16.jpg?raw=true"></div>
+
+</div>
+    </section>
+
+    <section id="Fieldrecording">
+    <h2>Field Recording</h2>
+
+
+<p>
+    Field recording is the craft of capturing sounds directly in their natural environment, collecting authentic and unique soundscapes. Whether in the wilderness or in urban settings – every location has its own character, which I capture for my projects. It doesn't matter whether it's for film, video game, or documentary: a special acoustic depth always relies on authentic environmental sounds. With my mobile equipment, I record sounds that are hard to reproduce elsewhere and bring these sounds into every project.
+</p>
+
+   
+    <div class="slideshow-container">
+        <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_01.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_02.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_03.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_04.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_05.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_06.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_07.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_field_recording/field_recording_08.jpg?raw=true"></div>
+    </div>
+   </section>
+
+<section id="Podcast">
+<h2>Podcast</h2>
+<p>Podcasts thrive on clear messages and high-quality sound. In post-production, I edit the audio tracks and tailor them to the technical requirements of the market. Additionally, I offer the creation of custom intros or audio logos to make the podcast truly distinctive. For recordings in the Cologne area, professional equipment is available. However, I also provide technical consultation for home recordings to ensure the podcast delivers in every aspect.</p>
+
+    
+    <!-- Video mit Loop und Hover-Effekt -->
+    <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
+<video id="podcastVideo" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%; z-index: 1;" autoplay muted loop playsinline>
+    <source src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Videos%20Website/Podcast.mp4?raw=true" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+</video>
+    </div>
+</section>
+
+
+   <section id="AboutMe">
+   <h2>About Me</h2>
+<p>My fascination with sound design began during my directing studies, when I discovered the potential to capture the audience's attention through sound. I have been pursuing this passion further in my master’s program ever since.
+<br>
+I work with meticulous attention to detail, in a structured and methodical manner, approaching my projects step by step. My extensive experience in various disciplines allows me to work efficiently and with clear focus. I place great value on creative collaboration with directors, editors, and production teams to get the best out of every project.
+<br>
+My workspace features a fully equipped and calibrated 5.1 post-production studio in the northern old town of Cologne, where I work with Pro Tools and high-quality Genelec monitors. For field recordings and on-set audio, I use professional equipment from Sennheiser and Sound Devices to ensure the best possible foundation for post-production is created right at the shoot.
+<br>
+To learn more about me and my work, feel free to contact me through the following channels. I look forward to a pleasant introductory conversation and a productive collaboration.</p>
+
+<div class="about-buttons-container">
+    <a href="mailto:info@leowangsound.de" class="about-button" id="mail-button">Mail</a>
+    <a href="https://www.instagram.com/leowangsound/" target="_blank" class="about-button" id="instagram-button">Instagram</a>
+</div>
+    
+    <div class="slideshow-container">
+        <div class="slides active-slide"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_01.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_02.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_03.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_04.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_05.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_06.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_07.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_08.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_09.jpg?raw=true"></div>
+        <div class="slides"><img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_ueber_mich/ueber_mich_10.jpg?raw=true"></div>
+    </div>
+</section>
+
+<section id="Portfolio">
+    <h2>Portfolio</h2>
+<p>In my work as a sound designer, dialogue editor, and sound engineer, I have contributed to a variety of projects – from indie films and documentaries to series. Every film and every scene is a unique challenge that I approach with passion and precision. For a deeper insight into my work, feel free to check out my full portfolio on Crew United.</p>
+
+    
+    <div class="portfolio-button-container">
+        <a href="https://www.crew-united.com/de/Leo-Wang_533840.html#!searchterm=leo%20wang" target="_blank" class="portfolio-button">Continue to Crew United</a>
+    </div>
+
+    <div class="slideshow-container">
+        <div class="slides active-slide">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_01.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_02.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_03.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_04.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_05.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_06.png?raw=true">
+        </div>
+        <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_07.png?raw=true">
+        </div>
+                <div class="slides">
+            <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/fotos_portfolio/Portfolio_08.png?raw=true">
+        </div>
+    </div>
+    
+    
+</section>
+
+
+
+
+<footer id="site-footer">
+    &copy; 2024 Leo Wang Sound
+    <p><a href="https://leowangsound.de/impressum" class="footer-link">Impressum</a></p>
+     <p><a href="https://leowangsound.de/datenschutzerklärung" class="footer-link">Datenschutzerklärung</a></p>
+</footer>
+
+
+<script>
+function smoothScroll(targetId) {
+    const targetElement = document.querySelector(targetId);
+    const zone2Height = document.querySelector('.zone-2').offsetHeight;
+    const screenHeight = window.innerHeight;
+    
+    // Dynamisches Offset basierend auf der Bildschirmhöhe
+    const offset = zone2Height + screenHeight * 0.12; // Z. B. 5% der Bildschirmhöhe als zusätzliche Margin
+    const elementPosition = targetElement.offsetTop;
+
+    window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+    });
+
+    // Optional: Animation für die Buttons
+    buttons.forEach(button => {
+        button.style.transition = "transform 0.5s ease-in-out";
+    });
+}
+
+
+
+
+// Allgemeine Slideshow-Funktion
+function createSlideshow(slideContainerSelector, interval = 7000) {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(`${slideContainerSelector} .slides`);
+    let slideInterval;
+    let slideOrder = [];
+    let isMouseDown = false;
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function initSlideOrder() {
+        slideOrder = Array.from(Array(slides.length).keys());
+        shuffle(slideOrder);
+        slideIndex = 0;
+    }
+
+    function showSlides(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active-slide");
+            slide.style.display = "none";
+        });
+
+        if (index >= slideOrder.length) {
+            initSlideOrder();
+        }
+
+        slides[slideOrder[slideIndex]].classList.add("active-slide");
+        slides[slideOrder[slideIndex]].style.display = "block";
+    }
+
+    function nextSlide() {
+        if (!isMouseDown) {
+            slideIndex++;
+            showSlides(slideIndex);
+        }
+    }
+
+    function startSlideShow() {
+        slideInterval = setInterval(nextSlide, interval);
+    }
+
+    function resetSlideShow() {
+        clearInterval(slideInterval);
+        nextSlide();
+        startSlideShow();
+    }
+
+    slides.forEach(slide => {
+        const img = slide.querySelector('img');
+
+        img.addEventListener("mouseover", () => {
+            img.style.transition = "transform 0.5s ease-in-out";
+            img.style.transform = "scale(1.05)";
+        });
+
+        img.addEventListener("mousedown", () => {
+            isMouseDown = true;
+            img.style.transition = "transform 0.2s ease-in-out";
+            img.style.transform = "scale(1)";
+        });
+
+        img.addEventListener("mouseup", () => {
+            isMouseDown = false;
+            resetSlideShow();
+        });
+
+        img.addEventListener("mouseleave", () => {
+            img.style.transform = "scale(1)";
+        });
+
+        // Hinzufügen des Klick-Events für mobile Geräte
+        img.addEventListener("click", () => {
+            if (isMobileDevice()) {
+                slides.forEach(slide => {
+                    const img = slide.querySelector('img');
+                    img.classList.add('clicked');
+                });
+            }
+        });
+    });
+
+    function isMobileDevice() {
+        return window.matchMedia("(hover: none)").matches;
+    }
+
+    initSlideOrder();
+    showSlides(slideIndex);
+    startSlideShow();
+}
+
+// Initialisiere Slideshows für jede Sektion
+createSlideshow("#FilmSoundrecording");
+createSlideshow("#Fieldrecording");
+createSlideshow("#AboutMe");
+createSlideshow("#Portfolio", 7000); // Bildwechsel alle 7 Sekunden
+
+
+
+
+
+
+// Funktion, um den aktiven Button zu setzen
+function setActiveButton(targetButton) {
+    const buttons = document.querySelectorAll('.nav-button');
+    buttons.forEach(button => button.classList.remove('active'));
+    targetButton.classList.add('active');
+}
+
+// Funktion, um den aktiven Button bei Klick zu ändern
+function handleButtonClick(targetId) {
+    const targetButton = document.querySelector(`[onclick="smoothScroll('${targetId}', 150)"]`);
+    setActiveButton(targetButton);
+}
+
+
+
+// Event-Listener für Scroll und Klick
+window.addEventListener('scroll', updateActiveButtonOnScroll);
+
+const navButtons = document.querySelectorAll('.nav-button');
+navButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const targetId = this.getAttribute('onclick').match(/#\w+/)[0];
+        handleButtonClick(targetId);
+    });
+});
+
+// Setze den "Sound Design"-Button als aktiv beim Laden der Seite
+document.addEventListener('DOMContentLoaded', () => {
+    const soundDesignButton = document.querySelector(`[onclick="smoothScroll('#SoundDesign', 150)"]`);
+    setActiveButton(soundDesignButton);
+});
+
+
+
+
+
+function updateActiveButtonOnScroll() {
+    const sections = document.querySelectorAll('section');
+    const scrollPos = window.scrollY || window.pageYOffset;
+    const windowBottom = scrollPos + window.innerHeight;
+    let lastButton = null;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - window.innerHeight * 0.18;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const sectionBottom = sectionTop + sectionHeight;
+
+        if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+            const targetButton = document.querySelector(`[onclick="smoothScroll('#${sectionId}', 150)"]`);
+            setActiveButton(targetButton);
+            lastButton = targetButton;
+        }
+    });
+
+    // Logik für den "Portfolio"-Button
+    const portfolioSection = document.querySelector('#Portfolio');
+    const portfolioButton = document.querySelector(`[onclick="smoothScroll('#Portfolio', 150)"]`);
+
+    // Wenn das Scrollen das Ende der Seite erreicht oder der "Portfolio"-Abschnitt vollständig sichtbar ist
+    if (portfolioSection && (windowBottom >= document.body.scrollHeight || scrollPos >= portfolioSection.offsetTop - 150)) {
+        setActiveButton(portfolioButton);
+    } else if (lastButton) {
+        setActiveButton(lastButton);
+    }
+}
+
+function toggleMenu() {
+    const navMenu = document.querySelector('.nav-menu');
+    navMenu.classList.toggle('active');
+}
+
+document.querySelectorAll('.nav-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.remove('active'); // Menü schließt sich nach Klick
+    });
+});
+
+
+
+
+</script>
+</body>
+</html>
