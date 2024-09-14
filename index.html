@@ -609,10 +609,11 @@ img, video {
     
     <div class="video-container" style="position: relative; max-width: 100%; height: 400px; overflow: hidden; margin-top: 0.938;">
         <img src="https://github.com/leowangsound/leowangsound.github.io/blob/main/FE_SD_Thumbnail.jpg?raw=true" alt="Video Thumbnail" id="videoThumbnail" style="width: 100%; height: 100%; object-fit: contain; filter: grayscale(100%); cursor: pointer;">
-        <video id="video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
-            <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
+<video id="video" playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; display: none; transition: filter 0.5s ease-in-out;" muted>
+    <source src="https://github.com/leowangsound/leowangsound.github.io/raw/main/FE_SD_Auschnitt.mp4.mp4" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+</video>
+
         <!-- Hinzufügen des Control-Icons -->
 <img id="videoControlIcon" src="" alt="Control Icon" style="
     position: absolute;
@@ -642,6 +643,12 @@ const video = document.getElementById('video');
 const videoControlIcon = document.getElementById('videoControlIcon');
 let isVideoPlaying = false;
 
+// Event Listener für das Thumbnail-Bild hinzufügen
+thumbnail.addEventListener('click', function() {
+    playVideo();
+});
+
+
 // Stelle sicher, dass das Video geladen ist
 video.addEventListener('loadeddata', function() {
     video.style.display = 'block'; // Zeige das Video an, wenn es geladen ist
@@ -649,16 +656,23 @@ video.addEventListener('loadeddata', function() {
 
 // Funktion zum Starten des Videos
 function playVideo() {
-    if (video.readyState >= 2) { // Video ist bereit zum Abspielen
-        video.muted = true; // Autoplay erfordert stummgeschaltetes Video
-        video.play().then(() => {
-            video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
-            isVideoPlaying = true;
-        }).catch(error => {
-            console.error("Video konnte nicht abgespielt werden: ", error);
-        });
-    }
+    video.style.display = 'block'; // Zeige das Video an
+    thumbnail.style.display = 'none'; // Verberge das Thumbnail
+    video.muted = false; // Schalte den Ton an
+    video.play().then(() => {
+        video.style.filter = 'grayscale(0%)'; // Entferne den Graufilter
+        isVideoPlaying = true;
+    }).catch(error => {
+        console.error("Video konnte nicht abgespielt werden: ", error);
+    });
 }
+// Wenn das Video endet, zeige das Thumbnail wieder an
+video.addEventListener('ended', function() {
+    video.style.display = 'none';
+    thumbnail.style.display = 'block';
+    isVideoPlaying = false;
+});
+
 
 // Funktion zum Pausieren des Videos
 function pauseVideo() {
@@ -699,6 +713,13 @@ function toggleMenu() {
 }
 
 
+// Versuch das Podcast-Video beim Laden der Seite abzuspielen
+window.addEventListener('load', function() {
+    const podcastVideo = document.getElementById('podcastVideo');
+    podcastVideo.play().catch(function(error) {
+        console.error("Podcast-Video konnte nicht automatisch abgespielt werden:", error);
+    });
+});
 
 
 
@@ -767,10 +788,10 @@ Field Recording ist die Profession, Klänge direkt in ihrer natürlichen Umgebun
     
     <!-- Video mit Loop und Hover-Effekt -->
     <div class="video-container" style="position: relative; max-width: 100%; height: 450px; overflow: hidden;">
-        <video id="podcastVideo" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); z-index: 1;" autoplay muted loop>
-            <source src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Videos%20Website/Podcast.mp4?raw=true" type="video/mp4">
-            Dein Browser unterstützt das Video-Tag nicht.
-        </video>
+<video id="podcastVideo" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%; z-index: 1;" autoplay muted loop playsinline>
+    <source src="https://github.com/leowangsound/leowangsound.github.io/blob/main/Videos%20Website/Podcast.mp4?raw=true" type="video/mp4">
+    Dein Browser unterstützt das Video-Tag nicht.
+</video>
     </div>
 </section>
 
