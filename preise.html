@@ -238,6 +238,9 @@
         <div class="result" id="result"></div>
         <div class="parameters" id="parameters" style="display:none;"></div>
         <div class="breakdown" id="breakdown" style="display:none;"></div>
+        <div id="additionalNote" style="display:none; margin-top: 20px; color: #ddd;"></div>
+<div id="additionalNote2" style="display:none; margin-top: 20px; color: #ddd;"></div>
+
     </div>
 
 <p style="text-align: center; margin-top: 20px;">
@@ -245,407 +248,247 @@
 </p>
 
     <script>
-    const rates = {
-        dreh: {
-            'O-Tonmeister': {
+// Tarifdaten
+const rates = {
+    dreh: {
+        'O-Tonmeister': {
+            '<1,2 Mio.': 449,
+            '>1,2 Mio.': 483,
+            'Werbung': 553
+        },
+        'O-Tonassistent': {
+            '<1,2 Mio.': 305,
+            '>1,2 Mio.': 328,
+            'Werbung': 375
+        },
+        'equipmentFee': 150
+    },
+    postproduktion: {
+        'Sound Design': {
+            'rates': {
                 '<1,2 Mio.': 449,
                 '>1,2 Mio.': 483,
                 'Werbung': 553
             },
-            'O-Tonassistent': {
-                '<1,2 Mio.': 305,
-                '>1,2 Mio.': 328,
-                'Werbung': 375
-            },
-            'equipmentFee': 150
+            'productivity': {
+                '<1,2 Mio.': 10,
+                '>1,2 Mio.': 10,
+                'Werbung': 10,
+                'Storytelling Podcast': 20
+            }
         },
-        postproduktion: {
-            'Sound Design': {
-                'rates': {
-                    '<1,2 Mio.': 449,
-                    '>1,2 Mio.': 483,
-                    'Werbung': 553
-                },
-                'productivity': {
-                    '<1,2 Mio.': 10,
-                    '>1,2 Mio.': 10,
-                    'Werbung': 10,
-                    'Storytelling Podcast': 20
+        'Dialog Edit': {
+            'rates': {
+                '<1,2 Mio.': 367,
+                '>1,2 Mio.': 394,
+                'Werbung': 451
+            },
+            'productivity': {
+                '<1,2 Mio.': 15,
+                '>1,2 Mio.': 15,
+                'Werbung': 30,
+                'Unterhaltungspodcast': 120,
+                'Storytelling Podcast': 90
+            }
+        },
+        'Mischung': {
+            'rates': {
+                '<1,2 Mio.': 463,
+                '>1,2 Mio.': 498,
+                'Werbung': 569
+            },
+            'productivity': {
+                '<1,2 Mio.': 20,
+                '>1,2 Mio.': 20,
+                'Werbung': 30,
+                'Storytelling Podcast': 30
+            }
+        },
+        'Gesamtpaket Dialog Edit/Sound Design/Mischung': 'Gesamtpaket',
+        'workplaceFee': {
+            'stereo': 145,
+            'surround': 195
+        },
+        'podcast': {
+            'unterhaltung': {
+                ratePerDay: 327,
+                productivity: 120,
+                breakdown: {
+                    'Dialog Edit': 6,
+                    'Mischung/Mastering': 4
                 }
             },
-            'Dialog Edit': {
-                'rates': {
-                    '<1,2 Mio.': 367,
-                    '>1,2 Mio.': 394,
-                    'Werbung': 451
-                },
-                'productivity': {
-                    '<1,2 Mio.': 15,
-                    '>1,2 Mio.': 15,
-                    'Werbung': 10,
-                    'Unterhaltungspodcast': 120,
-                    'Storytelling Podcast': 90
-                }
-            },
-            'Mischung': {
-                'rates': {
-                    '<1,2 Mio.': 463,
-                    '>1,2 Mio.': 498,
-                    'Werbung': 569
-                },
-                'productivity': {
-                    '<1,2 Mio.': 20,
-                    '>1,2 Mio.': 20,
-                    'Werbung': 10,
-                    'Storytelling Podcast': 30
-                }
-            },
-            'Gesamtpaket Dialog Edit/Sound Design/Mischung': 'Gesamtpaket',
-            'workplaceFee': {
-                'stereo': 145,
-                'surround': 195
-            },
-            'podcast': {
-                'unterhaltung': {
-                    ratePerDay: 327,
-                    productivity: 120,
-                    breakdown: {
-                        'Dialog Edit': 6,
-                        'Mischung/Mastering': 4
-                    }
-                },
-                'storytelling': {
-                    ratePerDay: 350,
-                    productivity: 20,
-                    breakdown: {
-                        'Dialog Edit': 1,
-                        'Sound Design': 4,
-                        'Mischung/Mastering': 5
-                    }
+            'storytelling': {
+                ratePerDay: 350,
+                productivity: 20,
+                breakdown: {
+                    'Dialog Edit': 1,
+                    'Sound Design': 4,
+                    'Mischung/Mastering': 5
                 }
             }
         }
-    };
+    }
+};
 
-    let breakdownData = {};
-    let parametersData = {};
+let breakdownData = {};
+let parametersData = {};
 
-    function updateForm() {
-        const projectType = document.getElementById('projectType').value;
-        const roleDiv = document.getElementById('roleDiv');
-        const formatDiv = document.getElementById('formatDiv');
-        const priceCategoryDiv = document.getElementById('priceCategoryDiv');
-        const podcastTypeDiv = document.getElementById('podcastTypeDiv');
-        const minutesDiv = document.getElementById('minutesDiv');
-        const daysDiv = document.getElementById('daysDiv');
-        const priceCategorySelect = document.getElementById('priceCategory');
+function updateForm() {
+    const projectType = document.getElementById('projectType').value;
+    const roleDiv = document.getElementById('roleDiv');
+    const formatDiv = document.getElementById('formatDiv');
+    const priceCategoryDiv = document.getElementById('priceCategoryDiv');
+    const podcastTypeDiv = document.getElementById('podcastTypeDiv');
+    const minutesDiv = document.getElementById('minutesDiv');
+    const daysDiv = document.getElementById('daysDiv');
+    const priceCategorySelect = document.getElementById('priceCategory');
 
-        document.getElementById('breakdown').style.display = 'none';
-        document.getElementById('result').innerText = '';
-        document.getElementById('parameters').style.display = 'none';
+    document.getElementById('breakdown').style.display = 'none';
+    document.getElementById('result').innerText = '';
+    document.getElementById('parameters').style.display = 'none';
 
-        // Aktualisiere Preis-Kategorie Optionen basierend auf Projektart
-        priceCategorySelect.innerHTML = `
-            <option value="">-- Wähle eine Preis-Kategorie --</option>
-            <option value="<1,2 Mio.">Fernsehfilm und -serie, Dokumentarfilm, Low-Budget Kinofilm (< 1,2 Mio. €)</option>
-            <option value=">1,2 Mio.">Spielfilm & Serie & Kinofilm (> 1,2 Mio. €)</option>
-            <option value="Werbung">Werbung</option>
-        `;
-        if (projectType === 'postproduktion') {
-            priceCategorySelect.innerHTML += `<option value="podcast">Podcast</option>`;
-        }
-
-        if (projectType === 'postproduktion') {
-            priceCategoryDiv.style.display = 'block';
-            roleDiv.style.display = 'block';
-            formatDiv.style.display = 'block';
-            minutesDiv.style.display = 'block';
-            daysDiv.style.display = 'none';
-            podcastTypeDiv.style.display = 'none';
-
-            updateRoles();
-
-        } else if (projectType === 'dreh') {
-            priceCategoryDiv.style.display = 'block';
-            roleDiv.style.display = 'block';
-            formatDiv.style.display = 'none'; // Format ausblenden
-            minutesDiv.style.display = 'none';
-            daysDiv.style.display = 'block';
-            podcastTypeDiv.style.display = 'none';
-
-            updateRoles();
-
-        } else {
-            priceCategoryDiv.style.display = 'none';
-            roleDiv.style.display = 'none';
-            formatDiv.style.display = 'none';
-            minutesDiv.style.display = 'none';
-            daysDiv.style.display = 'none';
-            podcastTypeDiv.style.display = 'none';
-        }
+    // Aktualisiere Preis-Kategorie Optionen basierend auf Projektart
+    priceCategorySelect.innerHTML = `
+        <option value="">-- Wähle eine Preis-Kategorie --</option>
+        <option value="<1,2 Mio.">Fernsehfilm und -serie, Dokumentarfilm, Low-Budget Kinofilm (< 1,2 Mio. €)</option>
+        <option value=">1,2 Mio.">Spielfilm & Serie & Kinofilm (> 1,2 Mio. €)</option>
+        <option value="Werbung">Werbung</option>
+    `;
+    if (projectType === 'postproduktion') {
+        priceCategorySelect.innerHTML += `<option value="podcast">Podcast</option>`;
     }
 
-    function updateRoles() {
-        const projectType = document.getElementById('projectType').value;
-        const priceCategory = document.getElementById('priceCategory').value;
-        const roleSelect = document.getElementById('role');
-        const roleDiv = document.getElementById('roleDiv');
-        const podcastTypeDiv = document.getElementById('podcastTypeDiv');
-        const formatDiv = document.getElementById('formatDiv');
+    if (projectType === 'postproduktion') {
+        priceCategoryDiv.style.display = 'block';
+        roleDiv.style.display = 'block';
+        formatDiv.style.display = 'block';
+        minutesDiv.style.display = 'block';
+        daysDiv.style.display = 'none';
+        podcastTypeDiv.style.display = 'none';
 
-        roleSelect.innerHTML = '<option value="">-- Wähle eine Rolle --</option>';
+        updateRoles();
 
-        if (projectType === 'postproduktion' && priceCategory === 'podcast') {
-            roleDiv.style.display = 'none';
-            podcastTypeDiv.style.display = 'block';
-            formatDiv.style.display = 'none';
-        } else if (projectType === 'postproduktion') {
-            roleDiv.style.display = 'block';
-            podcastTypeDiv.style.display = 'none';
-            formatDiv.style.display = 'block';
-            const roles = Object.keys(rates[projectType]);
-            roles.forEach(role => {
-                if (!['workplaceFee', 'podcast'].includes(role)) {
-                    const option = document.createElement('option');
-                    option.value = role;
-                    option.text = role;
-                    roleSelect.add(option);
-                }
-            });
-        } else if (projectType === 'dreh') {
-            roleDiv.style.display = 'block';
-            podcastTypeDiv.style.display = 'none';
-            formatDiv.style.display = 'none'; // Format ausblenden
-            const roles = Object.keys(rates[projectType]);
-            roles.forEach(role => {
-                if (!['equipmentFee'].includes(role)) {
-                    const option = document.createElement('option');
-                    option.value = role;
-                    option.text = role;
-                    roleSelect.add(option);
-                }
-            });
-        }
+    } else if (projectType === 'dreh') {
+        priceCategoryDiv.style.display = 'block';
+        roleDiv.style.display = 'block';
+        formatDiv.style.display = 'none'; // Format ausblenden
+        minutesDiv.style.display = 'none';
+        daysDiv.style.display = 'block';
+        podcastTypeDiv.style.display = 'none';
+
+        updateRoles();
+
+    } else {
+        priceCategoryDiv.style.display = 'none';
+        roleDiv.style.display = 'none';
+        formatDiv.style.display = 'none';
+        minutesDiv.style.display = 'none';
+        daysDiv.style.display = 'none';
+        podcastTypeDiv.style.display = 'none';
     }
+}
 
-    function calculate() {
-        const projectType = document.getElementById('projectType').value;
-        let total = 0;
-        breakdownData = {};
-        parametersData = {};
+function updateRoles() {
+    const projectType = document.getElementById('projectType').value;
+    const priceCategory = document.getElementById('priceCategory').value;
+    const roleSelect = document.getElementById('role');
+    const roleDiv = document.getElementById('roleDiv');
+    const podcastTypeDiv = document.getElementById('podcastTypeDiv');
+    const formatDiv = document.getElementById('formatDiv');
 
-        document.getElementById('breakdown').style.display = 'none';
-        document.getElementById('breakdown').innerHTML = '';
-        document.getElementById('parameters').style.display = 'none';
-        document.getElementById('parameters').innerHTML = '';
-        document.getElementById('result').innerText = '';
+    roleSelect.innerHTML = '<option value="">-- Wähle eine Rolle --</option>';
 
-        if (projectType === 'postproduktion') {
-            const priceCategory = document.getElementById('priceCategory').value;
+    if (projectType === 'postproduktion' && priceCategory === 'podcast') {
+        roleDiv.style.display = 'none';
+        podcastTypeDiv.style.display = 'block';
+        formatDiv.style.display = 'none';
+    } else if (projectType === 'postproduktion') {
+        roleDiv.style.display = 'block';
+        podcastTypeDiv.style.display = 'none';
+        formatDiv.style.display = 'block';
+        const roles = Object.keys(rates[projectType]);
+        roles.forEach(role => {
+            if (!['workplaceFee', 'podcast'].includes(role)) {
+                const option = document.createElement('option');
+                option.value = role;
+                option.text = role;
+                roleSelect.add(option);
+            }
+        });
 
-            if (priceCategory === 'podcast') {
-                const podcastType = document.getElementById('podcastType').value;
-                const minutes = parseFloat(document.getElementById('minutes').value);
-
-                if (!podcastType || !minutes) {
-                    document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
-                    return;
-                }
-
-                const podcastData = rates['postproduktion']['podcast'][podcastType];
-                const ratePerDay = podcastData.ratePerDay;
-                const productivity = podcastData.productivity;
-
-                const days = minutes / productivity;
-
-                breakdownData['Podcast'] = {
-                    rate: ratePerDay,
-                    days: days,
-                    cost: ratePerDay * days
-                };
-
-                total = breakdownData['Podcast'].cost;
-
-                // Anpassung der Anzeige für benötigte Tage oder Stunden
-                let timeKey, timeValue;
-                if (days >= 1) {
-                    timeKey = 'Anzahl der benötigten Tage';
-                    timeValue = `${days.toFixed(2)} Tage`;
-                } else {
-                    timeKey = 'Anzahl der benötigten Stunden';
-                    timeValue = `${(days * 10).toFixed(2)} Stunden`;
-                }
-
-                parametersData = {
-                    'Podcasttyp': podcastType.charAt(0).toUpperCase() + podcastType.slice(1),
-                    'Projektlänge': `${minutes} Minuten`,
-                    'Produktivität (Min./Tag)': `${productivity}`,
-                    [timeKey]: timeValue,
-                    'Tagessatz': `${ratePerDay} €`,
-                    'Stundensatz': `${(ratePerDay / 10).toFixed(2)} €`
-                };
-
-                generateBreakdown();
-
+        // Wenn "Dialog Edit" ausgewählt wird, "Format" ausblenden
+        roleSelect.onchange = function() {
+            const selectedRole = roleSelect.value;
+            if (selectedRole === 'Dialog Edit') {
+                formatDiv.style.display = 'none';
             } else {
-                const role = document.getElementById('role').value;
-                const format = document.getElementById('format').value;
-                const minutes = parseFloat(document.getElementById('minutes').value);
-
-                if (!role || !format || !minutes || !priceCategory) {
-                    document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
-                    return;
-                }
-
-                if (role === 'Gesamtpaket Dialog Edit/Sound Design/Mischung') {
-                    const roles = ['Sound Design', 'Dialog Edit', 'Mischung'];
-                    let totalDays = 0;
-                    let productivityValues = {};
-                    let rateValues = {};
-                    let ratePerHourValues = {};
-
-                    roles.forEach(r => {
-                        const rateData = rates['postproduktion'][r];
-                        const rate = rateData['rates'][priceCategory];
-                        const productivity = rateData['productivity'][priceCategory];
-
-                        if (!productivity) {
-                            document.getElementById('result').innerText = `${r} ist für diese Preis-Kategorie nicht vorgesehen.`;
-                            return;
-                        }
-
-                        const days = minutes / productivity;
-
-                        breakdownData[r] = {
-                            rate: rate,
-                            days: days,
-                            cost: rate * days,
-                            productivity: productivity
-                        };
-
-                        totalDays += days;
-                        productivityValues[r] = productivity;
-                        rateValues[r] = rate;
-                        ratePerHourValues[r] = (rate / 10).toFixed(2);
-                    });
-
-                    const workplaceFee = rates['postproduktion']['workplaceFee'][format];
-                    breakdownData[`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`] = {
-                        rate: workplaceFee,
-                        days: totalDays,
-                        cost: workplaceFee * totalDays
-                    };
-
-                    total = Object.values(breakdownData).reduce((sum, item) => sum + item.cost, 0);
-
-                    // Anpassung der Anzeige für benötigte Tage oder Stunden
-                    let timeKey, timeValue;
-                    if (totalDays >= 1) {
-                        timeKey = 'Anzahl der benötigten Tage';
-                        timeValue = `${totalDays.toFixed(2)} Tage`;
-                    } else {
-                        timeKey = 'Anzahl der benötigten Stunden';
-                        timeValue = `${(totalDays * 10).toFixed(2)} Stunden`;
-                    }
-
-                    parametersData = {
-                        'Rolle': 'Gesamtpaket',
-                        'Projektlänge': `${minutes} Minuten`,
-                        [timeKey]: timeValue,
-                        'Produktivität Sound Design': `${productivityValues['Sound Design']} Minuten/Tag`,
-                        'Produktivität Dialog Edit': `${productivityValues['Dialog Edit']} Minuten/Tag`,
-                        'Produktivität Mischung': `${productivityValues['Mischung']} Minuten/Tag`,
-                        'Tagessatz Sound Design': `${rateValues['Sound Design']} €`,
-                        'Stundensatz Sound Design': `${ratePerHourValues['Sound Design']} €`,
-                        'Tagessatz Dialog Edit': `${rateValues['Dialog Edit']} €`,
-                        'Stundensatz Dialog Edit': `${ratePerHourValues['Dialog Edit']} €`,
-                        'Tagessatz Mischung': `${rateValues['Mischung']} €`,
-                        'Stundensatz Mischung': `${ratePerHourValues['Mischung']} €`,
-                        [`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`]: `${workplaceFee} € pro Tag`
-                    };
-
-                    generateBreakdown();
-
-                } else {
-                    // Berechnung für einzelne Rollen
-                    const rateData = rates[projectType][role];
-                    const rate = rateData['rates'][priceCategory];
-                    let productivity = rateData['productivity'][priceCategory];
-
-                    if (!productivity) {
-                        document.getElementById('result').innerText = `${role} ist für diese Preis-Kategorie nicht vorgesehen.`;
-                        return;
-                    }
-
-                    const days = minutes / productivity;
-                    const workplaceFee = rates[projectType]['workplaceFee'][format];
-
-                    breakdownData[role] = {
-                        rate: rate,
-                        days: days,
-                        cost: rate * days,
-                        productivity: productivity
-                    };
-
-                    breakdownData[`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`] = {
-                        rate: workplaceFee,
-                        days: days,
-                        cost: workplaceFee * days
-                    };
-
-                    total = breakdownData[role].cost + breakdownData[`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`].cost;
-
-                    // Anpassung der Anzeige für benötigte Tage oder Stunden
-                    let timeKey, timeValue;
-                    if (days >= 1) {
-                        timeKey = 'Anzahl der benötigten Tage';
-                        timeValue = `${days.toFixed(2)} Tage`;
-                    } else {
-                        timeKey = 'Anzahl der benötigten Stunden';
-                        timeValue = `${(days * 10).toFixed(2)} Stunden`;
-                    }
-
-                    // Parameterdaten
-                    parametersData = {
-                        'Rolle': role,
-                        'Projektlänge': `${minutes} Minuten`,
-                        'Produktivität (Min./Tag)': `${productivity}`,
-                        [timeKey]: timeValue,
-                        'Tagessatz': `${rate} €`,
-                        'Stundensatz': `${(rate / 10).toFixed(2)} €`,
-                        [`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`]: `${workplaceFee} € pro Tag`
-                    };
-
-                    generateBreakdown();
-                }
+                formatDiv.style.display = 'block';
             }
-        } else if (projectType === 'dreh') {
-            // Berechnung für Dreh
-            const priceCategory = document.getElementById('priceCategory').value;
-            const role = document.getElementById('role').value;
-            const days = parseFloat(document.getElementById('days').value);
+        };
+} else if (projectType === 'dreh') {
+    roleDiv.style.display = 'block';
+    podcastTypeDiv.style.display = 'none';
+    formatDiv.style.display = 'none'; // Format-Feld ausblenden
+    const roles = Object.keys(rates[projectType]);
+    roles.forEach(role => {
+        if (!['equipmentFee'].includes(role)) {
+            const option = document.createElement('option');
+            option.value = role;
+            option.text = role;
+            roleSelect.add(option);
+        }
+    });
 
-            if (!role || !days || !priceCategory) {
+    // Event-Handler setzen, um Format-Feld ausgeblendet zu halten
+    roleSelect.onchange = function() {
+        formatDiv.style.display = 'none';
+    };
+}
+
+}
+
+function calculate() {
+    const projectType = document.getElementById('projectType').value;
+    let total = 0;
+    breakdownData = {};
+    parametersData = {};
+
+    document.getElementById('breakdown').style.display = 'none';
+    document.getElementById('breakdown').innerHTML = '';
+    document.getElementById('parameters').style.display = 'none';
+    document.getElementById('parameters').innerHTML = '';
+    document.getElementById('result').innerText = '';
+
+    // Zusätzliche Hinweise ausblenden
+    document.getElementById('additionalNote').style.display = 'none';
+    document.getElementById('additionalNote2').style.display = 'none';
+
+    if (projectType === 'postproduktion') {
+        const priceCategory = document.getElementById('priceCategory').value;
+
+        if (priceCategory === 'podcast') {
+            const podcastType = document.getElementById('podcastType').value;
+            const minutes = parseFloat(document.getElementById('minutes').value);
+
+            if (!podcastType || !minutes) {
                 document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
                 return;
             }
 
-            const rate = rates[projectType][role][priceCategory];
-            const equipmentFee = rates[projectType]['equipmentFee'];
+            const podcastData = rates['postproduktion']['podcast'][podcastType];
+            const ratePerDay = podcastData.ratePerDay;
+            const productivity = podcastData.productivity;
 
-            breakdownData[role] = {
-                rate: rate,
+            const days = minutes / productivity;
+
+            breakdownData['Podcast'] = {
+                rate: ratePerDay,
                 days: days,
-                cost: rate * days
+                cost: ratePerDay * days
             };
 
-            breakdownData['Technikpauschale'] = {
-                rate: equipmentFee,
-                days: days,
-                cost: equipmentFee * days
-            };
-
-            total = breakdownData[role].cost + breakdownData['Technikpauschale'].cost;
+            total = breakdownData['Podcast'].cost;
 
             // Anpassung der Anzeige für benötigte Tage oder Stunden
             let timeKey, timeValue;
@@ -657,113 +500,334 @@
                 timeValue = `${(days * 10).toFixed(2)} Stunden`;
             }
 
-            // Parameterdaten
             parametersData = {
-                'Rolle': role,
+                'Podcasttyp': podcastType.charAt(0).toUpperCase() + podcastType.slice(1),
+                'Projektlänge': `${minutes} Minuten`,
+                'Produktivität (Min./Tag)': `${productivity}`,
                 [timeKey]: timeValue,
-                'Tagessatz': `${rate} €`,
-                'Stundensatz': `${(rate / 10).toFixed(2)} €`,
-                'Technikpauschale': `${equipmentFee} € pro Tag`
+                'Tagessatz': `${ratePerDay} €`,
+                'Stundensatz': `${(ratePerDay / 10).toFixed(2)} €`
             };
 
             generateBreakdown();
+
         } else {
-            document.getElementById('result').innerText = 'Bitte eine gültige Projektart auswählen!';
+            const role = document.getElementById('role').value;
+            let format = document.getElementById('format').value;
+            const minutes = parseFloat(document.getElementById('minutes').value);
+
+            if (!role || !minutes || !priceCategory) {
+                document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
+                return;
+            }
+
+            // Wenn Rolle "Dialog Edit" ist, Format auf "stereo" setzen
+            if (role === 'Dialog Edit') {
+                format = 'stereo';
+            } else {
+                if (!format) {
+                    document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
+                    return;
+                }
+            }
+
+            if (role === 'Gesamtpaket Dialog Edit/Sound Design/Mischung') {
+                const roles = ['Sound Design', 'Dialog Edit', 'Mischung'];
+                let totalCost = 0;
+                let totalDays = 0;
+                let productivityValues = {};
+                let rateValues = {};
+                let ratePerHourValues = {};
+
+                roles.forEach(r => {
+                    const rateData = rates['postproduktion'][r];
+                    const rate = rateData['rates'][priceCategory];
+                    const productivity = rateData['productivity'][priceCategory];
+
+                    if (!productivity) {
+                        document.getElementById('result').innerText = `${r} ist für diese Preis-Kategorie nicht vorgesehen.`;
+                        return;
+                    }
+
+                    const days = minutes / productivity;
+
+                    breakdownData[r] = {
+                        rate: rate,
+                        days: days,
+                        cost: rate * days,
+                        productivity: productivity
+                    };
+
+                    totalDays += days;
+                    productivityValues[r] = productivity;
+                    rateValues[r] = rate;
+                    ratePerHourValues[r] = (rate / 10).toFixed(2);
+
+                    // Arbeitsplatzpauschale pro Rolle berechnen
+                    let roleFormat = format;
+                    if (r === 'Dialog Edit') {
+                        roleFormat = 'stereo';
+                    }
+                    const workplaceFee = rates['postproduktion']['workplaceFee'][roleFormat];
+                    breakdownData[`Arbeitsplatzpauschale ${r} ${roleFormat === 'stereo' ? 'Stereo' : 'Surround 5.1'}`] = {
+                        rate: workplaceFee,
+                        days: days,
+                        cost: workplaceFee * days
+                    };
+
+                    totalCost += breakdownData[r].cost + breakdownData[`Arbeitsplatzpauschale ${r} ${roleFormat === 'stereo' ? 'Stereo' : 'Surround 5.1'}`].cost;
+                });
+
+                total = totalCost;
+
+                // Anpassung der Anzeige für benötigte Tage oder Stunden
+                let timeKey, timeValue;
+                if (totalDays >= 1) {
+                    timeKey = 'Anzahl der benötigten Tage';
+                    timeValue = `${totalDays.toFixed(2)} Tage`;
+                } else {
+                    timeKey = 'Anzahl der benötigten Stunden';
+                    timeValue = `${(totalDays * 10).toFixed(2)} Stunden`;
+                }
+
+                parametersData = {
+                    'Rolle': 'Gesamtpaket',
+                    'Projektlänge': `${minutes} Minuten`,
+                    [timeKey]: timeValue,
+                    'Produktivität Sound Design': `${productivityValues['Sound Design']} Minuten/Tag`,
+                    'Produktivität Dialog Edit': `${productivityValues['Dialog Edit']} Minuten/Tag`,
+                    'Produktivität Mischung': `${productivityValues['Mischung']} Minuten/Tag`,
+                    'Tagessatz Sound Design': `${rateValues['Sound Design']} €`,
+                    'Stundensatz Sound Design': `${ratePerHourValues['Sound Design']} €`,
+                    'Tagessatz Dialog Edit': `${rateValues['Dialog Edit']} €`,
+                    'Stundensatz Dialog Edit': `${ratePerHourValues['Dialog Edit']} €`,
+                    'Tagessatz Mischung': `${rateValues['Mischung']} €`,
+                    'Stundensatz Mischung': `${ratePerHourValues['Mischung']} €`
+                };
+
+                generateBreakdown();
+
+            } else {
+                // Berechnung für einzelne Rollen
+                const rateData = rates[projectType][role];
+                const rate = rateData['rates'][priceCategory];
+                let productivity = rateData['productivity'][priceCategory];
+
+                if (!productivity) {
+                    document.getElementById('result').innerText = `${role} ist für diese Preis-Kategorie nicht vorgesehen.`;
+                    return;
+                }
+
+                const days = minutes / productivity;
+
+                const workplaceFee = rates[projectType]['workplaceFee'][format];
+
+                breakdownData[role] = {
+                    rate: rate,
+                    days: days,
+                    cost: rate * days,
+                    productivity: productivity
+                };
+
+                breakdownData[`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`] = {
+                    rate: workplaceFee,
+                    days: days,
+                    cost: workplaceFee * days
+                };
+
+                total = breakdownData[role].cost + breakdownData[`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`].cost;
+
+                // Anpassung der Anzeige für benötigte Tage oder Stunden
+                let timeKey, timeValue;
+                if (days >= 1) {
+                    timeKey = 'Anzahl der benötigten Tage';
+                    timeValue = `${days.toFixed(2)} Tage`;
+                } else {
+                    timeKey = 'Anzahl der benötigten Stunden';
+                    timeValue = `${(days * 10).toFixed(2)} Stunden`;
+                }
+
+                // Parameterdaten
+                parametersData = {
+                    'Rolle': role,
+                    'Projektlänge': `${minutes} Minuten`,
+                    'Produktivität (Min./Tag)': `${productivity}`,
+                    [timeKey]: timeValue,
+                    'Tagessatz': `${rate} €`,
+                    'Stundensatz': `${(rate / 10).toFixed(2)} €`,
+                    [`Arbeitsplatzpauschale ${format === 'stereo' ? 'Stereo' : 'Surround 5.1'}`]: `${workplaceFee} € pro Tag`
+                };
+
+                generateBreakdown();
+            }
+        }
+    } else if (projectType === 'dreh') {
+        // Berechnung für Dreh
+        const priceCategory = document.getElementById('priceCategory').value;
+        const role = document.getElementById('role').value;
+        const days = parseFloat(document.getElementById('days').value);
+
+        if (!role || !days || !priceCategory) {
+            document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
             return;
         }
 
-        document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
-        document.getElementById('breakdown').style.display = 'block';
-        document.getElementById('parameters').style.display = 'block';
-    }
+        const rate = rates[projectType][role][priceCategory];
+        const equipmentFee = rates[projectType]['equipmentFee'];
 
-    function generateBreakdown() {
-        // Parameterdaten in einer Tabelle anzeigen
-        let parametersHTML = `<strong>Parameter:</strong><br><table>`;
-        for (let key in parametersData) {
-            parametersHTML += `
-                <tr>
-                    <td><strong>${key}</strong></td>
-                    <td>${parametersData[key]}</td>
-                </tr>
-            `;
-        }
-        parametersHTML += `</table>`;
-        document.getElementById('parameters').innerHTML = parametersHTML;
+        breakdownData[role] = {
+            rate: rate,
+            days: days,
+            cost: rate * days
+        };
 
-        // Breakdown-Daten anzeigen
-        let breakdownHTML = `<strong>Berechnung:</strong><br><table>`;
-        for (let key in breakdownData) {
-            const item = breakdownData[key];
-            let timeUnit = 'Tage';
-            let timeValue = item.days;
-
-            if (item.days < 1) {
-                timeUnit = 'Stunden';
-                timeValue = item.days * 10; // 1 Tag = 10 Stunden
-            }
-
-            breakdownHTML += `
-                <tr>
-                    <td>${key}</td>
-                    <td><input type="number" class="editable" data-key="${key}" value="${timeValue.toFixed(2)}" onchange="updateItem(this)"> ${timeUnit}</td>
-                    <td>@ ${item.rate.toFixed(2)} €</td>
-                    <td>= ${(item.cost).toFixed(2)} €</td>
-                </tr>
-            `;
-        }
-        breakdownHTML += `</table>`;
-        document.getElementById('breakdown').innerHTML = breakdownHTML;
-    }
-
-    function updateItem(element) {
-        const key = element.getAttribute('data-key');
-        let newValue = parseFloat(element.value);
-        let timeUnit = 'Tage';
-
-        if (newValue < 1) {
-            timeUnit = 'Stunden';
-            newValue = newValue / 10; // Stunden zu Tagen umrechnen
+        if (role !== 'O-Tonassistent') {
+            breakdownData['Technikpauschale'] = {
+                rate: equipmentFee,
+                days: days,
+                cost: equipmentFee * days
+            };
+            total = breakdownData[role].cost + breakdownData['Technikpauschale'].cost;
         } else {
-            newValue = newValue; // Tage bleiben unverändert
+            total = breakdownData[role].cost;
         }
 
-        breakdownData[key].days = newValue;
-        breakdownData[key].cost = breakdownData[key].rate * newValue;
-
-        // Gesamtbetrag neu berechnen
-        let total = Object.values(breakdownData).reduce((sum, item) => sum + item.cost, 0);
-        document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
-
-        // Parameterdaten aktualisieren
-        let totalDays = 0;
-        for (let key in breakdownData) {
-            totalDays += breakdownData[key].days;
-        }
-
+        // Anpassung der Anzeige für benötigte Tage oder Stunden
         let timeKey, timeValue;
-        if (totalDays >= 1) {
+        if (days >= 1) {
             timeKey = 'Anzahl der benötigten Tage';
-            timeValue = `${totalDays.toFixed(2)} Tage`;
+            timeValue = `${days.toFixed(2)} Tage`;
         } else {
             timeKey = 'Anzahl der benötigten Stunden';
-            timeValue = `${(totalDays * 10).toFixed(2)} Stunden`;
+            timeValue = `${(days * 10).toFixed(2)} Stunden`;
         }
 
-        parametersData[timeKey] = timeValue;
+        // Parameterdaten
+        parametersData = {
+            'Rolle': role,
+            [timeKey]: timeValue,
+            'Tagessatz': `${rate} €`,
+            'Stundensatz': `${(rate / 10).toFixed(2)} €`
+        };
 
-        // Alte Zeitangabe entfernen
-        delete parametersData['Anzahl der benötigten Tage'];
-        delete parametersData['Anzahl der benötigten Stunden'];
+        if (role !== 'O-Tonassistent') {
+            parametersData['Technikpauschale'] = `${equipmentFee} € pro Tag`;
+        }
 
-        // Parameteranzeige neu generieren
         generateBreakdown();
+
+        // Zusätzliche Hinweise
+        if (role === 'O-Tonmeister') {
+            // Hinweis für Technikpauschale
+            const additionalNote = "Die Technikpauschale beinhaltet die Ausstattung für maximal 3 Sprechrollen pro Einstellung. Für größere Setups wird zusätzliches Equipment benötigt, was den Gesamtpreis entsprechend beeinflusst.";
+            document.getElementById('additionalNote').innerText = additionalNote;
+            document.getElementById('additionalNote').style.display = 'block';
+        }
+
+        if (priceCategory === '>1,2 Mio.' && role === 'O-Tonmeister') {
+            // Persönlicher Hinweis
+            const note = "Ich stehe Ihnen gerne für Anfragen zur Verfügung, würde in diesem Fall aber wahrscheinlich auf erfahrenere Kollegen verweisen. Gerne helfe ich bei der Vermittlung und stehe gegebenenfalls als Assistent zur Verfügung, da meine Hauptexpertise eher in der Postproduktion liegt und ich O-Ton hauptsächlich für kleinere Sets anbiete. Ausnahmen sind natürlich möglich und ergeben sich dann im Gespräch.";
+            document.getElementById('additionalNote2').innerText = note;
+            document.getElementById('additionalNote2').style.display = 'block';
+        }
+    } else {
+        document.getElementById('result').innerText = 'Bitte eine gültige Projektart auswählen!';
+        return;
     }
 
-    function updateItemPodcast(element) {
-        // Wenn Sie Anpassungen für Podcasts vornehmen möchten, können Sie diese Funktion erweitern.
+    document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
+    document.getElementById('breakdown').style.display = 'block';
+    document.getElementById('parameters').style.display = 'block';
+}
+
+function generateBreakdown() {
+    // Parameterdaten in einer Tabelle anzeigen
+    let parametersHTML = `<strong>Parameter:</strong><br><table>`;
+    for (let key in parametersData) {
+        parametersHTML += `
+            <tr>
+                <td><strong>${key}</strong></td>
+                <td>${parametersData[key]}</td>
+            </tr>
+        `;
     }
+    parametersHTML += `</table>`;
+    document.getElementById('parameters').innerHTML = parametersHTML;
+
+    // Breakdown-Daten anzeigen
+    let breakdownHTML = `<strong>Berechnung:</strong><br><table>`;
+    for (let key in breakdownData) {
+        const item = breakdownData[key];
+        let timeUnit = 'Tage';
+        let timeValue = item.days;
+
+        if (item.days < 1) {
+            timeUnit = 'Stunden';
+            timeValue = item.days * 10; // 1 Tag = 10 Stunden
+        }
+
+        breakdownHTML += `
+            <tr>
+                <td>${key}</td>
+                <td><input type="number" class="editable" data-key="${key}" value="${timeValue.toFixed(2)}" onchange="updateItem(this)"> ${timeUnit}</td>
+                <td>@ ${item.rate.toFixed(2)} €</td>
+                <td>= ${(item.cost).toFixed(2)} €</td>
+            </tr>
+        `;
+    }
+    breakdownHTML += `</table>`;
+    document.getElementById('breakdown').innerHTML = breakdownHTML;
+}
+
+function updateItem(element) {
+    const key = element.getAttribute('data-key');
+    let newValue = parseFloat(element.value);
+    let timeUnit = 'Tage';
+
+    if (newValue < 1) {
+        timeUnit = 'Stunden';
+        newValue = newValue / 10; // Stunden zu Tagen umrechnen
+    } else {
+        newValue = newValue; // Tage bleiben unverändert
+    }
+
+    breakdownData[key].days = newValue;
+    breakdownData[key].cost = breakdownData[key].rate * newValue;
+
+    // Gesamtbetrag neu berechnen
+    let total = Object.values(breakdownData).reduce((sum, item) => sum + item.cost, 0);
+    document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
+
+    // Parameterdaten aktualisieren
+    let totalDays = 0;
+    for (let key in breakdownData) {
+        totalDays += breakdownData[key].days;
+    }
+
+    let timeKey, timeValue;
+    if (totalDays >= 1) {
+        timeKey = 'Anzahl der benötigten Tage';
+        timeValue = `${totalDays.toFixed(2)} Tage`;
+    } else {
+        timeKey = 'Anzahl der benötigten Stunden';
+        timeValue = `${(totalDays * 10).toFixed(2)} Stunden`;
+    }
+
+    parametersData[timeKey] = timeValue;
+
+    // Alte Zeitangabe entfernen
+    delete parametersData['Anzahl der benötigten Tage'];
+    delete parametersData['Anzahl der benötigten Stunden'];
+
+    // Parameteranzeige neu generieren
+    generateBreakdown();
+}
+
+function updateItemPodcast(element) {
+    // Wenn Anpassungen für Podcasts vorgenommen werden sollen, kann diese Funktion erweitert werden.
+}
 </script>
+
 
 </body>
 </html>
