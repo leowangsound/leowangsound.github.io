@@ -39,18 +39,21 @@ h1, h2, h3 {
     font-size: 0.813rem;
     cursor: pointer;
     transition: transform 0.3s, filter 0.3s;
-    position: absolute;
-    left: 9px;
-    top: 0px;
     height: 15px;
     display: flex;
     align-items: center;
+    margin-right: 10px; /* Abstand zwischen den Buttons */
+}
+
+.language-button:last-child {
+    margin-right: 0; /* Kein zusätzlicher Abstand nach dem letzten Button */
 }
 
 .language-button:hover {
     transform: scale(1.2);
     filter: brightness(150%);
 }
+
 
 /* Zone 0 (Icons und Sprache) */
 .zone-0 {
@@ -61,43 +64,48 @@ h1, h2, h3 {
     width: 100%;
     z-index: 1001;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between; /* Elemente links und rechts ausrichten */
     align-items: center;
-    padding-right: 1.25rem;
+    padding: 0 1.25rem;
 }
 
-        .social-icon {
-            width: 13px; /* Breite des Icons */
-            height: 13px; /* Höhe des Icons */
-            margin-left: 0.125rem; /* Abstand zwischen den Icons */
-            cursor: pointer;
-            margin-right: 1.25rem;
-            
-            
-        }
+.zone-0-left,
+.zone-0-right {
+    display: flex;
+    align-items: center;
+}
 
-        .mail-icon,
-        .instagram-icon {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            transition: filter 0.5s; /* Übergang für Filtereffekt */
-            margin-right: 0.5rem;
-        }
+.social-icon {
+    width: 13px;
+    height: 13px;
+    margin-right: 1vh;
+    cursor: pointer;
+    margin-right: 1.25rem;
+}
 
-        .mail-icon:hover,
-        .instagram-icon:hover {
-            filter: brightness(120%); /* Erhöhe die Helligkeit um 50% beim Hover */
-            transform: scale(1.15); /* Vergrößere das Icon um 10% beim Hover */
-        }
+.mail-icon,
+.instagram-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: filter 0.5s;
+    margin-right: 1vh;
+}
 
-        .mail-icon {
-            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true) center/cover no-repeat; /* Mail-Icon */
-        }
+.mail-icon:hover,
+.instagram-icon:hover {
+    filter: brightness(120%);
+    transform: scale(1.15);
+}
 
-        .instagram-icon {
-            background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true) center/cover no-repeat; /* Instagram-Icon */
-        }
+.mail-icon {
+    background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/mail%20icon.jpg?raw=true) center/cover no-repeat;
+}
+
+.instagram-icon {
+    background: url(https://github.com/leowangsound/leowangsound.github.io/blob/main/instagram-logo.png?raw=true) center/cover no-repeat;
+}
+
 
 /* Zone 1 (Logo) */
 .zone-1 {
@@ -407,14 +415,14 @@ img, video {
 }
 
 
-/* Media Queries für Bildschirme mit einer maximalen Breite von 1280px (Iphone SE, Ipad, kleine Laptops) */
-@media only screen and (max-width: 1280px) {
+/* Media Queries für Bildschirme mit einer maximalen Breite von 14400px (Iphone SE, Ipad, kleine Laptops) */
+@media only screen and (max-width: 14400px) {
     /* Schriftgröße für kleinere Geräte anpassen */
     body {
         font-size: 1.375rem;
     }
 
-    /* Zone 0 - Anpassungen für Icons und Sprachbutton */
+  /* Zone 0 - Anpassungen für Icons und Sprachbutton */
     .zone-0 {
         height: 3vh;
         background-color: #000;
@@ -423,9 +431,9 @@ img, video {
         width: 100%;
         z-index: 1001;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between; /* Ändern Sie flex-end zu space-between */
         align-items: center;
-        padding-right: 1.25rem;
+        padding: 0 1.25rem; /* Fügen Sie Padding links und rechts hinzu */
     }
 
     /* Zone 1 - Logo-Ausrichtung und Hamburger-Icon */
@@ -554,18 +562,24 @@ img, video {
 
 <!-- Zone 0 -->
 <div class="zone-0">
-    <!-- "en" Button als Link -->
-    <a href="https://www.leowangsound.de/en" class="language-button">en</a>
+    <!-- Linke Seite: Sprachoptionen -->
+    <div class="zone-0-left">
+        <a href="https://www.leowangsound.de/en" class="language-button">en</a>
+        <a href="https://www.leowangsound.de/preise" class="language-button">Preise</a>
+    </div>
 
-
-    <!-- Vorhandene Icons -->
-    <a href="mailto:info@leowangsound.de">
-        <div class="mail-icon"></div>
-    </a>
-    <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
-        <div class="social-icon instagram-icon"></div>
-    </a>
+    <!-- Rechte Seite: Icons -->
+    <div class="zone-0-right">
+        <a href="mailto:info@leowangsound.de">
+            <div class="mail-icon"></div>
+        </a>
+        <a href="https://www.instagram.com/leowangsound/" target="_blank" rel="noopener noreferrer">
+            <div class="social-icon instagram-icon"></div>
+        </a>
+    </div>
 </div>
+
+
 
 <!-- Zone 1 (Logo) -->
 <div class="zone-1">
