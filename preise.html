@@ -234,6 +234,8 @@
         </div>
 
         <button onclick="calculate()">Berechnen</button>
+<button id="shareButton" onclick="shareCalculation()">Berechnung teilen</button>
+
 
         <div class="result" id="result"></div>
         <div class="parameters" id="parameters" style="display:none;"></div>
@@ -581,13 +583,17 @@ function calculate() {
             rateValues[role] = rate;
             ratePerHourValues[role] = (rate / 10).toFixed(2);
 
-            // Arbeitsplatzpauschale berechnen
+            // Anpassung der Arbeitsplatzpauschale basierend auf dem Format
             let roleFormat = format;
             if (role === 'Dialog Edit') {
                 roleFormat = 'stereo';
                 totalWorkplaceDaysStereo += days;
             } else {
-                totalWorkplaceDaysSurround += days;
+                if (format === 'stereo') {
+                    totalWorkplaceDaysStereo += days;
+                } else if (format === 'surround') {
+                    totalWorkplaceDaysSurround += days;
+                }
             }
 
             totalCost += breakdownData[role].cost;
@@ -736,6 +742,8 @@ function calculate() {
     document.getElementById('parameters').style.display = 'block';
 }
 
+
+
 function generateBreakdown() {
     // Parameterdaten in einer Tabelle anzeigen
     let parametersHTML = `<strong>Parameter:</strong><br><table>`;
@@ -823,7 +831,100 @@ function updateItemPodcast(element) {
     // Wenn Anpassungen für Podcasts vorgenommen werden sollen, kann diese Funktion erweitert werden.
 }
 
+function shareCalculation() {
+    // Aktuelle Einstellungen erfassen
+    const projectType = document.getElementById('projectType').value;
+    const priceCategory = document.getElementById('priceCategory').value;
+    const role = document.getElementById('role').value;
+    const format = document.getElementById('format').value;
+    const minutes = document.getElementById('minutes').value;
+    const days = document.getElementById('days').value;
+    const podcastType = document.getElementById('podcastType').value;
 
+    // Objekt mit den Einstellungen erstellen
+    const settings = {
+        projectType,
+        priceCategory,
+        role,
+        format,
+        minutes,
+        days,
+        podcastType
+    };
+
+    // Objekt in Query-Parameter umwandeln
+    const params = new URLSearchParams();
+
+    for (const key in settings) {
+        if (settings[key]) {
+            params.append(key, settings[key]);
+        }
+    }
+
+    // Aktuelle URL ohne Parameter
+    const baseUrl = window.location.origin + window.location.pathname;
+
+    // Vollständige URL mit Parametern
+    const shareUrl = `${baseUrl}?${params.toString()}`;
+
+    // Link in die Zwischenablage kopieren
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        const shareButton = document.getElementById('shareButton');
+        shareButton.innerText = 'Link in die Zwischenablage kopiert';
+        // Nach 3 Sekunden den Text zurücksetzen
+        setTimeout(() => {
+            shareButton.innerText = 'Berechnung teilen';
+        }, 3000);
+    }).catch(err => {
+        alert('Fehler beim Kopieren des Links: ' + err);
+    });
+}
+
+window.onload = function() {
+    // URL-Parameter auslesen
+    const params = new URLSearchParams(window.location.search);
+
+    const projectType = params.get('projectType');
+    if (projectType) {
+        document.getElementById('projectType').value = projectType;
+        updateForm();
+
+        const priceCategory = params.get('priceCategory');
+        if (priceCategory) {
+            document.getElementById('priceCategory').value = priceCategory;
+            updatePriceCategory();
+
+            const podcastType = params.get('podcastType');
+            if (podcastType) {
+                document.getElementById('podcastType').value = podcastType;
+                updatePodcastType();
+            }
+
+            const role = params.get('role');
+            if (role) {
+                document.getElementById('role').value = role;
+            }
+
+            const format = params.get('format');
+            if (format) {
+                document.getElementById('format').value = format;
+            }
+
+            const minutes = params.get('minutes');
+            if (minutes) {
+                document.getElementById('minutes').value = minutes;
+            }
+
+            const days = params.get('days');
+            if (days) {
+                document.getElementById('days').value = days;
+            }
+
+            // Berechnung automatisch durchführen
+            calculate();
+        }
+    }
+};
 
 </script>
 
