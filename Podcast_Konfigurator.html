@@ -250,7 +250,7 @@
                 <div class="toggle" data-group="aufnahme" data-hint="Professionelle Aufnahme bei mir in Köln (Bis zu 2 Personen).">Aufnahme bei mir in Köln</div>
             </div>
             <div class="option-group">
-                <div class="toggle" data-group="video" data-hint="Zusätzlicher Aufwand für Video, inklusive Kooperationspartner für Bild und Schnitt. Daher ist ein Pauschalpreis nicht kalkulierbar. Ich vermittle gerne weiter und betreue tontechnisch.">Videopodcast aktivieren</div>
+                <div class="toggle" data-group="video" data-hint="Zusätzlicher Aufwand für Video, inklusive Kooperationspartner für Bild und Schnitt. Daher ist ein Pauschalpreis nicht kalkulierbar. Ich vermittle gerne weiter und betreue tontechnisch.">Videopodcast</div>
             </div>
             
 <div class="option-group">
@@ -291,7 +291,7 @@
             <h3>Erzählerischer Premium Podcast</h3>
             <div class="option-group">
                 <div class="toggle" data-group="sprecher" data-hint="Du hast deine Sprecher:innen bereits organisiert – ideal für interne Produktionen oder Kooperationen.">Sprecher:innen sind bereits organisiert</div>
-                <div class="toggle" data-group="sprecher" data-hint="Ich kümmere mich um passende Stimmen. Sprecher:innen Gage fällt individuell und zusätzlich zum Pauschalpreis aus.">Sprecher:innen werden über mich organisiert.</div>
+                <div class="toggle" data-group="sprecher" data-hint="Ich kümmere mich um passende Stimmen. Sprecher:innen Gage fällt individuell und zusätzlich zum Pauschalpreis an.">Sprecher:innen werden über mich organisiert.</div>
             </div>
             <div class="option-group">
                 <div class="toggle" data-group="sound" data-hint="Minimalistisches Sound Design mit gezieltem Einsatz von Geräuschen und lizenzfreier Musik aus Libraries – für klaren, sachlichen Stil.">Reduziertes Sound Design & Library Musik</div>
@@ -358,59 +358,63 @@
 
 
     <script>
-        const toggles = document.querySelectorAll('.toggle');
-        const hinweisfeld = document.getElementById('hinweisfeld');
-        const defaultSelections = {
-            'schnitt': 0,
-            'aufnahme': 0,
-            'video': -1,
-            'sprecher': 0,
-            'sound': 0,
-            'feedback': 0,
-            'dauer': 0,
-            'frequenz': 0
-        };
+const toggles = document.querySelectorAll('.toggle');
+const hinweisfeld = document.getElementById('hinweisfeld');
+const defaultSelections = {
+    'schnitt': 0,
+    'aufnahme': 0,
+    'video': -1,
+    'sprecher': 0,
+    'sound': 0,
+    'feedback': 0,
+    'dauer': 0,
+    'frequenz': 0
+};
 
-        const groupMap = {};
+const groupMap = {};
 
-        toggles.forEach((toggle, index) => {
-            const group = toggle.getAttribute('data-group');
-            if (!groupMap[group]) groupMap[group] = [];
-            groupMap[group].push(toggle);
-
-            toggle.addEventListener('click', () => {
-if (group === 'video') {
-    const isActive = toggle.classList.toggle('active');
-    if (isActive) {
-        hinweisfeld.textContent = "Zusätzlicher Aufwand für Video, inklusive Kooperationspartner für Bild und Schnitt. Daher ist ein Pauschalpreis nicht kalkulierbar. Ich vermittle gerne weiter und betreue tontechnisch.";
-        document.getElementById("preistext").textContent = "–";
-    } else {
-        hinweisfeld.textContent = "";
-        berechnePauschalpreis(); // <<– Diese Zeile ist NEU
-    }
-    return;
-}
-
-
-
-                groupMap[group].forEach(el => el.classList.remove('active'));
-                toggle.classList.add('active');
-berechnePauschalpreis();
-
-            });
-
-            toggle.addEventListener('mouseover', () => {
-                hinweisfeld.textContent = toggle.getAttribute('data-hint') || '';
-            });
-
-toggle.addEventListener('mouseout', () => {
-    const videoAktiv = groupMap['video']?.some(t => t.classList.contains('active'));
-    if (!videoAktiv) {
-        hinweisfeld.textContent = '';
-    }
+// ZUERST: Auch Dropdown-Werte in groupMap eintragen
+document.querySelectorAll('.dropdown-menu div').forEach(item => {
+    const group = item.getAttribute('data-group');
+    if (!groupMap[group]) groupMap[group] = [];
+    groupMap[group].push(item);
 });
 
-        });
+// DANACH: Toggle-Elemente eintragen und verarbeiten
+toggles.forEach((toggle, index) => {
+    const group = toggle.getAttribute('data-group');
+    if (!groupMap[group]) groupMap[group] = [];
+    groupMap[group].push(toggle);
+
+    toggle.addEventListener('click', () => {
+        if (group === 'video') {
+            const isActive = toggle.classList.toggle('active');
+            if (isActive) {
+                hinweisfeld.textContent = "Zusätzlicher Aufwand für Video, inklusive Kooperationspartner für Bild und Schnitt. Daher ist ein Pauschalpreis nicht kalkulierbar. Ich vermittle gerne weiter und betreue tontechnisch.";
+                document.getElementById("preistext").textContent = "–";
+            } else {
+                hinweisfeld.textContent = "";
+                berechnePauschalpreis();
+            }
+            return;
+        }
+
+        groupMap[group].forEach(el => el.classList.remove('active'));
+        toggle.classList.add('active');
+        berechnePauschalpreis();
+    });
+
+    toggle.addEventListener('mouseover', () => {
+        hinweisfeld.textContent = toggle.getAttribute('data-hint') || '';
+    });
+
+    toggle.addEventListener('mouseout', () => {
+        const videoAktiv = groupMap['video']?.some(t => t.classList.contains('active'));
+        if (!videoAktiv) {
+            hinweisfeld.textContent = '';
+        }
+    });
+});
 
 function toggleDropdown(id) {
     const menu = document.getElementById(id);
@@ -418,12 +422,22 @@ function toggleDropdown(id) {
 }
 
 function selectDropdown(element, group) {
-    const menu = element.parentNode; // dropdown-menu
-    const dropdown = menu.previousElementSibling; // die .dropdown-Box
-    const textSpan = dropdown.querySelector('span');
+    const menu = element.parentNode;
+    const dropdown = menu.previousElementSibling;
 
-    // Text aktualisieren
-    textSpan.textContent = element.textContent;
+    // Setze den sichtbaren Text IMMER auf das erste <span>
+    const visibleTextSpan = dropdown.querySelector('span:first-child');
+    if (visibleTextSpan) {
+        visibleTextSpan.textContent = element.textContent;
+    }
+
+    // Alle alten aktiven Einträge der Gruppe deaktivieren
+    if (groupMap[group]) {
+        groupMap[group].forEach(el => el.classList.remove("active"));
+    }
+
+    // Geklickten Dropdown-Eintrag als aktiv markieren
+    element.classList.add("active");
 
     // Menü schließen
     menu.style.display = "none";
@@ -434,23 +448,20 @@ function selectDropdown(element, group) {
 
 
 
+// Set defaults
+for (const [group, index] of Object.entries(defaultSelections)) {
+    if (index >= 0 && groupMap[group] && groupMap[group][index]) {
+        groupMap[group][index].classList.add('active');
+    }
+}
 
-
-
-        // Set defaults
-        for (const [group, index] of Object.entries(defaultSelections)) {
-            if (index >= 0 && groupMap[group] && groupMap[group][index]) {
-                groupMap[group][index].classList.add('active');
-            }
-        }
-
-        // Paket switching effect
+// Paket switching effect
 document.getElementById('paket-gespraech').addEventListener('click', () => {
     document.getElementById('paket-gespraech').classList.add('active');
     document.getElementById('paket-gespraech').classList.remove('inactive');
     document.getElementById('paket-premium').classList.remove('active');
     document.getElementById('paket-premium').classList.add('inactive');
-    berechnePauschalpreis(); // 👈 das ist neu!
+    berechnePauschalpreis();
 });
 
 document.getElementById('paket-premium').addEventListener('click', () => {
@@ -458,8 +469,9 @@ document.getElementById('paket-premium').addEventListener('click', () => {
     document.getElementById('paket-premium').classList.remove('inactive');
     document.getElementById('paket-gespraech').classList.remove('active');
     document.getElementById('paket-gespraech').classList.add('inactive');
-    berechnePauschalpreis(); // 👈 das ist neu!
+    berechnePauschalpreis();
 });
+
 
 
 
@@ -569,27 +581,38 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Dropdowns (Dauer & Frequenz)
-    const dauer = urlParams.get("dauer");
-    const freq = urlParams.get("frequenz");
+ // Dropdowns (Dauer & Frequenz) – korrekt setzen & registrieren
+const dauer = urlParams.get("dauer");
+const freq = urlParams.get("frequenz");
 
-    if (dauer) {
-        document.querySelectorAll(".dropdown").forEach(dd => {
-            const label = dd.querySelector("span");
-            if (label && label.textContent.includes(">")) {
-                label.textContent = dauer;
-            }
-        });
-    }
+if (dauer) {
+    document.querySelectorAll('.dropdown-menu div[data-group="dauer"]').forEach(el => {
+        if (el.textContent.trim() === dauer.trim()) {
+            selectDropdown(el, "dauer");
 
-    if (freq) {
-        document.querySelectorAll(".dropdown").forEach(dd => {
-            const label = dd.querySelector("span");
-            if (label && (label.textContent.includes("mal") || label.textContent.includes("einmalig"))) {
-                label.textContent = freq;
-            }
-        });
-    }
+            // Sichtbaren Text aktualisieren
+            const dropdown = el.closest('.dropdown-menu').previousElementSibling;
+selectDropdown(el, "dauer");
+
+
+        }
+    });
+}
+
+if (freq) {
+    document.querySelectorAll('.dropdown-menu div[data-group="frequenz"]').forEach(el => {
+        if (el.textContent.trim() === freq.trim()) {
+            selectDropdown(el, "frequenz");
+
+            // Sichtbaren Text aktualisieren
+            const dropdown = el.closest('.dropdown-menu').previousElementSibling;
+      dropdown.querySelector('span:first-child').textContent = freq.trim();
+
+        }
+    });
+}
+
+
 
     berechnePauschalpreis();
 });
@@ -617,40 +640,31 @@ function sendeAnfrage() {
     const datum = new Date().toLocaleDateString("de-DE");
     const betreff = encodeURIComponent(`Podcastpaket – Anfrage ${datum}`);
 
-    // Konfiguration auslesen
-    const params = new URLSearchParams();
-
     const aktivesPaket = document.querySelector(".paket.active")?.id;
-    if (aktivesPaket === "paket-premium") {
-        params.set("paket", "premium");
-    } else {
-        params.set("paket", "gespraech");
-    }
+    const paketText = (aktivesPaket === "paket-premium") ? "Erzählerischer Premium Podcast" : "Persönlicher Gesprächspodcast";
+
+    let zusammenfassung = `Gewähltes Paket: ${paketText}\n\nAusgewählte Optionen:\n`;
 
     for (const [gruppe, toggles] of Object.entries(groupMap)) {
-        const aktive = toggles.find(t => t.classList.contains("active"));
+        const aktive = toggles.find(t => 
+            t.classList.contains("active") &&
+            t.closest(".paket")?.classList.contains("active")
+        );
         if (aktive) {
-            params.set(gruppe, aktive.textContent.trim());
+            zusammenfassung += `- ${gruppe.charAt(0).toUpperCase() + gruppe.slice(1)}: ${aktive.textContent.trim()}\n`;
         }
     }
 
-    // Dauer + Frequenz aus Dropdowns
-    const dauer = document.querySelector("#dauer-menu")?.previousElementSibling.querySelector("span")?.textContent
-              || document.querySelector("#dauer-menu-gespraech")?.previousElementSibling.querySelector("span")?.textContent;
-    if (dauer) params.set("dauer", dauer.trim());
+    zusammenfassung += "\nNachricht:\n" + nachricht + "\n";
+    zusammenfassung += `\nAbsender: ${absender}\n`;
 
-    const freq = document.querySelector("#frequenz-menu")?.previousElementSibling.querySelector("span")?.textContent
-              || document.querySelector("#frequenz-menu-gespraech")?.previousElementSibling.querySelector("span")?.textContent;
-    if (freq) params.set("frequenz", freq.trim());
-
-    const konfigUrl = `https://leowangsound.de/konfigurator.html?${params.toString()}`;
-
-    const body = encodeURIComponent(`Hier ist meine Projektanfrage.\n\nNachricht:\n${nachricht}\n\nAbsender: ${absender}\n\nKonfiguration: ${konfigUrl}`);
-
+    const body = encodeURIComponent(zusammenfassung);
     const mailtoLink = `mailto:${empfaenger}?subject=${betreff}&body=${body}`;
 
     window.location.href = mailtoLink;
 }
+
+
 
 
 
