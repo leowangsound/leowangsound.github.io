@@ -420,10 +420,17 @@ function updateForm() {
 
 function updatePriceCategory() {
     const priceCategory = document.getElementById('priceCategory').value;
+    const projectType = document.getElementById('projectType').value;
     const podcastTypeDiv = document.getElementById('podcastTypeDiv');
     const formatDiv = document.getElementById('formatDiv');
     const roleDiv = document.getElementById('roleDiv');
     const roleSelect = document.getElementById('role');
+
+    // 👉 Automatische Weiterleitung zum Konfigurator
+    if (projectType === 'postproduktion' && priceCategory === 'podcast') {
+        window.location.href = 'https://leowangsound.de/Podcast_Konfigurator';
+        return;
+    }
 
     podcastTypeDiv.style.display = (priceCategory === 'podcast') ? 'block' : 'none';
 
@@ -437,6 +444,7 @@ function updatePriceCategory() {
 
     updateRoles();
 }
+
 
 function updatePodcastType() {
     const podcastType = document.getElementById('podcastType').value;
