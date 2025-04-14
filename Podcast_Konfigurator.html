@@ -541,15 +541,14 @@ function zeigePauschalpreis(text) {
 
 // Auswahl beim Laden aktivieren & Preis berechnen
 window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+
     // Standardauswahl setzen
     for (const [group, index] of Object.entries(defaultSelections)) {
         if (index >= 0 && groupMap[group] && groupMap[group][index]) {
             groupMap[group][index].classList.add('active');
         }
     }
-    
-    window.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
 
     // Paket setzen
     const paket = urlParams.get("paket");
@@ -595,10 +594,6 @@ window.addEventListener('DOMContentLoaded', () => {
     berechnePauschalpreis();
 });
 
-
-    // Initiale Berechnung durchführen
-    berechnePauschalpreis();
-});
 
 // Eventlistener für Dropdown-Einträge (neu!)
 document.querySelectorAll('.dropdown-menu div').forEach(item => {
