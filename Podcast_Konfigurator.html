@@ -347,11 +347,14 @@
 
 <!-- Kontaktfeld -->
 <div class="kontaktfeld">
-    <h2>Erzähle mir mehr über dein Projekt</h2>
-    <textarea placeholder="Deine Nachricht an Leo Wang... (z. B. Inhalte, Veröffentlichungszeitraum, Stil, etc.)"></textarea>
-    <br>
-    <button class="submit-button">Anfrage absenden</button>
+  <h2>Erzähle mir mehr über dein Projekt</h2>
+  <input type="email" id="absender" placeholder="Deine E-Mail-Adresse" required style="width: 80%; padding: 10px; margin-bottom: 10px; background-color: #000; color: #fff; border: 1px solid #444;">
+  <br>
+  <textarea id="nachricht" placeholder="Deine Nachricht an Leo Wang... (z. B. Inhalte, Zeitraum, Stil)" required></textarea>
+  <br>
+  <button class="submit-button" onclick="sendeAnfrage()">Anfrage absenden</button>
 </div>
+
 
 
     <script>
@@ -556,6 +559,29 @@ document.querySelectorAll('.dropdown-menu div').forEach(item => {
         selectDropdown(item, group);
     });
 });
+
+
+function sendeAnfrage() {
+    const absender = document.getElementById("absender").value;
+    const nachricht = document.getElementById("nachricht").value;
+
+    if (!absender || !nachricht) {
+        alert("Bitte gib deine E-Mail-Adresse und eine Nachricht ein.");
+        return;
+    }
+
+    const empfaenger = "info@leowangsound.de";
+    const datum = new Date().toLocaleDateString("de-DE");
+    const betreff = encodeURIComponent(`Podcastpaket – Anfrage ${datum}`);
+
+    const konfigLink = window.location.href + "#konfiguration";
+    const body = encodeURIComponent(`Konfiguration (bitte unverändert lassen): ${konfigLink}\n\nNachricht:\n${nachricht}\n\nAbsender: ${absender}`);
+
+    const mailtoLink = `mailto:${empfaenger}?subject=${betreff}&body=${body}`;
+
+    window.location.href = mailtoLink;
+}
+
 
     </script>
 </body>
