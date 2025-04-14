@@ -547,6 +547,54 @@ window.addEventListener('DOMContentLoaded', () => {
             groupMap[group][index].classList.add('active');
         }
     }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Paket setzen
+    const paket = urlParams.get("paket");
+    if (paket === "premium") {
+        document.getElementById('paket-premium').classList.add('active');
+        document.getElementById('paket-premium').classList.remove('inactive');
+        document.getElementById('paket-gespraech').classList.remove('active');
+        document.getElementById('paket-gespraech').classList.add('inactive');
+    }
+
+    // Toggles setzen
+    for (const [gruppe, toggles] of Object.entries(groupMap)) {
+        const wert = urlParams.get(gruppe);
+        if (wert) {
+            toggles.forEach(t => t.classList.remove("active"));
+            const match = toggles.find(t => t.textContent.trim() === wert.trim());
+            if (match) match.classList.add("active");
+        }
+    }
+
+    // Dropdowns (Dauer & Frequenz)
+    const dauer = urlParams.get("dauer");
+    const freq = urlParams.get("frequenz");
+
+    if (dauer) {
+        document.querySelectorAll(".dropdown").forEach(dd => {
+            const label = dd.querySelector("span");
+            if (label && label.textContent.includes(">")) {
+                label.textContent = dauer;
+            }
+        });
+    }
+
+    if (freq) {
+        document.querySelectorAll(".dropdown").forEach(dd => {
+            const label = dd.querySelector("span");
+            if (label && (label.textContent.includes("mal") || label.textContent.includes("einmalig"))) {
+                label.textContent = freq;
+            }
+        });
+    }
+
+    berechnePauschalpreis();
+});
+
 
     // Initiale Berechnung durchführen
     berechnePauschalpreis();
@@ -574,13 +622,41 @@ function sendeAnfrage() {
     const datum = new Date().toLocaleDateString("de-DE");
     const betreff = encodeURIComponent(`Podcastpaket – Anfrage ${datum}`);
 
-    const konfigLink = window.location.href + "#konfiguration";
-    const body = encodeURIComponent(`Konfiguration (bitte unverändert lassen): ${konfigLink}\n\nNachricht:\n${nachricht}\n\nAbsender: ${absender}`);
+    // Konfiguration auslesen
+    const params = new URLSearchParams();
+
+    const aktivesPaket = document.querySelector(".paket.active")?.id;
+    if (aktivesPaket === "paket-premium") {
+        params.set("paket", "premium");
+    } else {
+        params.set("paket", "gespraech");
+    }
+
+    for (const [gruppe, toggles] of Object.entries(groupMap)) {
+        const aktive = toggles.find(t => t.classList.contains("active"));
+        if (aktive) {
+            params.set(gruppe, aktive.textContent.trim());
+        }
+    }
+
+    // Dauer + Frequenz aus Dropdowns
+    const dauer = document.querySelector("#dauer-menu")?.previousElementSibling.querySelector("span")?.textContent
+              || document.querySelector("#dauer-menu-gespraech")?.previousElementSibling.querySelector("span")?.textContent;
+    if (dauer) params.set("dauer", dauer.trim());
+
+    const freq = document.querySelector("#frequenz-menu")?.previousElementSibling.querySelector("span")?.textContent
+              || document.querySelector("#frequenz-menu-gespraech")?.previousElementSibling.querySelector("span")?.textContent;
+    if (freq) params.set("frequenz", freq.trim());
+
+    const konfigUrl = `https://leowangsound.de/konfigurator.html?${params.toString()}`;
+
+    const body = encodeURIComponent(`Hier ist meine Projektanfrage.\n\nNachricht:\n${nachricht}\n\nAbsender: ${absender}\n\nKonfiguration: ${konfigUrl}`);
 
     const mailtoLink = `mailto:${empfaenger}?subject=${betreff}&body=${body}`;
 
     window.location.href = mailtoLink;
 }
+
 
 
     </script>
