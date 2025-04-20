@@ -130,6 +130,45 @@
     filter: brightness(1.2); /* Leuchtet auf */
 }
 
+  /* Footer */
+#site-footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
+    color: #fff; /* Weiße Schrift */
+}
+
+/* Footer-Link für das Impressum */
+.footer-link {
+    color: #fff; /* Weiße Schrift wie der Rest des Footers */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.footer-link:hover {
+    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+}
+.highlight {
+    background-color: #fff;  /* Weißer Kasten */
+    color: #000;  /* Schwarze Schrift */
+    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
+    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
+    font-weight: bold;  /* Optional: Mach den Text fett */
+}
+
+              footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
+    color: #fff;
+}
         
     </style>
 </head>
@@ -268,6 +307,15 @@ Leowangsound<br>Leo, Wang<br>Balthasarstraße, 75<br>50670, Köln
 <p><a href="https://www.generator-datenschutzerklärung.de" target="_blank" rel="noopener">Muster-Datenschutzerklärung</a> der <a href="https://www.bewertung-löschen24.de" rel="nofollow noopener" target="_blank">Anwaltskanzlei Weiß &amp; Partner</a></p>
 
 </div>
+
+
+<footer id="site-footer">
+    &copy; 2025 Leo Wang Sound
+    <p><a href="https://leowangsound.de/impressum" class="footer-link">Impressum</a></p>
+     <p><a href="https://leowangsound.de/preise" class="footer-link">Preise</a></p>
+      <p><a href="https://leowangsound.de" class="footer-link">Zurück zur Hauptseite</a></p>
+</footer>
+
 
 </body>
 </html>
