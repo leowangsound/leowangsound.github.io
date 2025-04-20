@@ -529,7 +529,8 @@ function berechnePauschalpreis() {
 
         // Aufnahmeoption
         const aufnahme = groupMap['aufnahme']?.find(t => t.classList.contains('active'))?.textContent;
-        if (aufnahme === 'Aufnahme bei mir im Studio Köln') basispreis += 50;
+if (aufnahme?.includes('bei mir in Köln')) basispreis += 50;
+
 
         // Videopodcast
         const videoAktiv = groupMap['video']?.some(t => t.classList.contains('active'));
