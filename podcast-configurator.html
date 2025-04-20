@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Konfigurator</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: #C8D7D2;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+ /* Fixierte Zone für das Logo oben */
+.zone-1 {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1000;
+}
+
+/* Zentrierung innerhalb der Logo-Zone */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Logo selbst (aus GitHub geladen) */
+.logo {
+    width: 100px;
+    height: 100px;
+    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover-Effekt für das Logo */
+.logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+
+.konfigurator-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.hint-box,
+.kontaktfeld {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+
+        .paket {
+            flex: 1;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .paket.active {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+
+        .paket.inactive {
+            opacity: 0.5;
+        }
+
+        .paket h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: #F4F2F0;
+            text-transform: uppercase;
+            margin-top: 0;
+        }
+
+        .option-group {
+            margin: 20px 0;
+        }
+
+        .toggle {
+            background-color: #222;
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 5px;
+        }
+
+        .toggle.active {
+            background-color: #C8D7D2;
+            color: #000;
+            font-weight: bold;
+        }
+
+.hint-box {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    min-height: 80px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 16px;
+    color: #aaa;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+    transition: none; /* Kein Aufspringen beim Hover */
+    white-space: pre-wrap;
+}
+
+
+        .kontaktfeld {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        textarea {
+            width: 80%;
+            height: 120px;
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .submit-button {
+            background-color: #C8D7D2;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #fff;
+        }
+
+.dropdown {
+    position: relative;
+    background-color: #222;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+
+
+.dropdown-menu {
+    display: none;
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 0 0 5px 5px;
+    margin-top: -5px;
+    z-index: 10;
+    position: relative;
+}
+
+.dropdown-menu div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-menu div:hover {
+    background-color: #333;
+}
+
+.preisfeld {
+    max-width: 1000px;
+    margin: 15px auto;
+    padding: 20px;
+    background-color: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.kontaktfeld, #preisfeld {
+    width: 100%;
+    max-width: 1000px;
+    display: block;
+    box-sizing: border-box;
+}
+
+    /* Footer */
+#site-footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
+    color: #fff; /* Weiße Schrift */
+}
+
+/* Footer-Link für das Impressum */
+.footer-link {
+    color: #fff; /* Weiße Schrift wie der Rest des Footers */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.footer-link:hover {
+    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+}
+.highlight {
+    background-color: #fff;  /* Weißer Kasten */
+    color: #000;  /* Schwarze Schrift */
+    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
+    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
+    font-weight: bold;  /* Optional: Mach den Text fett */
+}
+
+              footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+  <div class="logo-container">
+    <a href="https://leowangsound.de/" target="_self">
+      <div class="logo"></div>
+    </a>
+  </div>
+</div>
+
+<!-- Optional: Abstandhalter, damit das Logo nichts überlappt -->
+<div style="height: 120px;"></div>
+
+<h1>Podcast Configurator</h1>
+
+<div class="konfigurator-container">
+    <div class="paket active" id="paket-gespraech">
+        <h3>Personal Talk Podcast</h3>
+        <div class="option-group">
+            <div class="toggle" data-group="schnitt" data-hint="Uncut, natural conversations – ideal for confident speakers.">Authentic conversation flow (uncut)</div>
+            <div class="toggle" data-group="schnitt" data-hint="Intensive editing for a smooth, professional performance.">Extensive speech editing</div>
+        </div>
+        <div class="option-group">
+            <div class="toggle" data-group="aufnahme" data-hint="You and your co-host record remotely at home. I provide technical support and make your audio Spotify-ready.">Remote recording (at your place)</div>
+            <div class="toggle" data-group="aufnahme" data-hint="Professional recording at my studio in Cologne (up to 2 people).">Recording at my studio in Cologne</div>
+        </div>
+        <div class="option-group">
+            <div class="toggle" data-group="video" data-hint="Additional effort for video, including cooperation partners for filming and editing. Therefore, a flat rate cannot be calculated. I'm happy to assist with audio and provide contacts.">Video podcast</div>
+        </div>
+
+            
+<div class="option-group">
+    <div class="dropdown" onclick="toggleDropdown('dauer-menu-gespraech')">
+        <span style="display:inline-block;">&gt; 30 min</span>
+        <span style="float:right; color:#C8D7D2;">▾</span>
+    </div>
+    <div class="dropdown-menu" id="dauer-menu-gespraech">
+        <div data-group="dauer">&gt; 30 min</div>
+        <div data-group="dauer">&gt; 45 min</div>
+        <div data-group="dauer">&gt; 60 min</div>
+        <div data-group="dauer">&gt; 90 min</div>
+        <div data-group="dauer">&gt; 120 min</div>
+    </div>
+</div>
+
+<div class="option-group">
+    <div class="dropdown" onclick="toggleDropdown('frequenz-menu-gespraech')">
+        <span style="display:inline-block;">one-time</span>
+        <span style="float:right; color:#C8D7D2;">▾</span>
+    </div>
+    <div class="dropdown-menu" id="frequenz-menu-gespraech">
+        <div data-group="frequenz">one-time</div>
+        <div data-group="frequenz">once a month</div>
+        <div data-group="frequenz">twice a month</div>
+        <div data-group="frequenz">three times a month</div>
+        <div data-group="frequenz">four times a month</div>
+    </div>
+</div>
+
+
+
+
+
+        </div> <!-- <- ENDE Gesprächspaket korrekt schließen -->
+
+<div class="paket inactive" id="paket-premium">
+
+    <h3>Narrative Premium Podcast</h3>
+<div class="option-group">
+    <div class="toggle" data-group="sprecher" data-value="self" data-hint="You’ve already arranged your voice talents – ideal for in-house productions or collaborations.">Voice talents are already arranged</div>
+    <div class="toggle" data-group="sprecher" data-value="me" data-hint="I will arrange suitable voice talents. Voice talent fees are calculated individually and added to the base price.">Voice talents arranged by me</div>
+
+    </div>
+<div class="option-group">
+    <div class="toggle" data-group="sound" data-value="minimal" data-hint="Minimalist sound design with carefully placed effects and royalty-free library music – perfect for a clear, factual style.">Minimalist sound design & library music</div>
+    <div class="toggle" data-group="sound" data-value="premium" data-hint="Rich soundscapes and emotional depth using atmospheric layers and custom-composed music.">Sound design, soundscapes & original score</div>
+</div>
+
+    <div class="option-group">
+        <div class="toggle" data-group="feedback" data-hint="You provide one round of feedback before publication.">1 feedback round</div>
+        <div class="toggle" data-group="feedback" data-hint="Up to two revisions included.">2 feedback rounds</div>
+        <div class="toggle" data-group="feedback" data-hint="Unlimited revisions – until everything is perfect.">Unlimited feedback rounds</div>
+    </div>
+
+            
+<div class="option-group">
+    <div class="dropdown" onclick="toggleDropdown('dauer-menu')">
+        <span style="display:inline-block;">&gt; 30 min</span>
+        <span style="float:right; color:#C8D7D2;">▾</span>
+    </div>
+    <div class="dropdown-menu" id="dauer-menu">
+        <div data-group="dauer">&gt; 30 min</div>
+        <div data-group="dauer">&gt; 45 min</div>
+        <div data-group="dauer">&gt; 60 min</div>
+        <div data-group="dauer">&gt; 90 min</div>
+        <div data-group="dauer">&gt; 120 min</div>
+    </div>
+</div>
+
+<div class="option-group">
+    <div class="dropdown" onclick="toggleDropdown('frequenz-menu')">
+        <span style="display:inline-block;">one-time</span>
+        <span style="float:right; color:#C8D7D2;">▾</span>
+    </div>
+    <div class="dropdown-menu" id="frequenz-menu">
+        <div data-group="frequenz">one-time</div>
+        <div data-group="frequenz">once a month</div>
+        <div data-group="frequenz">twice a month</div>
+        <div data-group="frequenz">three times a month</div>
+        <div data-group="frequenz">four times a month</div>
+    </div>
+</div>
+
+
+
+
+    </div>
+
+    <div class="hint-box" id="hinweisfeld"></div>
+
+
+
+<!-- Pauschalpreis-Feld -->
+<div class="kontaktfeld" id="preisfeld">
+    <h2>Flat rate</h2>
+    <div id="preistext" style="font-size: 20px; color: #C8D7D2; margin-top: 10px;">–</div>
+</div>
+
+
+<!-- Kontaktfeld -->
+<div class="kontaktfeld">
+  <h2>Tell me more about your project</h2>
+  <input type="email" id="absender" placeholder="Your email address" required style="width: 80%; padding: 10px; margin-bottom: 10px; background-color: #000; color: #fff; border: 1px solid #444;">
+  <br>
+  <textarea id="nachricht" placeholder="Your message to Leo Wang... (e.g. content, timeline, style)" required></textarea>
+  <br>
+  <button class="submit-button" onclick="sendeAnfrage()">Send inquiry</button>
+</div>
+
+
+
+
+    <script>
+const toggles = document.querySelectorAll('.toggle');
+const hinweisfeld = document.getElementById('hinweisfeld');
+const defaultSelections = {
+    'schnitt': 0,
+    'aufnahme': 0,
+    'video': -1,
+    'sprecher': 0,
+    'sound': 0,
+    'feedback': 0,
+    'dauer': 0,
+    'frequenz': 0
+};
+
+const groupMap = {};
+
+// ZUERST: Auch Dropdown-Werte in groupMap eintragen
+document.querySelectorAll('.dropdown-menu div').forEach(item => {
+    const group = item.getAttribute('data-group');
+    if (!groupMap[group]) groupMap[group] = [];
+    groupMap[group].push(item);
+});
+
+// DANACH: Toggle-Elemente eintragen und verarbeiten
+toggles.forEach((toggle, index) => {
+    const group = toggle.getAttribute('data-group');
+    if (!groupMap[group]) groupMap[group] = [];
+    groupMap[group].push(toggle);
+
+    toggle.addEventListener('click', () => {
+        if (group === 'video') {
+            const isActive = toggle.classList.toggle('active');
+            if (isActive) {
+                hinweisfeld.textContent = "Video production requires additional effort, including partners for filming and editing. That's why a fixed price cannot be calculated. I'm happy to connect you and handle the audio side.";
+                document.getElementById("preistext").textContent = "–";
+            } else {
+                hinweisfeld.textContent = "";
+                berechnePauschalpreis();
+            }
+            return;
+        }
+
+        groupMap[group].forEach(el => el.classList.remove('active'));
+        toggle.classList.add('active');
+        berechnePauschalpreis();
+    });
+
+    toggle.addEventListener('mouseover', () => {
+        hinweisfeld.textContent = toggle.getAttribute('data-hint') || '';
+    });
+
+    toggle.addEventListener('mouseout', () => {
+        const videoAktiv = groupMap['video']?.some(t => t.classList.contains('active'));
+        if (!videoAktiv) {
+            hinweisfeld.textContent = '';
+        }
+    });
+});
+
+function toggleDropdown(id) {
+    const menu = document.getElementById(id);
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+function selectDropdown(element, group) {
+    const menu = element.parentNode;
+    const dropdown = menu.previousElementSibling;
+
+    // Setze den sichtbaren Text IMMER auf das erste <span>
+    const visibleTextSpan = dropdown.querySelector('span:first-child');
+    if (visibleTextSpan) {
+        visibleTextSpan.textContent = element.textContent;
+    }
+
+    // Alle alten aktiven Einträge der Gruppe deaktivieren
+    if (groupMap[group]) {
+        groupMap[group].forEach(el => el.classList.remove("active"));
+    }
+
+    // Geklickten Dropdown-Eintrag als aktiv markieren
+    element.classList.add("active");
+
+    // Menü schließen
+    menu.style.display = "none";
+
+    // Preis aktualisieren
+    berechnePauschalpreis();
+}
+
+
+
+// Set defaults
+for (const [group, index] of Object.entries(defaultSelections)) {
+    if (index >= 0 && groupMap[group] && groupMap[group][index]) {
+        groupMap[group][index].classList.add('active');
+    }
+}
+
+// Paket switching effect
+document.getElementById('paket-gespraech').addEventListener('click', () => {
+    document.getElementById('paket-gespraech').classList.add('active');
+    document.getElementById('paket-gespraech').classList.remove('inactive');
+    document.getElementById('paket-premium').classList.remove('active');
+    document.getElementById('paket-premium').classList.add('inactive');
+    berechnePauschalpreis();
+});
+
+document.getElementById('paket-premium').addEventListener('click', () => {
+    document.getElementById('paket-premium').classList.add('active');
+    document.getElementById('paket-premium').classList.remove('inactive');
+    document.getElementById('paket-gespraech').classList.remove('active');
+    document.getElementById('paket-gespraech').classList.add('inactive');
+    berechnePauschalpreis();
+});
+
+
+
+
+function berechnePauschalpreis() {
+    const gesprächAktiv = document.getElementById('paket-gespraech').classList.contains('active');
+    const premiumAktiv = document.getElementById('paket-premium').classList.contains('active');
+
+    let preistext = '';
+    let basispreis = 0;
+    let aufschlag = 1;
+    let rabatt = 1;
+
+    if (gesprächAktiv) {
+        // Schnittoption
+        const schnitt = groupMap['schnitt']?.find(t => t.classList.contains('active'))?.textContent;
+       basispreis = schnitt?.toLowerCase().includes('editing') ? 200 : 150;
+
+
+        // Aufnahmeoption
+        const aufnahme = groupMap['aufnahme']?.find(t => t.classList.contains('active'))?.textContent;
+if (aufnahme?.toLowerCase().includes('studio') || aufnahme?.toLowerCase().includes('köln')) basispreis += 50;
+
+
+        // Videopodcast
+        const videoAktiv = groupMap['video']?.some(t => t.classList.contains('active'));
+        if (videoAktiv) {
+            preistext = 'For video podcasts, a flat rate cannot be calculated due to external service providers and location bookings. However, I’m happy to handle the audio part, connect you with the right people, and create a custom offer after a consultation.';
+            zeigePauschalpreis(preistext);
+            return;
+        }
+
+    } else if (premiumAktiv) {
+        // Soundoption
+const soundElement = groupMap['sound']?.find(t => t.classList.contains('active'));
+const soundValue = soundElement?.getAttribute('data-value');
+basispreis = (soundValue === 'premium') ? 2500 : 1500;
+
+
+        // Feedbackoption
+const feedback = groupMap['feedback']?.find(t => t.classList.contains('active'))?.textContent?.toLowerCase();
+if (feedback?.includes('2') || feedback?.includes('two')) aufschlag *= 1.05;
+if (feedback?.includes('unbegrenzt') || feedback?.includes('unlimited')) aufschlag *= 1.10;
+
+    }
+
+// Dauer & Frequenz korrekt auslesen je nach aktivem Paket
+let dauerElement, freqElement;
+
+if (gesprächAktiv) {
+    dauerElement = document.querySelector('#dauer-menu-gespraech').previousElementSibling.querySelector('span');
+    freqElement = document.querySelector('#frequenz-menu-gespraech').previousElementSibling.querySelector('span');
+} else if (premiumAktiv) {
+    dauerElement = document.querySelector('#dauer-menu').previousElementSibling.querySelector('span');
+    freqElement = document.querySelector('#frequenz-menu').previousElementSibling.querySelector('span');
+}
+
+// Dauerfaktor berechnen
+const dauerStufe = dauerElement ? dauerElement.textContent.match(/\d+/)?.[0] : "30";
+const stufeIndex = ['30', '45', '60', '90', '120'].indexOf(dauerStufe);
+if (stufeIndex > 0) aufschlag *= 1 + (0.15 * stufeIndex);
+
+// Frequenzfaktor berechnen
+const freqText = freqElement?.textContent?.toLowerCase() || "einmalig";
+let rabattStufe = 0;
+
+if (freqText.includes('1x') || freqText.includes('once')) rabattStufe = 1;
+if (freqText.includes('2x') || freqText.includes('twice')) rabattStufe = 2;
+if (freqText.includes('3x') || freqText.includes('three')) rabattStufe = 3;
+if (freqText.includes('4x') || freqText.includes('four')) rabattStufe = 4;
+
+
+if (rabattStufe > 0) rabatt *= 1 - (0.05 * rabattStufe);
+
+
+// Endpreis berechnen
+const endpreis = Math.round(basispreis * aufschlag * rabatt);
+preistext = `Estimated flat rate: ${endpreis} €`;
+
+zeigePauschalpreis(preistext);
+}
+
+function zeigePauschalpreis(text) {
+    document.getElementById('preistext').textContent = text;
+}
+
+// Auswahl beim Laden aktivieren & Preis berechnen
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Standardauswahl setzen
+    for (const [group, index] of Object.entries(defaultSelections)) {
+        if (index >= 0 && groupMap[group] && groupMap[group][index]) {
+            groupMap[group][index].classList.add('active');
+        }
+    }
+
+    // Paket setzen
+    const paket = urlParams.get("paket");
+    if (paket === "premium") {
+        document.getElementById('paket-premium').classList.add('active');
+        document.getElementById('paket-premium').classList.remove('inactive');
+        document.getElementById('paket-gespraech').classList.remove('active');
+        document.getElementById('paket-gespraech').classList.add('inactive');
+    }
+
+    // Toggles setzen
+    for (const [gruppe, toggles] of Object.entries(groupMap)) {
+        const wert = urlParams.get(gruppe);
+        if (wert) {
+            toggles.forEach(t => t.classList.remove("active"));
+            const match = toggles.find(t => t.textContent.trim() === wert.trim());
+            if (match) match.classList.add("active");
+        }
+    }
+
+ // Dropdowns (Dauer & Frequenz) – korrekt setzen & registrieren
+const dauer = urlParams.get("dauer");
+const freq = urlParams.get("frequenz");
+
+if (dauer) {
+    document.querySelectorAll('.dropdown-menu div[data-group="dauer"]').forEach(el => {
+        if (el.textContent.trim() === dauer.trim()) {
+            selectDropdown(el, "dauer");
+
+            // Sichtbaren Text aktualisieren
+            const dropdown = el.closest('.dropdown-menu').previousElementSibling;
+selectDropdown(el, "dauer");
+
+
+        }
+    });
+}
+
+if (freq) {
+    document.querySelectorAll('.dropdown-menu div[data-group="frequenz"]').forEach(el => {
+        if (el.textContent.trim() === freq.trim()) {
+            selectDropdown(el, "frequenz");
+
+            // Sichtbaren Text aktualisieren
+            const dropdown = el.closest('.dropdown-menu').previousElementSibling;
+      dropdown.querySelector('span:first-child').textContent = freq.trim();
+
+        }
+    });
+}
+
+
+
+    berechnePauschalpreis();
+});
+
+
+// Eventlistener für Dropdown-Einträge (neu!)
+document.querySelectorAll('.dropdown-menu div').forEach(item => {
+    item.addEventListener('click', () => {
+        const group = item.getAttribute('data-group');
+        selectDropdown(item, group);
+    });
+});
+
+
+function sendeAnfrage() {
+    const absender = document.getElementById("absender").value;
+    const nachricht = document.getElementById("nachricht").value;
+
+    if (!absender || !nachricht) {
+        alert("Bitte gib deine E-Mail-Adresse und eine Nachricht ein.");
+        return;
+    }
+
+    const empfaenger = "info@leowangsound.de";
+    const datum = new Date().toLocaleDateString("de-DE");
+    const betreff = encodeURIComponent(`Podcastpaket – Anfrage ${datum}`);
+
+    const aktivesPaket = document.querySelector(".paket.active")?.id;
+    const paketText = (aktivesPaket === "paket-premium") ? "Erzählerischer Premium Podcast" : "Persönlicher Gesprächspodcast";
+
+    let zusammenfassung = `Gewähltes Paket: ${paketText}\n\nAusgewählte Optionen:\n`;
+
+    for (const [gruppe, toggles] of Object.entries(groupMap)) {
+        const aktive = toggles.find(t => 
+            t.classList.contains("active") &&
+            t.closest(".paket")?.classList.contains("active")
+        );
+        if (aktive) {
+            zusammenfassung += `- ${gruppe.charAt(0).toUpperCase() + gruppe.slice(1)}: ${aktive.textContent.trim()}\n`;
+        }
+    }
+
+    zusammenfassung += "\nNachricht:\n" + nachricht + "\n";
+    zusammenfassung += `\nAbsender: ${absender}\n`;
+
+    const body = encodeURIComponent(zusammenfassung);
+    const mailtoLink = `mailto:${empfaenger}?subject=${betreff}&body=${body}`;
+
+    window.location.href = mailtoLink;
+}
+
+
+    </script>
+
+<footer id="site-footer">
+    &copy; 2025 Leo Wang Sound
+    <p><a href="https://leowangsound.de/imprint" class="footer-link">Imprint</a></p>
+     <p><a href="https://leowangsound.de/legal-notice" class="footer-link">legal-notice</a></p>
+      <p><a href="https://leowangsound.de/en" class="footer-link">Back to Homepage</a></p>
+</footer>
+
+</body>
+</html>
