@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+
+        @font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-Regular.woff2') format('woff2'),
+         url('fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('fonts/BebasNeue-Regular.woff2') format('woff2'),
+         url('fonts/BebasNeue-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('fonts/CourierPrime-Regular.woff2') format('woff2'),
+         url('fonts/CourierPrime-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('fonts/CourierPrime-Bold.woff2') format('woff2'),
+         url('fonts/CourierPrime-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('fonts/CourierPrime-Italic.woff2') format('woff2'),
+         url('fonts/CourierPrime-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('fonts/CourierPrime-BoldItalic.woff2') format('woff2'),
+         url('fonts/CourierPrime-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+        body {
+            background-color: #000; /* Schwarz wie der Rest der Seite */
+            color: #fff; /* Weißer Text */
+            font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+            margin: 0;
+            padding: 0;
+        }
+
+h1, h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: #C8D7D2; /* Gleiche Farbe wie bei der Datenschutzerklärung */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+p, a {
+    color: #F4F2F0; /* Weiß wie auf der Datenschutzerklärung */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+a {
+    color: #C8D7D2; /* Verlinkungen gleiche Farbe wie bei der Datenschutzerklärung */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+
+
+        strong {
+            color: #fff; /* Fett gedruckter Text in weiß */
+        }
+
+        a {
+            text-decoration: none;
+            color: #F4F2F0; /* Orange Links */
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff; /* Weißer Text beim Hover */
+        }
+
+.impressum {
+    max-width: 800px;
+    margin: 150px auto 50px;
+    padding: 20px;
+    background-color: #000; /* Schwarz wie der Rest der Seite */
+}
+
+/* Zone 1 (Logo) */
+.zone-1 {
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    background: url('https://github.com/leowangsound/leowangsound.github.io/blob/1adbd127fd9192ae787701cc804166352c1096d2/LOGO%20v4.png?raw=true') center/cover no-repeat;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+    /* Footer */
+#site-footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
+    color: #fff; /* Weiße Schrift */
+}
+
+/* Footer-Link für das Impressum */
+.footer-link {
+    color: #fff; /* Weiße Schrift wie der Rest des Footers */
+    text-decoration: none; /* Entfernt die Unterstreichung */
+    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
+    transition: color 0.3s ease; /* Smooth transition for color */
+}
+
+.footer-link:hover {
+    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+}
+.highlight {
+    background-color: #fff;  /* Weißer Kasten */
+    color: #000;  /* Schwarze Schrift */
+    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
+    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
+    font-weight: bold;  /* Optional: Mach den Text fett */
+}
+
+              footer {
+    text-align: center;
+    padding: 0.625rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+
+<!-- Zone 1 (Logo) -->
+<div class="zone-1">
+    <div class="logo-container">
+        <a href="https://leowangsound.de/" target="_self">
+            <div class="logo"></div>
+        </a>
+    </div>
+</div>
+
+    <section id="impressum">
+        <div class="impressum">
+         <h1>Imprint</h1>
+<p>This Imprint is required under German law (§ 5 DDG) (Digital Services Act).</p>
+
+<p>Leo Wang<br>
+Balthasarstraße 75<br>
+50670 Cologne<br>
+Germany</p>
+
+<p><strong>Represented by:</strong><br>
+Leo Wang</p>
+
+<p><strong>Contact:</strong><br>
+Phone: +49 1522 9525360<br>
+Email: <a href="mailto:info@leowangsound.de">info@leowangsound.de</a></p>
+
+
+<h2>Disclaimer</h2>
+
+<p><strong>Liability for Content</strong><br><br>
+The content of our website has been created with the utmost care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7 para. 1 DDG (Digital Services Act) under general law. However, according to §§ 8 to 10 DDG, we are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general laws remain unaffected. However, liability in this regard is only possible from the moment we become aware of a specific legal violation. If we become aware of any such infringements, we will remove the content immediately.
+</p>
+
+<p><strong>Liability for Links</strong><br><br>
+Our website contains links to external third-party websites, over which we have no control. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the linked sites is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. A permanent content control of the linked pages is not reasonable without concrete evidence of a legal infringement. Upon notification of violations, we will remove such links immediately.
+</p>
+
+<p><strong>Copyright</strong><br><br>
+The content and works created by the site operators on these pages are subject to German copyright law. Any reproduction, editing, distribution, or any kind of use beyond the scope of copyright law requires the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use. Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is marked as such. If you nevertheless become aware of a copyright infringement, please inform us accordingly. Upon notification of violations, we will remove such content immediately.
+</p>
+
+<p><strong>Data Protection</strong><br><br>
+The use of our website is generally possible without providing personal data. Insofar as personal data (e.g., name, address, or email address) is collected on our site, this is always done on a voluntary basis whenever possible. These data will not be passed on to third parties without your explicit consent. We point out that data transmission over the Internet (e.g., communication via email) may have security vulnerabilities. A complete protection of data from access by third parties is not possible. The use of contact data published within the scope of the legal notice obligation by third parties for sending unsolicited advertising and information materials is hereby expressly prohibited. The operators of the site expressly reserve the right to take legal action in the case of unsolicited advertising, such as spam emails.
+</p>
+
+<p><strong>Google Analytics</strong><br><br>
+This website uses Google Analytics, a web analytics service provided by Google Inc. ("Google"). Google Analytics uses "cookies", which are text files stored on your computer that enable an analysis of your use of the website. The information generated by the cookie about your use of this website (including your IP address) is transferred to a Google server in the USA and stored there. Google will use this information to evaluate your use of the website, to compile reports on website activities for the website operators, and to provide other services related to website and internet usage. Google may also transfer this information to third parties where required to do so by law, or where such third parties process the data on Google's behalf. Google will not associate your IP address with any other data held by Google. You can prevent the installation of cookies by adjusting your browser settings accordingly; however, please note that if you do this, you may not be able to use all features of this website to their full extent. By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.
+</p>
+
+<p><strong>Google AdSense</strong><br><br>
+This website uses Google AdSense, a web advertising service of Google Inc., USA ("Google"). Google AdSense uses "cookies" (text files) stored on your computer that enable analysis of your use of the website. Google AdSense also uses "web beacons" (small invisible graphics) to collect information. Through the use of web beacons, simple actions such as visitor traffic on the website can be recorded and collected. The information generated by the cookie and/or web beacon about your use of this website (including your IP address) is transferred to a Google server in the USA and stored there. Google will use this information to evaluate your use of the website with regard to ads, to compile reports on website activity and ads for the website operators, and to provide other services related to website and internet use. Google may also transfer this information to third parties where required by law or where such third parties process the data on Google's behalf. Google will not associate your IP address with any other data held by Google. You can prevent the storage of cookies and the display of web beacons by adjusting your browser settings accordingly (e.g., in Internet Explorer under "Tools > Internet Options > Privacy > Settings"; in Firefox under "Tools > Options > Privacy > Cookies"); however, please note that if you do this, you may not be able to use all features of this website to their full extent. By using this website, you consent to the processing of data about you by Google in the manner and for the purposes set out above.
+</p>
+
+
+<p>This legal notice was generated using <a href="https://www.impressum-generator.de">impressum-generator.de</a></p>
+
+        </div>
+
+    </section>
+
+<footer id="site-footer">
+    &copy; 2025 Leo Wang Sound
+    <p><a href="https://leowangsound.de/en" class="footer-link">Back to Homepage</a></p>
+     <p><a href="https://leowangsound.de/legal-notice" class="footer-link">Legal Notice</a></p>
+      <p><a href="https://leowangsound.de/prices" class="footer-link">Prices</a></p>
+</footer>
+
+</body>
+</html>
