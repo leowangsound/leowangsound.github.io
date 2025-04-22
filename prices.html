@@ -1,1066 +1,1150 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Gagenkalkulator</title>
 
     <style>
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("fonts/Montserrat-Regular.woff2") format("woff2"),
+          url("fonts/Montserrat-Regular.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-@font-face {
-    font-family: 'Montserrat';
-    src: url('fonts/Montserrat-Regular.woff2') format('woff2'),
-         url('fonts/Montserrat-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+      @font-face {
+        font-family: "Bebas Neue";
+        src:
+          url("fonts/BebasNeue-Regular.woff2") format("woff2"),
+          url("fonts/BebasNeue-Regular.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-@font-face {
-    font-family: 'Bebas Neue';
-    src: url('fonts/BebasNeue-Regular.woff2') format('woff2'),
-         url('fonts/BebasNeue-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+      @font-face {
+        font-family: "Courier Prime";
+        src:
+          url("fonts/CourierPrime-Regular.woff2") format("woff2"),
+          url("fonts/CourierPrime-Regular.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-@font-face {
-    font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Regular.woff2') format('woff2'),
-         url('fonts/CourierPrime-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+      @font-face {
+        font-family: "Courier Prime";
+        src:
+          url("fonts/CourierPrime-Bold.woff2") format("woff2"),
+          url("fonts/CourierPrime-Bold.woff") format("woff");
+        font-weight: bold;
+        font-style: normal;
+      }
 
-@font-face {
-    font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Bold.woff2') format('woff2'),
-         url('fonts/CourierPrime-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
+      @font-face {
+        font-family: "Courier Prime";
+        src:
+          url("fonts/CourierPrime-Italic.woff2") format("woff2"),
+          url("fonts/CourierPrime-Italic.woff") format("woff");
+        font-weight: normal;
+        font-style: italic;
+      }
 
-@font-face {
-    font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Italic.woff2') format('woff2'),
-         url('fonts/CourierPrime-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-}
+      @font-face {
+        font-family: "Courier Prime";
+        src:
+          url("fonts/CourierPrime-BoldItalic.woff2") format("woff2"),
+          url("fonts/CourierPrime-BoldItalic.woff") format("woff");
+        font-weight: bold;
+        font-style: italic;
+      }
 
-@font-face {
-    font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-BoldItalic.woff2') format('woff2'),
-         url('fonts/CourierPrime-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-}
-        
-        /* Allgemeine Styles */
-        body {
-            background-color: #000; /* Schwarz */
-            color: #F4F2F0;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      /* Allgemeine Styles */
+      body {
+        background-color: #000; /* Schwarz */
+        color: #f4f2f0;
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.25rem;
+        color: #c8d7d2;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 20vh; /* Abstand für die fixe Zone 1 */
+      }
+
+      /* Zone 1 (Logo) */
+      .zone-1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 12vh;
+        z-index: 1000;
+      }
+
+      /* Logo */
+      .logo-container {
+        height: 90%;
+      }
+
+      .logo {
+        max-height: 80%;
+        max-width: auto;
+        height: auto;
+        width: auto;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      /* Calculator Styles */
+      .calculator {
+        background-color: #000;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 700px;
+        margin: 0 auto;
+        box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+        color: #f4f2f0;
+        font-size: 1.125rem;
+        line-height: 1.6;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: #222;
+        color: #f4f2f0;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #c8d7d2;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #000;
+        color: #ddd;
+        border: 1px solid #fff;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      button:hover {
+        background-color: #fff;
+        color: #000;
+        transform: scale(1.05);
+      }
+
+      .result,
+      .breakdown,
+      .parameters {
+        margin-top: 20px;
+        font-size: 1em;
+        color: #ddd;
+      }
+
+      .breakdown,
+      .parameters {
+        background-color: #111;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .editable {
+        width: 60px;
+        background-color: #222;
+        color: #f4f2f0;
+        border: 1px solid #444;
+        border-radius: 4px;
+        padding: 5px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      td {
+        padding: 5px;
+      }
+
+      /* Responsive Design */
+      @media only screen and (max-width: 1280px) {
+        h1,
+        h2,
+        h3 {
+          font-size: 1.75rem;
+          margin-top: 15vh;
         }
 
-        h1, h2, h3 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.25rem;
-            color: #C8D7D2;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-top: 20vh; /* Abstand für die fixe Zone 1 */
-        }
-
-        /* Zone 1 (Logo) */
-        .zone-1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 12vh;
-            z-index: 1000;
-        }
-
-        /* Logo */
-        .logo-container {
-            height: 90%;
-        }
-
-        .logo {
-            max-height: 80%;
-            max-width: auto;
-            height: auto;
-            width: auto;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        /* Calculator Styles */
         .calculator {
-            background-color: #000;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 700px;
-            margin: 0 auto;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
-            color: #F4F2F0;
-            font-size: 1.125rem;
-            line-height: 1.6;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            background-color: #222;
-            color: #F4F2F0;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #C8D7D2;
+          padding: 15px;
         }
 
         button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #000;
-            color: #ddd;
-            border: 1px solid #fff;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            font-family: 'Montserrat', sans-serif;
+          width: 100%;
         }
+      }
 
-        button:hover {
-            background-color: #fff;
-            color: #000;
-            transform: scale(1.05);
-        }
+      /* Footer */
+      #site-footer {
+        text-align: center;
+        padding: 0.625rem;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(
+          to bottom,
+          #000,
+          #000
+        ); /* Schwarz zu Schwarz */
+        color: #fff; /* Weiße Schrift */
+      }
 
-        .result, .breakdown, .parameters {
-            margin-top: 20px;
-            font-size: 1em;
-            color: #ddd;
-        }
+      /* Footer-Link für das Impressum */
+      .footer-link {
+        color: #fff; /* Weiße Schrift wie der Rest des Footers */
+        text-decoration: none; /* Entfernt die Unterstreichung */
+        font-family: "Montserrat", sans-serif; /* Einheitliche Schriftart */
+        transition: color 0.3s ease; /* Smooth transition for color */
+      }
 
-        .breakdown, .parameters {
-            background-color: #111;
-            padding: 15px;
-            border-radius: 8px;
-        }
+      .footer-link:hover {
+        color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
+      }
+      .highlight {
+        background-color: #fff; /* Weißer Kasten */
+        color: #000; /* Schwarze Schrift */
+        padding: 0.125rem 0.25rem; /* Etwas Innenabstand für den Kasten */
+        border-radius: 3px; /* Abgerundete Ecken für einen eleganten Look */
+        font-weight: bold; /* Optional: Mach den Text fett */
+      }
 
-        .editable {
-            width: 60px;
-            background-color: #222;
-            color: #F4F2F0;
-            border: 1px solid #444;
-            border-radius: 4px;
-            padding: 5px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        td {
-            padding: 5px;
-        }
-
-        /* Responsive Design */
-        @media only screen and (max-width: 1280px) {
-            h1, h2, h3 {
-                font-size: 1.75rem;
-                margin-top: 15vh;
-            }
-
-            .calculator {
-                padding: 15px;
-            }
-
-            button {
-                width: 100%;
-            }
-        }
-        
-        
-        /* Footer */
-#site-footer {
-    text-align: center;
-    padding: 0.625rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, #000, #000); /* Schwarz zu Schwarz */
-    color: #fff; /* Weiße Schrift */
-}
-
-/* Footer-Link für das Impressum */
-.footer-link {
-    color: #fff; /* Weiße Schrift wie der Rest des Footers */
-    text-decoration: none; /* Entfernt die Unterstreichung */
-    font-family: 'Montserrat', sans-serif; /* Einheitliche Schriftart */
-    transition: color 0.3s ease; /* Smooth transition for color */
-}
-
-.footer-link:hover {
-    color: #ff9500; /* Farbe ändert sich beim Hover in Orange */
-}
-.highlight {
-    background-color: #fff;  /* Weißer Kasten */
-    color: #000;  /* Schwarze Schrift */
-    padding: 0.125rem 0.25rem;  /* Etwas Innenabstand für den Kasten */
-    border-radius: 3px;  /* Abgerundete Ecken für einen eleganten Look */
-    font-weight: bold;  /* Optional: Mach den Text fett */
-}
-
-              footer {
-    text-align: center;
-    padding: 0.625rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, #000, #000); /* Farbverlauf im Footer von Schwarz zu Blau */
-    color: #fff;
-}
-
+      footer {
+        text-align: center;
+        padding: 0.625rem;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(
+          to bottom,
+          #000,
+          #000
+        ); /* Farbverlauf im Footer von Schwarz zu Blau */
+        color: #fff;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Zone 1 (Logo) -->
     <div class="zone-1">
-        <div class="logo-container">
-            <a href="https://www.leowangsound.de">
-                <img class="logo" src="https://github.com/leowangsound/leowangsound.github.io/blob/main/LOGO%20v4.png?raw=true" alt="Logo">
-            </a>
-        </div>
+      <div class="logo-container">
+        <a href="https://www.leowangsound.de">
+          <img
+            class="logo"
+            src="https://github.com/leowangsound/leowangsound.github.io/blob/main/LOGO%20v4.png?raw=true"
+            alt="Logo"
+          />
+        </a>
+      </div>
     </div>
 
     <h1>Pricing Calculator</h1>
     <div class="calculator">
-        <label for="projectType">Projecttype:</label>
-        <select id="projectType" onchange="updateForm()">
-            <option value="">-- Choose a projecttype --</option>
-            <option value="dreh">On Set</option>
-            <option value="postproduktion">Postproduction</option>
+      <label for="projectType">Projecttype:</label>
+      <select id="projectType" onchange="updateForm()">
+        <option value="">-- Choose a projecttype --</option>
+        <option value="dreh">On Set</option>
+        <option value="postproduktion">Postproduction</option>
+      </select>
+
+      <!-- Preis-Kategorie -->
+      <div id="priceCategoryDiv" style="display: none">
+        <label for="priceCategory">Price-Category:</label>
+        <select id="priceCategory" onchange="updatePriceCategory()">
+          <option value="">-- Choose a Price-Category --</option>
+          <option value="<1,2 Mio.">
+            TC-Movie and -series, Documentary, Low-Budget Feature Film (< 1,2
+            Mio. €)
+          </option>
+          <option value=">1,2 Mio.">Featurefilm & Series (> 1,2 Mio. €)</option>
+          <option value="Werbung">Advertisement</option>
+          <option value="podcast">Podcast</option>
         </select>
+      </div>
 
-        <!-- Preis-Kategorie -->
-        <div id="priceCategoryDiv" style="display:none;">
-            <label for="priceCategory">Price-Category:</label>
-            <select id="priceCategory" onchange="updatePriceCategory()">
-                <option value="">-- Choose a Price-Category --</option>
-                <option value="<1,2 Mio.">TC-Movie and -series, Documentary, Low-Budget Feature Film (< 1,2 Mio. €)</option>
-                <option value=">1,2 Mio.">Featurefilm & Series (> 1,2 Mio. €)</option>
-                <option value="Werbung">Advertisement</option>
-                <option value="podcast">Podcast</option>
-            </select>
-        </div>
+      <!-- Podcast-Typ Auswahl -->
+      <div id="podcastTypeDiv" style="display: none">
+        <label for="podcastType">Type of Podcast:</label>
+        <select id="podcastType" onchange="updatePodcastType()">
+          <option value="">-- Choose a Podcast Type --</option>
+          <option value="unterhaltung">Conversational / Entertainment</option>
+          <option value="storytelling">Storytelling / Narrative</option>
+        </select>
+      </div>
 
-  <!-- Podcast-Typ Auswahl -->
-<div id="podcastTypeDiv" style="display:none;">
-    <label for="podcastType">Type of Podcast:</label>
-    <select id="podcastType" onchange="updatePodcastType()">
-        <option value="">-- Choose a Podcast Type --</option>
-        <option value="unterhaltung">Conversational / Entertainment</option>
-        <option value="storytelling">Storytelling / Narrative</option>
-    </select>
-</div>
+      <!-- Rolle -->
+      <div id="roleDiv" style="display: none">
+        <label for="role">Roles:</label>
+        <select id="role">
+          <option value="">-- Choose a role --</option>
+        </select>
+      </div>
 
+      <!-- Format-Auswahl -->
+      <div id="formatDiv" style="display: none">
+        <label for="format">Format:</label>
+        <select id="format">
+          <option value="">-- Choose a Format --</option>
+          <option value="stereo">Stereo</option>
+          <option value="surround">Surround 5.1</option>
+        </select>
+      </div>
 
-        <!-- Rolle -->
-        <div id="roleDiv" style="display:none;">
-            <label for="role">Roles:</label>
-            <select id="role">
-                <option value="">-- Choose a role --</option>
-            </select>
-        </div>
+      <!-- Projektlänge in Minuten -->
+      <div id="minutesDiv" style="display: none">
+        <label for="minutes">Projectlength in minutes:</label>
+        <input
+          type="number"
+          id="minutes"
+          placeholder="Projectlength in minutes"
+        />
+      </div>
 
-        <!-- Format-Auswahl -->
-        <div id="formatDiv" style="display:none;">
-            <label for="format">Format:</label>
-            <select id="format">
-                <option value="">-- Choose a Format --</option>
-                <option value="stereo">Stereo</option>
-                <option value="surround">Surround 5.1</option>
-            </select>
-        </div>
+      <!-- Anzahl der Tage -->
+      <div id="daysDiv" style="display: none">
+        <label for="days">Number of Days:</label>
+        <input type="number" id="days" placeholder="Number of workingdays" />
+      </div>
 
-        <!-- Projektlänge in Minuten -->
-        <div id="minutesDiv" style="display:none;">
-            <label for="minutes">Projectlength in minutes:</label>
-            <input type="number" id="minutes" placeholder="Projectlength in minutes">
-        </div>
+      <button onclick="calculate()">Calculate</button>
+      <button id="shareButton" onclick="shareCalculation()">
+        Share Calculation
+      </button>
 
-        <!-- Anzahl der Tage -->
-        <div id="daysDiv" style="display:none;">
-            <label for="days">Number of Days:</label>
-            <input type="number" id="days" placeholder="Number of workingdays">
-        </div>
-
-        <button onclick="calculate()">Calculate</button>
-<button id="shareButton" onclick="shareCalculation()">Share Calculation</button>
-
-
-        <div class="result" id="result"></div>
-        <div class="parameters" id="parameters" style="display:none;"></div>
-        <div class="breakdown" id="breakdown" style="display:none;"></div>
-        <div id="additionalNote" style="display:none; margin-top: 20px; color: #ddd;"></div>
-        <div id="additionalNote2" style="display:none; margin-top: 20px; color: #ddd;"></div>
-
+      <div class="result" id="result"></div>
+      <div class="parameters" id="parameters" style="display: none"></div>
+      <div class="breakdown" id="breakdown" style="display: none"></div>
+      <div
+        id="additionalNote"
+        style="display: none; margin-top: 20px; color: #ddd"
+      ></div>
+      <div
+        id="additionalNote2"
+        style="display: none; margin-top: 20px; color: #ddd"
+      ></div>
     </div>
 
-    <p style="text-align: center; margin-top: 20px;">
-    The rates are based on the <a href="https://www.bvft.de/verguetungsempfehlung/" target="_blank" style="color: #C8D7D2; text-decoration: underline;">rate recommendations</a> of the <a href="https://www.bvft.de" target="_blank" style="color: #C8D7D2; text-decoration: underline;">German Association for Film Sound Professionals (bvft)</a>.
-</p>
-
+    <p style="text-align: center; margin-top: 20px">
+      The rates are based on the
+      <a
+        href="https://www.bvft.de/verguetungsempfehlung/"
+        target="_blank"
+        style="color: #c8d7d2; text-decoration: underline"
+        >rate recommendations</a
+      >
+      of the
+      <a
+        href="https://www.bvft.de"
+        target="_blank"
+        style="color: #c8d7d2; text-decoration: underline"
+        >German Association for Film Sound Professionals (bvft)</a
+      >.
+    </p>
 
     <script>
-    
-    const priceCategoryMap = {
-    '<1.2M': '<1,2 Mio.',
-    '>1.2M': '>1,2 Mio.',
-    'Commercial': 'Werbung',
-    'podcast': 'podcast'
+      const priceCategoryMap = {
+        "<1.2M": "<1,2 Mio.",
+        ">1.2M": ">1,2 Mio.",
+        Commercial: "Werbung",
+        podcast: "podcast",
+      }
+
+      // Tarifdaten
+      const rates = {
+        dreh: {
+          "Production Sound Mixer": {
+            "<1,2 Mio.": 449,
+            ">1,2 Mio.": 483,
+            Werbung: 553,
+          },
+          "Boom Operator": {
+            "<1,2 Mio.": 305,
+            ">1,2 Mio.": 328,
+            Werbung: 375,
+          },
+          equipmentFee: 150,
+        },
+        postproduktion: {
+          "Sound Design": {
+            rates: {
+              "<1,2 Mio.": 449,
+              ">1,2 Mio.": 483,
+              Werbung: 553,
+              podcast: 350, // Fügen Sie hier den korrekten Satz ein
+            },
+            productivity: {
+              "<1,2 Mio.": 10,
+              ">1,2 Mio.": 10,
+              Werbung: 10,
+              "Storytelling Podcast": 20,
+            },
+          },
+          "Dialog Edit": {
+            rates: {
+              "<1,2 Mio.": 367,
+              ">1,2 Mio.": 394,
+              Werbung: 451,
+              podcast: 300, // Fügen Sie hier den korrekten Satz ein
+            },
+            productivity: {
+              "<1,2 Mio.": 15,
+              ">1,2 Mio.": 15,
+              Werbung: 30,
+              Unterhaltungspodcast: 120,
+              "Storytelling Podcast": 90,
+            },
+          },
+          Mischung: {
+            rates: {
+              "<1,2 Mio.": 463,
+              ">1,2 Mio.": 498,
+              Werbung: 569,
+              podcast: 350, // Fügen Sie hier den korrekten Satz ein
+            },
+            productivity: {
+              "<1,2 Mio.": 20,
+              ">1,2 Mio.": 20,
+              Werbung: 30,
+              "Storytelling Podcast": 45,
+            },
+          },
+          "Gesamtpaket Dialog Edit/Sound Design/Mischung": "Gesamtpaket",
+          workplaceFee: {
+            stereo: 145,
+            surround: 195,
+          },
+        },
+      }
+
+      let breakdownData = {}
+      const roleLabelMap = {
+  "Production Sound Mixer": "Production Sound Mixer",
+  "Boom Operator": "Boom Operator",
+  "Sound Design": "Sound Design",
+  "Dialog Edit": "Dialogue Editing",
+  "Mischung": "Mixing",
+  "Gesamtpaket Dialog Edit/Sound Design/Mischung": "Full Package",
+  "Studio flat rate Stereo": "Studio flat rate Stereo",
+  "Studio flat rate Surround 5.1": "Studio flat rate Surround 5.1",
+  "Equipment flat rate": "Equipment flat rate"
 };
 
+      let parametersData = {}
 
-// Tarifdaten
-const rates = {
-    dreh: {
-        'O-Tonmeister': {
-            '<1,2 Mio.': 449,
-            '>1,2 Mio.': 483,
-            'Werbung': 553
-        },
-        'O-Tonassistent': {
-            '<1,2 Mio.': 305,
-            '>1,2 Mio.': 328,
-            'Werbung': 375
-        },
-        'equipmentFee': 150
-    },
-    postproduktion: {
-        'Sound Design': {
-            'rates': {
-                '<1,2 Mio.': 449,
-                '>1,2 Mio.': 483,
-                'Werbung': 553,
-                'podcast': 350 // Fügen Sie hier den korrekten Satz ein
-            },
-            'productivity': {
-                '<1,2 Mio.': 10,
-                '>1,2 Mio.': 10,
-                'Werbung': 10,
-                'Storytelling Podcast': 20
-            }
-        },
-        'Dialog Edit': {
-            'rates': {
-                '<1,2 Mio.': 367,
-                '>1,2 Mio.': 394,
-                'Werbung': 451,
-                'podcast': 300 // Fügen Sie hier den korrekten Satz ein
-            },
-            'productivity': {
-                '<1,2 Mio.': 15,
-                '>1,2 Mio.': 15,
-                'Werbung': 30,
-                'Unterhaltungspodcast': 120,
-                'Storytelling Podcast': 90
-            }
-        },
-        'Mischung': {
-            'rates': {
-                '<1,2 Mio.': 463,
-                '>1,2 Mio.': 498,
-                'Werbung': 569,
-                'podcast': 350 // Fügen Sie hier den korrekten Satz ein
-            },
-            'productivity': {
-                '<1,2 Mio.': 20,
-                '>1,2 Mio.': 20,
-                'Werbung': 30,
-                'Storytelling Podcast': 45
-            }
-        },
-        'Gesamtpaket Dialog Edit/Sound Design/Mischung': 'Gesamtpaket',
-        'workplaceFee': {
-            'stereo': 145,
-            'surround': 195
-        }
-    }
-};
+      function updateForm() {
+        const projectType = document.getElementById("projectType").value
+        const roleDiv = document.getElementById("roleDiv")
+        const formatDiv = document.getElementById("formatDiv")
+        const priceCategoryDiv = document.getElementById("priceCategoryDiv")
+        const podcastTypeDiv = document.getElementById("podcastTypeDiv")
+        const minutesDiv = document.getElementById("minutesDiv")
+        const daysDiv = document.getElementById("daysDiv")
+        const priceCategorySelect = document.getElementById("priceCategory")
 
-let breakdownData = {};
-let parametersData = {};
+        document.getElementById("breakdown").style.display = "none"
+        document.getElementById("result").innerText = ""
+        document.getElementById("parameters").style.display = "none"
 
-function updateForm() {
-    const projectType = document.getElementById('projectType').value;
-    const roleDiv = document.getElementById('roleDiv');
-    const formatDiv = document.getElementById('formatDiv');
-    const priceCategoryDiv = document.getElementById('priceCategoryDiv');
-    const podcastTypeDiv = document.getElementById('podcastTypeDiv');
-    const minutesDiv = document.getElementById('minutesDiv');
-    const daysDiv = document.getElementById('daysDiv');
-    const priceCategorySelect = document.getElementById('priceCategory');
-
-    document.getElementById('breakdown').style.display = 'none';
-    document.getElementById('result').innerText = '';
-    document.getElementById('parameters').style.display = 'none';
-
-    // Aktualisiere Preis-Kategorie Optionen basierend auf Projektart
-priceCategorySelect.innerHTML = `
+        // Aktualisiere Preis-Kategorie Optionen basierend auf Projektart
+        priceCategorySelect.innerHTML = `
     <option value="">-- Choose a price category --</option>
     <option value="<1.2M">TV film & series, documentary, low-budget cinema (< €1.2M)</option>
     <option value=">1.2M">Feature film, series & cinema (> €1.2M)</option>
     <option value="Commercial">Commercial</option>
-`;
-    if (projectType === 'postproduktion') {
-        priceCategorySelect.innerHTML += `<option value="podcast">Podcast</option>`;
-    }
+`
+        if (projectType === "postproduktion") {
+          priceCategorySelect.innerHTML += `<option value="podcast">Podcast</option>`
+        }
 
-    if (projectType === 'postproduktion') {
-        priceCategoryDiv.style.display = 'block';
-        roleDiv.style.display = 'block';
-        formatDiv.style.display = 'block';
-        minutesDiv.style.display = 'block';
-        daysDiv.style.display = 'none';
-        podcastTypeDiv.style.display = 'none';
+        if (projectType === "postproduktion") {
+          priceCategoryDiv.style.display = "block"
+          roleDiv.style.display = "block"
+          formatDiv.style.display = "block"
+          minutesDiv.style.display = "block"
+          daysDiv.style.display = "none"
+          podcastTypeDiv.style.display = "none"
 
-        updateRoles();
+          updateRoles()
+        } else if (projectType === "dreh") {
+          priceCategoryDiv.style.display = "block"
+          roleDiv.style.display = "block"
+          formatDiv.style.display = "none" // Format ausblenden
+          minutesDiv.style.display = "none"
+          daysDiv.style.display = "block"
+          podcastTypeDiv.style.display = "none"
 
-    } else if (projectType === 'dreh') {
-        priceCategoryDiv.style.display = 'block';
-        roleDiv.style.display = 'block';
-        formatDiv.style.display = 'none'; // Format ausblenden
-        minutesDiv.style.display = 'none';
-        daysDiv.style.display = 'block';
-        podcastTypeDiv.style.display = 'none';
-
-        updateRoles();
-
-    } else {
-        priceCategoryDiv.style.display = 'none';
-        roleDiv.style.display = 'none';
-        formatDiv.style.display = 'none';
-        minutesDiv.style.display = 'none';
-        daysDiv.style.display = 'none';
-        podcastTypeDiv.style.display = 'none';
-    }
-}
-
-function updatePriceCategory() {
-    const priceCategory = document.getElementById('priceCategory').value;
-    const mappedPriceCategory = priceCategoryMap[priceCategory];
-    const projectType = document.getElementById('projectType').value;
-    const podcastTypeDiv = document.getElementById('podcastTypeDiv');
-    const formatDiv = document.getElementById('formatDiv');
-    const roleDiv = document.getElementById('roleDiv');
-    const roleSelect = document.getElementById('role');
-
-    // 👉 Automatische Weiterleitung zum Konfigurator
-    if (projectType === 'postproduktion' && priceCategory === 'podcast') {
-        window.location.href = 'https://leowangsound.de/podcast-configurator';
-        return;
-    }
-
-    podcastTypeDiv.style.display = (priceCategory === 'podcast') ? 'block' : 'none';
-
-    if (priceCategory === 'podcast') {
-        formatDiv.style.display = 'none';
-        roleDiv.style.display = 'block';
-    } else {
-        formatDiv.style.display = 'block';
-        roleDiv.style.display = 'block';
-    }
-
-    updateRoles();
-}
-
-
-function updatePodcastType() {
-    const podcastType = document.getElementById('podcastType').value;
-    const roleDiv = document.getElementById('roleDiv');
-    const roleSelect = document.getElementById('role');
-    const formatDiv = document.getElementById('formatDiv');
-
-    if (podcastType === 'unterhaltung') {
-        roleDiv.style.display = 'none';
-        roleSelect.innerHTML = '';
-        const option = document.createElement('option');
-        option.value = 'Dialog Edit';
-        option.text = 'Dialog Edit';
-        roleSelect.add(option);
-    } else if (podcastType === 'storytelling') {
-        roleDiv.style.display = 'none';
-        formatDiv.style.display = 'none';
-        roleSelect.innerHTML = '';
-        // Markieren, dass mehrere Rollen ausgewählt werden sollen
-        roleSelect.value = 'storytelling';
-    } else {
-        roleDiv.style.display = 'block';
-    }
-}
-
-function updateRoles() {
-    const projectType = document.getElementById('projectType').value;
-    const priceCategory = document.getElementById('priceCategory').value;
-    const mappedPriceCategory = priceCategoryMap[priceCategory];
-    const roleSelect = document.getElementById('role');
-    const roleDiv = document.getElementById('roleDiv');
-    const podcastTypeDiv = document.getElementById('podcastTypeDiv');
-    const formatDiv = document.getElementById('formatDiv');
-
-    roleSelect.innerHTML = '<option value="">-- Wähle eine Rolle --</option>';
-
-    if (projectType === 'postproduktion') {
-        if (priceCategory === 'podcast') {
-            formatDiv.style.display = 'none';
+          updateRoles()
         } else {
-            formatDiv.style.display = 'block';
+          priceCategoryDiv.style.display = "none"
+          roleDiv.style.display = "none"
+          formatDiv.style.display = "none"
+          minutesDiv.style.display = "none"
+          daysDiv.style.display = "none"
+          podcastTypeDiv.style.display = "none"
         }
-        podcastTypeDiv.style.display = priceCategory === 'podcast' ? 'block' : 'none';
+      }
 
-const roleLabelMap = {
-    'O-Tonmeister': 'Sound Mixer',
-    'O-Tonassistent': 'Sound Assistant',
-    'Sound Design': 'Sound Design',
-    'Dialog Edit': 'Dialogue Editing',
-    'Mischung': 'Mixing',
-    'Gesamtpaket Dialog Edit/Sound Design/Mischung': 'Full Package'
-};
+      function updatePriceCategory() {
+        const priceCategory = document.getElementById("priceCategory").value
+        const mappedPriceCategory = priceCategoryMap[priceCategory]
+        const projectType = document.getElementById("projectType").value
+        const podcastTypeDiv = document.getElementById("podcastTypeDiv")
+        const formatDiv = document.getElementById("formatDiv")
+        const roleDiv = document.getElementById("roleDiv")
+        const roleSelect = document.getElementById("role")
 
-const roles = Object.keys(rates[projectType]);
-roles.forEach(role => {
-    if (!['equipmentFee', 'workplaceFee'].includes(role)) {
-        const option = document.createElement('option');
-        option.value = role; // Der technische Schlüssel bleibt deutsch!
-        option.text = roleLabelMap[role] || role; // Die Anzeige ist englisch
-        roleSelect.add(option);
-    }
-});
+        // 👉 Automatische Weiterleitung zum Konfigurator
+        if (projectType === "postproduktion" && priceCategory === "podcast") {
+          window.location.href = "https://leowangsound.de/podcast-configurator"
+          return
+        }
 
+        podcastTypeDiv.style.display =
+          priceCategory === "podcast" ? "block" : "none"
 
-        // Wenn "Dialog Edit" oder "Gesamtpaket" ausgewählt wird
-        roleSelect.onchange = function() {
-            const selectedRole = roleSelect.value;
-            if (selectedRole === 'Dialog Edit') {
-                formatDiv.style.display = 'none';
-            } else if (selectedRole === 'Gesamtpaket Dialog Edit/Sound Design/Mischung') {
-                formatDiv.style.display = 'block';
+        if (priceCategory === "podcast") {
+          formatDiv.style.display = "none"
+          roleDiv.style.display = "block"
+        } else {
+          formatDiv.style.display = "block"
+          roleDiv.style.display = "block"
+        }
+
+        updateRoles()
+      }
+
+      function updatePodcastType() {
+        const podcastType = document.getElementById("podcastType").value
+        const roleDiv = document.getElementById("roleDiv")
+        const roleSelect = document.getElementById("role")
+        const formatDiv = document.getElementById("formatDiv")
+
+        if (podcastType === "unterhaltung") {
+          roleDiv.style.display = "none"
+          roleSelect.innerHTML = ""
+          const option = document.createElement("option")
+          option.value = "Dialog Edit"
+          option.text = "Dialog Edit"
+          roleSelect.add(option)
+        } else if (podcastType === "storytelling") {
+          roleDiv.style.display = "none"
+          formatDiv.style.display = "none"
+          roleSelect.innerHTML = ""
+          // Markieren, dass mehrere Rollen ausgewählt werden sollen
+          roleSelect.value = "storytelling"
+        } else {
+          roleDiv.style.display = "block"
+        }
+      }
+
+      function updateRoles() {
+        const projectType = document.getElementById("projectType").value
+        const priceCategory = document.getElementById("priceCategory").value
+        const mappedPriceCategory = priceCategoryMap[priceCategory]
+        const roleSelect = document.getElementById("role")
+        const roleDiv = document.getElementById("roleDiv")
+        const podcastTypeDiv = document.getElementById("podcastTypeDiv")
+        const formatDiv = document.getElementById("formatDiv")
+
+        roleSelect.innerHTML = '<option value="">-- Choose a Role --</option>'
+
+        if (projectType === "postproduktion") {
+          if (priceCategory === "podcast") {
+            formatDiv.style.display = "none"
+          } else {
+            formatDiv.style.display = "block"
+          }
+          podcastTypeDiv.style.display =
+            priceCategory === "podcast" ? "block" : "none"
+
+          const roleLabelMap = {
+            "Production Sound Mixer": "Production Sound Mixer",
+            "Boom Operator": "Boom Operator",
+            "Sound Design": "Sound Design",
+            "Dialog Edit": "Dialogue Editing",
+            Mischung: "Mixing",
+            "Gesamtpaket Dialog Edit/Sound Design/Mischung": "Full Package",
+          }
+
+          const roles = Object.keys(rates[projectType])
+          roles.forEach((role) => {
+            if (!["equipmentFee", "workplaceFee"].includes(role)) {
+              const option = document.createElement("option")
+              option.value = role // Der technische Schlüssel bleibt deutsch!
+              option.text = roleLabelMap[role] || role // Die Anzeige ist englisch
+              roleSelect.add(option)
+            }
+          })
+
+          // Wenn "Dialog Edit" oder "Gesamtpaket" ausgewählt wird
+          roleSelect.onchange = function () {
+            const selectedRole = roleSelect.value
+            if (selectedRole === "Dialog Edit") {
+              formatDiv.style.display = "none"
+            } else if (
+              selectedRole === "Gesamtpaket Dialog Edit/Sound Design/Mischung"
+            ) {
+              formatDiv.style.display = "block"
             } else {
-                formatDiv.style.display = 'block';
+              formatDiv.style.display = "block"
             }
-        };
+          }
+        } else if (projectType === "dreh") {
+          roleDiv.style.display = "block"
+          podcastTypeDiv.style.display = "none"
+          formatDiv.style.display = "none"
 
-    } else if (projectType === 'dreh') {
-        roleDiv.style.display = 'block';
-        podcastTypeDiv.style.display = 'none';
-        formatDiv.style.display = 'none';
+          roleSelect.innerHTML = '<option value="">-- Choose a Role --</option>'
+          const roleLabelMap = {
+            "Production Sound Mixer": "Production Sound Mixer",
+            "Boom Operator": "Boom Operator",
+          }
 
-        roleSelect.innerHTML = '<option value="">-- Wähle eine Rolle --</option>';
-        const roleLabelMap = {
-            'O-Tonmeister': 'Sound Mixer',
-            'O-Tonassistent': 'Sound Assistant'
-        };
-
-        const roles = Object.keys(rates[projectType]);
-        roles.forEach(role => {
-            if (!['equipmentFee'].includes(role)) {
-                const option = document.createElement('option');
-                option.value = role;
-                option.text = roleLabelMap[role] || role;
-                roleSelect.add(option);
+          const roles = Object.keys(rates[projectType])
+          roles.forEach((role) => {
+            if (!["equipmentFee"].includes(role)) {
+              const option = document.createElement("option")
+              option.value = role
+              option.text = roleLabelMap[role] || role
+              roleSelect.add(option)
             }
-        });
+          })
 
-
-        roleSelect.onchange = function() {
-            formatDiv.style.display = 'none';
+          roleSelect.onchange = function () {
+            formatDiv.style.display = "none"
+          }
         }
-    }
-}
+      }
 
-function calculate() {
-    const projectType = document.getElementById('projectType').value;
-    const priceCategory = document.getElementById('priceCategory').value;
-    const mappedPriceCategory = priceCategoryMap[priceCategory];
-    let total = 0;
-    breakdownData = {};
-    parametersData = {};
+      function calculate() {
+        const projectType = document.getElementById("projectType").value
+        const priceCategory = document.getElementById('priceCategory').value;
+				const mappedPriceCategory = priceCategoryMap[priceCategory] || priceCategory;
 
-    document.getElementById('breakdown').style.display = 'none';
-    document.getElementById('breakdown').innerHTML = '';
-    document.getElementById('parameters').style.display = 'none';
-    document.getElementById('parameters').innerHTML = '';
-    document.getElementById('result').innerText = '';
+          priceCategoryMap[priceCategory] || priceCategory
 
-    // Zusätzliche Hinweise ausblenden
-    document.getElementById('additionalNote').style.display = 'none';
-    document.getElementById('additionalNote2').style.display = 'none';
+        let total = 0
+        breakdownData = {}
+        parametersData = {}
 
-    if (projectType === 'postproduktion') {
-        const minutes = parseFloat(document.getElementById('minutes').value);
+        document.getElementById("breakdown").style.display = "none"
+        document.getElementById("breakdown").innerHTML = ""
+        document.getElementById("parameters").style.display = "none"
+        document.getElementById("parameters").innerHTML = ""
+        document.getElementById("result").innerText = ""
 
-        if (!minutes || !priceCategory) {
-            document.getElementById('result').innerText = 'Please fill out all fields!';
-            return;
-        }
+        // Zusätzliche Hinweise ausblenden
+        document.getElementById("additionalNote").style.display = "none"
+        document.getElementById("additionalNote2").style.display = "none"
 
-        let roles = [];
-        let format = 'stereo'; // Standardmäßig Stereo
+        if (projectType === "postproduktion") {
+          const minutes = parseFloat(document.getElementById("minutes").value)
 
-        if (priceCategory === 'podcast') {
-            const podcastType = document.getElementById('podcastType').value;
+          if (!minutes || !priceCategory) {
+            document.getElementById("result").innerText =
+              "Please fill out all fields!"
+            return
+          }
+
+          let roles = []
+          let format = "stereo" // Standardmäßig Stereo
+
+          if (priceCategory === "podcast") {
+            const podcastType = document.getElementById("podcastType").value
             if (!podcastType) {
-                document.getElementById('result').innerText = 'Please fill out all fields!';
-                return;
+              document.getElementById("result").innerText =
+                "Please fill out all fields!"
+              return
             }
 
-            if (podcastType === 'unterhaltung') {
-                roles = ['Dialog Edit'];
-            } else if (podcastType === 'storytelling') {
-                roles = ['Dialog Edit', 'Sound Design', 'Mischung'];
+            if (podcastType === "unterhaltung") {
+              roles = ["Dialog Edit"]
+            } else if (podcastType === "storytelling") {
+              roles = ["Dialog Edit", "Sound Design", "Mischung"]
             } else {
-                document.getElementById('result').innerText = 'Unbekannter Podcasttyp!';
-                return;
+              document.getElementById("result").innerText =
+                "Unknown podcast type!"
+              return
             }
-        } else {
-            const role = document.getElementById('role').value;
-            format = document.getElementById('format').value;
+          } else {
+            const role = document.getElementById("role").value
+            format = document.getElementById("format").value
 
-            if (!role || (!format && role !== 'Dialog Edit')) {
-                document.getElementById('result').innerText = 'Please fill out all fields!';
-                return;
+            if (!role || (!format && role !== "Dialog Edit")) {
+              document.getElementById("result").innerText =
+                "Please fill out all fields!"
+              return
             }
 
-            if (role === 'Gesamtpaket Dialog Edit/Sound Design/Mischung') {
-                roles = ['Dialog Edit', 'Sound Design', 'Mischung'];
+            if (role === "Gesamtpaket Dialog Edit/Sound Design/Mischung") {
+              roles = ["Dialog Edit", "Sound Design", "Mischung"]
             } else {
-                roles = [role];
+              roles = [role]
             }
-        }
+          }
 
-        let totalCost = 0;
-        let totalDays = 0;
-        let productivityValues = {};
-        let rateValues = {};
-        let ratePerHourValues = {};
-        let totalWorkplaceDaysStereo = 0;
-        let totalWorkplaceDaysSurround = 0;
+          let totalCost = 0
+          let totalDays = 0
+          let productivityValues = {}
+          let rateValues = {}
+          let ratePerHourValues = {}
+          let totalWorkplaceDaysStereo = 0
+          let totalWorkplaceDaysSurround = 0
 
-        for (let role of roles) {
-            const rateData = rates[projectType][role];
-const rate = rateData['rates'][mappedPriceCategory];
-            let productivityKey = priceCategory;
+          for (let role of roles) {
+            const rateData = rates[projectType][role]
+            const rate = rateData["rates"][mappedPriceCategory]
+            let productivityKey = priceCategory
 
-            if (priceCategory === 'podcast') {
-                const podcastType = document.getElementById('podcastType').value;
-                if (podcastType === 'unterhaltung') {
-                    productivityKey = 'Unterhaltungspodcast';
-                } else if (podcastType === 'storytelling') {
-                    productivityKey = 'Storytelling Podcast';
-                }
+            if (priceCategory === "podcast") {
+              const podcastType = document.getElementById("podcastType").value
+              if (podcastType === "unterhaltung") {
+                productivityKey = "Unterhaltungspodcast"
+              } else if (podcastType === "storytelling") {
+                productivityKey = "Storytelling Podcast"
+              }
             }
 
-let productivity = rateData['productivity'][mappedPriceCategory];
-
+            let productivity = rateData["productivity"][mappedPriceCategory]
 
             if (!productivity) {
-                document.getElementById('result').innerText = `${role} ist für diese Preis-Kategorie nicht vorgesehen.`;
-                return;
+              document.getElementById("result").innerText =
+                `${role} is not available for this price category.`
+              return
             }
 
-            const days = minutes / productivity;
+            const days = minutes / productivity
 
             breakdownData[role] = {
-                rate: rate,
-                days: days,
-                cost: rate * days,
-                productivity: productivity
-            };
+              rate: rate,
+              days: days,
+              cost: rate * days,
+              productivity: productivity,
+            }
 
-            totalDays += days;
-            productivityValues[role] = productivity;
-            rateValues[role] = rate;
-            ratePerHourValues[role] = (rate / 10).toFixed(2);
+            totalDays += days
+            productivityValues[role] = productivity
+            rateValues[role] = rate
+            ratePerHourValues[role] = (rate / 10).toFixed(2)
 
             // Anpassung der Arbeitsplatzpauschale basierend auf dem Format
-            let roleFormat = format;
-            if (role === 'Dialog Edit') {
-                roleFormat = 'stereo';
-                totalWorkplaceDaysStereo += days;
+            let roleFormat = format
+            if (role === "Dialog Edit") {
+              roleFormat = "stereo"
+              totalWorkplaceDaysStereo += days
             } else {
-                if (format === 'stereo') {
-                    totalWorkplaceDaysStereo += days;
-                } else if (format === 'surround') {
-                    totalWorkplaceDaysSurround += days;
-                }
+              if (format === "stereo") {
+                totalWorkplaceDaysStereo += days
+              } else if (format === "surround") {
+                totalWorkplaceDaysSurround += days
+              }
             }
 
-            totalCost += breakdownData[role].cost;
-        }
+            totalCost += breakdownData[role].cost
+          }
 
-        // Gesamtarbeitsplatzpauschale berechnen
-        const workplaceFeeStereo = rates[projectType]['workplaceFee']['stereo'];
-        const workplaceFeeSurround = rates[projectType]['workplaceFee']['surround'];
+          // Gesamtarbeitsplatzpauschale berechnen
+          const workplaceFeeStereo =
+            rates[projectType]["workplaceFee"]["stereo"]
+          const workplaceFeeSurround =
+            rates[projectType]["workplaceFee"]["surround"]
 
-        if (totalWorkplaceDaysStereo > 0) {
-            breakdownData[`Arbeitsplatzpauschale Stereo`] = {
-                rate: workplaceFeeStereo,
-                days: totalWorkplaceDaysStereo,
-                cost: workplaceFeeStereo * totalWorkplaceDaysStereo
-            };
-            totalCost += breakdownData[`Arbeitsplatzpauschale Stereo`].cost;
-        }
+          if (totalWorkplaceDaysStereo > 0) {
+            breakdownData[`Studio flat rate Stereo`] = {
+              rate: workplaceFeeStereo,
+              days: totalWorkplaceDaysStereo,
+              cost: workplaceFeeStereo * totalWorkplaceDaysStereo,
+            }
+            totalCost += breakdownData[`Studio flat rate Stereo`].cost
+          }
 
-        if (totalWorkplaceDaysSurround > 0) {
-            breakdownData[`Arbeitsplatzpauschale Surround 5.1`] = {
-                rate: workplaceFeeSurround,
-                days: totalWorkplaceDaysSurround,
-                cost: workplaceFeeSurround * totalWorkplaceDaysSurround
-            };
-            totalCost += breakdownData[`Arbeitsplatzpauschale Surround 5.1`].cost;
-        }
+          if (totalWorkplaceDaysSurround > 0) {
+            breakdownData[`Studio flat rate Surround 5.1`] = {
+              rate: workplaceFeeSurround,
+              days: totalWorkplaceDaysSurround,
+              cost: workplaceFeeSurround * totalWorkplaceDaysSurround,
+            }
+            totalCost +=
+              breakdownData[`Studio flat rate Surround 5.1`].cost
+          }
 
-        total = totalCost;
+          total = totalCost
 
-        // Anpassung der Anzeige für benötigte Tage oder Stunden
-        let timeKey, timeValue;
-        let totalHours = totalDays * 10; // 1 Tag = 10 Stunden
+          // Anpassung der Anzeige für benötigte Tage oder Stunden
+          let timeKey, timeValue
+          let totalHours = totalDays * 10 // 1 Tag = 10 Stunden
 
-        if (totalHours >= 10) {
-            timeKey = 'Anzahl der benötigten Tage';
-            timeValue = `${totalDays.toFixed(2)} Tage`;
-        } else {
-            timeKey = 'Anzahl der benötigten Stunden';
-            timeValue = `${totalHours.toFixed(2)} Stunden`;
-        }
+          if (totalHours >= 10) {
+            timeKey = "Required number of days"
+            timeValue = `${totalDays.toFixed(2)} Days`
+          } else {
+            timeKey = "Required number of hours"
+            timeValue = `${totalHours.toFixed(2)} hours`
+          }
 
-        parametersData = {
-            'Rolle(n)': roles.join(', '),
-            'Projektlänge': `${minutes} Minuten`,
-            [timeKey]: timeValue
-        };
+          parametersData = {
+            "Role(s)": roles.map(role => roleLabelMap[role] || role).join(", "),
+            Projectlength: `${minutes} minutes`,
+            [timeKey]: timeValue,
+          }
 
-        roles.forEach(role => {
-            let days = breakdownData[role].days;
-            let rate = rateValues[role];
-            let productivity = productivityValues[role];
+          roles.forEach((role) => {
+            let days = breakdownData[role].days
+            let rate = rateValues[role]
+            let productivity = productivityValues[role]
 
             if (days * 10 >= 10) {
-                parametersData[`Produktivität ${role}`] = `${productivity} Minuten/Tag`;
-                parametersData[`Tagessatz ${role}`] = `${rate} €`;
+              parametersData[`Productivity ${roleLabelMap[role] || role}`] =
+                `${productivity} Minutes/Day`
+              parametersData[`Daily rate ${roleLabelMap[role] || role}`] = `${rate} €`
             } else {
-                parametersData[`Produktivität ${role}`] = `${(productivity / 10).toFixed(2)} Minuten/Stunde`;
-                parametersData[`Stundensatz ${role}`] = `${ratePerHourValues[role]} €`;
+              parametersData[`Productivity ${roleLabelMap[role] || role}`] =
+                `${(productivity / 10).toFixed(2)} Minutes/Hour`
+              parametersData[`Hourly rate ${roleLabelMap[role] || role}`] =
+                `${ratePerHourValues[role]} €`
             }
-        });
+          })
 
-        generateBreakdown();
+          generateBreakdown()
+        } else if (projectType === "dreh") {
+          // Berechnung für Dreh
+          const role = document.getElementById("role").value
+          const days = parseFloat(document.getElementById("days").value)
 
-    } else if (projectType === 'dreh') {
-        // Berechnung für Dreh
-        const role = document.getElementById('role').value;
-        const days = parseFloat(document.getElementById('days').value);
+          if (!role || !days || !priceCategory) {
+            document.getElementById("result").innerText =
+              "Please fill out all fields!"
+            return
+          }
 
-        if (!role || !days || !priceCategory) {
-            document.getElementById('result').innerText = 'Bitte alle Felder ausfüllen!';
-            return;
-        }
+          const rate = rates[projectType][role][mappedPriceCategory];
+          const equipmentFee = rates[projectType]["equipmentFee"]
 
-        const rate = rates[projectType][role][priceCategory];
-        const equipmentFee = rates[projectType]['equipmentFee'];
-
-        breakdownData[role] = {
+          breakdownData[role] = {
             rate: rate,
             days: days,
-            cost: rate * days
-        };
+            cost: rate * days,
+          }
 
-        if (role !== 'O-Tonassistent') {
-            breakdownData['Technikpauschale'] = {
-                rate: equipmentFee,
-                days: days,
-                cost: equipmentFee * days
-            };
-            total = breakdownData[role].cost + breakdownData['Technikpauschale'].cost;
-        } else {
-            total = breakdownData[role].cost;
-        }
+          if (role !== "Boom Operator") {
+            breakdownData["Equipment flat rate"] = {
+              rate: equipmentFee,
+              days: days,
+              cost: equipmentFee * days,
+            }
+            total =
+              breakdownData[role].cost + breakdownData["Equipment flat rate"].cost
+          } else {
+            total = breakdownData[role].cost
+          }
 
-        // Anpassung der Anzeige für benötigte Tage oder Stunden
-        let timeKey, timeValue;
-        let totalHours = days * 10;
+          // Anpassung der Anzeige für benötigte Tage oder Stunden
+          let timeKey, timeValue
+          let totalHours = days * 10
 
-        if (totalHours >= 10) {
-            timeKey = 'Anzahl der benötigten Tage';
-            timeValue = `${days.toFixed(2)} Tage`;
-        } else {
-            timeKey = 'Anzahl der benötigten Stunden';
-            timeValue = `${(days * 10).toFixed(2)} Stunden`;
-        }
+          if (totalHours >= 10) {
+            timeKey = "Required number of days"
+            timeValue = `${days.toFixed(2)} Days`
+          } else {
+            timeKey = "Required number of hours"
+            timeValue = `${(days * 10).toFixed(2)} Stunden`
+          }
 
-        // Parameterdaten
-        parametersData = {
-            'Rolle': role,
+          // Parameterdaten
+          parametersData = {
+            Role: role,
             [timeKey]: timeValue,
-        };
+          }
 
-        if (totalHours >= 10) {
-            parametersData['Tagessatz'] = `${rate} €`;
-        } else {
-            parametersData['Stundensatz'] = `${(rate / 10).toFixed(2)} €`;
-        }
+          if (totalHours >= 10) {
+            parametersData["Daily rate"] = `${rate} €`
+          } else {
+            parametersData["Hourly rate"] = `${(rate / 10).toFixed(2)} €`
+          }
 
-        if (role !== 'O-Tonassistent') {
-            parametersData['Technikpauschale'] = `${equipmentFee} € pro Tag`;
-        }
+          if (role !== "Boom Operator") {
+            parametersData["Equipment flat rate"] = `${equipmentFee} € per Day`
+          }
 
-        generateBreakdown();
+          generateBreakdown()
 
-        // Zusätzliche Hinweise
-        if (role === 'O-Tonmeister') {
-            // Hinweis für Technikpauschale
-            const additionalNote = "Die Technikpauschale beinhaltet die Ausstattung für maximal 3 Sprechrollen pro Einstellung. Für größere Setups wird zusätzliches Equipment benötigt, was den Gesamtpreis entsprechend beeinflusst.";
-            document.getElementById('additionalNote').innerText = additionalNote;
-            document.getElementById('additionalNote').style.display = 'block';
-        }
+          // Zusätzliche Hinweise
+          if (role === "Production Sound Mixer") {
+            // Hinweis für Equipment flat rate
+            const additionalNote =
+              "The equipment fee includes gear for up to 3 speaking roles per setup. Larger setups require additional equipment, which will increase the overall cost accordingly."
+            document.getElementById("additionalNote").innerText = additionalNote
+            document.getElementById("additionalNote").style.display = "block"
+          }
 
-        if (priceCategory === '>1,2 Mio.' && role === 'O-Tonmeister') {
+          if (priceCategory === ">1,2 Mio." && role === "Production Sound Mixer") {
             // Persönlicher Hinweis
-            const note = "Ich stehe Ihnen gerne für Anfragen zur Verfügung, würde in diesem Fall aber wahrscheinlich auf erfahrenere Kolleg*innen verweisen. Gerne helfe ich bei der Vermittlung und stehe gegebenenfalls als Assistent zur Verfügung, da meine Hauptexpertise eher in der Postproduktion liegt und ich O-Ton hauptsächlich für kleinere Sets anbiete. Ausnahmen sind natürlich möglich und ergeben sich dann im Gespräch.";
-            document.getElementById('additionalNote2').innerText = note;
-            document.getElementById('additionalNote2').style.display = 'block';
+            const note =
+              "I’m happy to receive inquiries, but in this case I would likely refer you to more experienced colleagues. I’m glad to help with recommendations and could assist on set if needed, since my main expertise lies in post-production and I usually offer location sound services for smaller setups. Of course, exceptions are always possible and can be discussed individually."
+            document.getElementById("additionalNote2").innerText = note
+            document.getElementById("additionalNote2").style.display = "block"
+          }
+        } else {
+          document.getElementById("result").innerText =
+            "Please select a valid project type!"
+          return
         }
 
-    } else {
-        document.getElementById('result').innerText = 'Please select a valid project type!';
-        return;
-    }
+        document.getElementById("result").innerText =
+          `Total Fee: ${total.toFixed(2)} €`
+        document.getElementById("breakdown").style.display = "block"
+        document.getElementById("parameters").style.display = "block"
+      }
 
-    document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
-    document.getElementById('breakdown').style.display = 'block';
-    document.getElementById('parameters').style.display = 'block';
-}
-
-
-
-function generateBreakdown() {
-    // Parameterdaten in einer Tabelle anzeigen
-    let parametersHTML = `<strong>Parameter:</strong><br><table>`;
-    for (let key in parametersData) {
-        parametersHTML += `
+      function generateBreakdown() {
+        // Parameterdaten in einer Tabelle anzeigen
+        let parametersHTML = `<strong>Parameters:</strong><br><table>`
+        for (let key in parametersData) {
+          parametersHTML += `
             <tr>
                 <td><strong>${key}</strong></td>
                 <td>${parametersData[key]}</td>
             </tr>
-        `;
-    }
-    parametersHTML += `</table>`;
-    document.getElementById('parameters').innerHTML = parametersHTML;
-
-    // Breakdown-Daten anzeigen
-    let breakdownHTML = `<strong>Berechnung:</strong><br><table>`;
-    for (let key in breakdownData) {
-        const item = breakdownData[key];
-        let timeUnit = 'Tage';
-        let timeValue = item.days;
-
-        if (item.days < 0.1) {
-            timeUnit = 'Stunden';
-            timeValue = item.days * 10; // 1 Tag = 10 Stunden
+        `
         }
+        parametersHTML += `</table>`
+        document.getElementById("parameters").innerHTML = parametersHTML
 
-        breakdownHTML += `
+        // Breakdown-Daten anzeigen
+        let breakdownHTML = `<strong>Calculation:</strong><br><table>`
+        for (let key in breakdownData) {
+          const item = breakdownData[key]
+          let timeUnit = "Days"
+          let timeValue = item.days
+
+          if (item.days < 0.1) {
+            timeUnit = "Stunden"
+            timeValue = item.days * 10 // 1 Tag = 10 Stunden
+          }
+
+          breakdownHTML += `
             <tr>
-                <td>${key}</td>
+                <td>${roleLabelMap[key] || key}</td>
                 <td><input type="number" class="editable" data-key="${key}" value="${timeValue.toFixed(2)}" onchange="updateItem(this)"> ${timeUnit}</td>
                 <td>@ ${item.rate.toFixed(2)} €</td>
-                <td>= ${(item.cost).toFixed(2)} €</td>
+                <td>= ${item.cost.toFixed(2)} €</td>
             </tr>
-        `;
-    }
-    breakdownHTML += `</table>`;
-    document.getElementById('breakdown').innerHTML = breakdownHTML;
-}
-
-function updateItem(element) {
-    const key = element.getAttribute('data-key');
-    let newValue = parseFloat(element.value);
-    let timeUnit = 'Tage';
-
-    if (newValue < 1) {
-        timeUnit = 'Stunden';
-        newValue = newValue / 10; // Stunden zu Tagen umrechnen
-    }
-
-    breakdownData[key].days = newValue;
-    breakdownData[key].cost = breakdownData[key].rate * newValue;
-
-    // Gesamtbetrag neu berechnen
-    let total = Object.values(breakdownData).reduce((sum, item) => sum + item.cost, 0);
-    document.getElementById('result').innerText = `Gesamtgage: ${total.toFixed(2)} €`;
-
-    // Parameterdaten aktualisieren
-    let totalDays = 0;
-    for (let key in breakdownData) {
-        totalDays += breakdownData[key].days;
-    }
-
-    let timeKey, timeValue;
-    let totalHours = totalDays * 10;
-
-    if (totalHours >= 10) {
-        timeKey = 'Anzahl der benötigten Tage';
-        timeValue = `${totalDays.toFixed(2)} Tage`;
-    } else {
-        timeKey = 'Anzahl der benötigten Stunden';
-        timeValue = `${totalHours.toFixed(2)} Stunden`;
-    }
-
-    parametersData[timeKey] = timeValue;
-
-    // Alte Zeitangabe entfernen
-    delete parametersData['Anzahl der benötigten Tage'];
-    delete parametersData['Anzahl der benötigten Stunden'];
-
-    // Parameteranzeige neu generieren
-    generateBreakdown();
-}
-
-function updateItemPodcast(element) {
-    // Wenn Anpassungen für Podcasts vorgenommen werden sollen, kann diese Funktion erweitert werden.
-}
-
-function shareCalculation() {
-    // Aktuelle Einstellungen erfassen
-    const projectType = document.getElementById('projectType').value;
-    const priceCategory = document.getElementById('priceCategory').value;
-    const role = document.getElementById('role').value;
-    const format = document.getElementById('format').value;
-    const minutes = document.getElementById('minutes').value;
-    const days = document.getElementById('days').value;
-    const podcastType = document.getElementById('podcastType').value;
-
-    // Objekt mit den Einstellungen erstellen
-    const settings = {
-        projectType,
-        priceCategory,
-        role,
-        format,
-        minutes,
-        days,
-        podcastType
-    };
-
-    // Objekt in Query-Parameter umwandeln
-    const params = new URLSearchParams();
-
-    for (const key in settings) {
-        if (settings[key]) {
-            params.append(key, settings[key]);
+        `
         }
-    }
+        breakdownHTML += `</table>`
+        document.getElementById("breakdown").innerHTML = breakdownHTML
+      }
 
-    // Aktuelle URL ohne Parameter
-    const baseUrl = window.location.origin + window.location.pathname;
+      function updateItem(element) {
+        const key = element.getAttribute("data-key")
+        let newValue = parseFloat(element.value)
+        let timeUnit = "Days"
 
-    // Vollständige URL mit Parametern
-    const shareUrl = `${baseUrl}?${params.toString()}`;
+        if (newValue < 1) {
+          timeUnit = "Stunden"
+          newValue = newValue / 10 // Stunden zu Tagen umrechnen
+        }
 
-    // Link in die Zwischenablage kopieren
-    navigator.clipboard.writeText(shareUrl).then(() => {
-        const shareButton = document.getElementById('shareButton');
-        shareButton.innerText = 'Link in die Zwischenablage kopiert';
-        // Nach 3 Sekunden den Text zurücksetzen
-        setTimeout(() => {
-            shareButton.innerText = 'Berechnung teilen';
-        }, 3000);
-    }).catch(err => {
-        alert('Fehler beim Kopieren des Links: ' + err);
-    });
-}
+        breakdownData[key].days = newValue
+        breakdownData[key].cost = breakdownData[key].rate * newValue
 
-window.onload = function() {
-    // URL-Parameter auslesen
-    const params = new URLSearchParams(window.location.search);
+        // Gesamtbetrag neu berechnen
+        let total = Object.values(breakdownData).reduce(
+          (sum, item) => sum + item.cost,
+          0,
+        )
+        document.getElementById("result").innerText =
+          `Gesamtgage: ${total.toFixed(2)} €`
 
-    const projectType = params.get('projectType');
-    if (projectType) {
-        document.getElementById('projectType').value = projectType;
-        updateForm();
+        // Parameterdaten aktualisieren
+        let totalDays = 0
+        for (let key in breakdownData) {
+          totalDays += breakdownData[key].days
+        }
 
-        const priceCategory = params.get('priceCategory');
-        if (priceCategory) {
-            document.getElementById('priceCategory').value = priceCategory;
-            updatePriceCategory();
+        let timeKey, timeValue
+        let totalHours = totalDays * 10
 
-            const podcastType = params.get('podcastType');
+        if (totalHours >= 10) {
+          timeKey = "Required number of days"
+          timeValue = `${totalDays.toFixed(2)} days`
+        } else {
+          timeKey = "Required number of hours"
+          timeValue = `${totalHours.toFixed(2)} hours`
+        }
+
+        parametersData[timeKey] = timeValue
+
+        // Alte Zeitangabe entfernen
+        delete parametersData["Required number of days"]
+        delete parametersData["Required number of hours"]
+
+        // Parameteranzeige neu generieren
+        generateBreakdown()
+      }
+
+      function updateItemPodcast(element) {
+        // Wenn Anpassungen für Podcasts vorgenommen werden sollen, kann diese Funktion erweitert werden.
+      }
+
+      function shareCalculation() {
+        // Aktuelle Einstellungen erfassen
+        const projectType = document.getElementById("projectType").value
+        const priceCategory = document.getElementById("priceCategory").value
+        const role = document.getElementById("role").value
+        const format = document.getElementById("format").value
+        const minutes = document.getElementById("minutes").value
+        const days = document.getElementById("days").value
+        const podcastType = document.getElementById("podcastType").value
+
+        // Objekt mit den Einstellungen erstellen
+        const settings = {
+          projectType,
+          priceCategory,
+          role,
+          format,
+          minutes,
+          days,
+          podcastType,
+        }
+
+        // Objekt in Query-Parameter umwandeln
+        const params = new URLSearchParams()
+
+        for (const key in settings) {
+          if (settings[key]) {
+            params.append(key, settings[key])
+          }
+        }
+
+        // Aktuelle URL ohne Parameter
+        const baseUrl = window.location.origin + window.location.pathname
+
+        // Vollständige URL mit Parametern
+        const shareUrl = `${baseUrl}?${params.toString()}`
+
+        // Link in die Zwischenablage kopieren
+        navigator.clipboard
+          .writeText(shareUrl)
+          .then(() => {
+            const shareButton = document.getElementById("shareButton")
+            shareButton.innerText = "Link copied to clipboard"
+            // Nach 3 Sekunden den Text zurücksetzen
+            setTimeout(() => {
+              shareButton.innerText = "Share Calculation"
+            }, 3000)
+          })
+          .catch((err) => {
+            alert("Error copying the link: " + err)
+          })
+      }
+
+      window.onload = function () {
+        // URL-Parameter auslesen
+        const params = new URLSearchParams(window.location.search)
+
+        const projectType = params.get("projectType")
+        if (projectType) {
+          document.getElementById("projectType").value = projectType
+          updateForm()
+
+          const priceCategory = params.get("priceCategory")
+          if (priceCategory) {
+            document.getElementById("priceCategory").value = priceCategory
+            updatePriceCategory()
+
+            const podcastType = params.get("podcastType")
             if (podcastType) {
-                document.getElementById('podcastType').value = podcastType;
-                updatePodcastType();
+              document.getElementById("podcastType").value = podcastType
+              updatePodcastType()
             }
 
-            const role = params.get('role');
+            const role = params.get("role")
             if (role) {
-                document.getElementById('role').value = role;
+              document.getElementById("role").value = role
             }
 
-            const format = params.get('format');
+            const format = params.get("format")
             if (format) {
-                document.getElementById('format').value = format;
+              document.getElementById("format").value = format
             }
 
-            const minutes = params.get('minutes');
+            const minutes = params.get("minutes")
             if (minutes) {
-                document.getElementById('minutes').value = minutes;
+              document.getElementById("minutes").value = minutes
             }
 
-            const days = params.get('days');
+            const days = params.get("days")
             if (days) {
-                document.getElementById('days').value = days;
+              document.getElementById("days").value = days
             }
 
             // Berechnung automatisch durchführen
-            calculate();
+            calculate()
+          }
         }
-    }
-};
+      }
+    </script>
 
-
-
-</script>
-
-<footer id="site-footer">
-    &copy; 2025 Leo Wang Sound
-    <p><a href="https://leowangsound.de/imprint" class="footer-link">Imprint</a></p>
-     <p><a href="https://leowangsound.de/legal-notice" class="footer-link">Legal-Notice</a></p>
-      <p><a href="https://leowangsound.de/en" class="footer-link">Back to Homepage</a></p>
-</footer>
-
-</body>
+    <footer id="site-footer">
+      &copy; 2025 Leo Wang Sound
+      <p>
+        <a href="https://leowangsound.de/imprint" class="footer-link"
+          >Imprint</a
+        >
+      </p>
+      <p>
+        <a href="https://leowangsound.de/legal-notice" class="footer-link"
+          >Legal-Notice</a
+        >
+      </p>
+      <p>
+        <a href="https://leowangsound.de/en" class="footer-link"
+          >Back to Homepage</a
+        >
+      </p>
+    </footer>
+  </body>
 </html>
