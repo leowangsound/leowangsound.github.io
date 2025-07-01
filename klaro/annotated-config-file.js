@@ -6,6 +6,7 @@ var klaroConfig = {
     cookieExpiresAfterDays: 180,
     cookieDomain: 'leowangsound.de',
     default: false,
+    testing: true,
     mustConsent: true,
     acceptAll: true,
     hideDeclineAll: false,
