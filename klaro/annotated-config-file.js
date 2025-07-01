@@ -49,7 +49,7 @@ var klaroConfig = {
         },
     },
     purposes: ['styling'],
-    contextualConsentOnly: true,
+    contextualConsentOnly: false,
 },
 
         {
