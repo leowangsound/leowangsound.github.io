@@ -57,7 +57,7 @@ var klaroConfig = {
             name: 'youtube',
             title: 'YouTube Embed',
             purposes: ['media'],
-            contextualConsentOnly: true,
+            contextualConsentOnly: false,
             translations: {
                 de: {
                     description: 'YouTube wird verwendet, um Videos direkt auf der Website einzubetten.',
