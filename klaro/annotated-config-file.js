@@ -11,6 +11,8 @@ var klaroConfig = {
     acceptAll: true,
     hideDeclineAll: false,
     hideLearnMore: false,
+    debug: true,
+
 
     translations: {
         de: {
@@ -22,14 +24,11 @@ var klaroConfig = {
                 title: 'Datenschutz-Einstellungen',
                 description: 'Hier kannst du einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind.',
             },
-purposes: {
-    media: {
-        title: 'Externe Medien',
-        description: 'Einbindung von Spotify, YouTube o. ä.',
-    },
-    analytics: {
-        title: 'Besucher-Statistiken',
-    },
+            purposes: {
+                media: {
+                    title: 'Externe Medien',
+                    description: 'Einbindung von Spotify, YouTube o. ä.',
+                },
                 analytics: {
                     title: 'Besucher-Statistiken',
                 },
@@ -38,24 +37,23 @@ purposes: {
     },
 
     services: [
-{
-    name: 'spotify',
-    default: false,
-    translations: {
-        zz: {
-            title: 'Spotify',
+        {
+            name: 'spotify',
+            default: false,
+            translations: {
+                zz: {
+                    title: 'Spotify',
+                },
+                de: {
+                    description: 'Spotify Podcast Player zur direkten Wiedergabe eingebetteter Folgen.',
+                },
+                en: {
+                    description: 'Spotify podcast player for embedded episode playback.',
+                },
+            },
+            purposes: ['media'],
+            contextualConsentOnly: false,
         },
-        de: {
-            description: 'Spotify Podcast Player zur direkten Wiedergabe eingebetteter Folgen.',
-        },
-        en: {
-            description: 'Spotify podcast player for embedded episode playback.',
-        },
-    },
-    purposes: ['media'],
-    contextualConsentOnly: false,
-},
-
         {
             name: 'youtube',
             title: 'YouTube Embed',
@@ -67,19 +65,6 @@ purposes: {
                 }
             }
         }
-        // Optional:
-        // {
-        //     name: 'googlefonts',
-        //     title: 'Google Fonts',
-        //     purposes: ['styling'],
-        //     required: false,
-        //     onlyOnce: true,
-        //     translations: {
-        //         de: {
-        //             description: 'Webfonts von Google werden zur Darstellung verwendet (nicht lokal eingebunden).',
-        //         }
-        //     }
-        // }
     ],
 
     callback: function(consent, service) {
