@@ -34,18 +34,24 @@ var klaroConfig = {
     },
 
     services: [
-        {
-            name: 'spotify',
-            title: 'Spotify Embed',
-            purposes: ['media'],
-            cookies: [],
-            contextualConsentOnly: true,
-            translations: {
-                de: {
-                    description: 'Spotify wird verwendet, um Inhalte direkt auf der Website einzubetten.',
-                }
-            }
+{
+    name: 'spotify',
+    default: false,
+    translations: {
+        zz: {
+            title: 'Spotify',
         },
+        de: {
+            description: 'Spotify Podcast Player zur direkten Wiedergabe eingebetteter Folgen.',
+        },
+        en: {
+            description: 'Spotify podcast player for embedded episode playback.',
+        },
+    },
+    purposes: ['styling'],
+    contextualConsentOnly: true,
+},
+
         {
             name: 'youtube',
             title: 'YouTube Embed',
