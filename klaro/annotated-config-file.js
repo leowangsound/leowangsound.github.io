@@ -22,11 +22,14 @@ var klaroConfig = {
                 title: 'Datenschutz-Einstellungen',
                 description: 'Hier kannst du einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind.',
             },
-            purposes: {
-                media: {
-                    title: 'Externe Medien',
-                    description: 'Einbindung von Spotify, YouTube o. ä.',
-                },
+purposes: {
+    media: {
+        title: 'Externe Medien',
+        description: 'Einbindung von Spotify, YouTube o. ä.',
+    },
+    analytics: {
+        title: 'Besucher-Statistiken',
+    },
                 analytics: {
                     title: 'Besucher-Statistiken',
                 },
@@ -49,7 +52,7 @@ var klaroConfig = {
             description: 'Spotify podcast player for embedded episode playback.',
         },
     },
-    purposes: ['styling'],
+    purposes: ['media'],
     contextualConsentOnly: false,
 },
 
