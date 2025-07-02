@@ -73,3 +73,12 @@ var klaroConfig = {
         );
     },
 };
+
+callback: function(consent, service) {
+  if (window.klaro && klaro.manager && klaro.manager.visible) {
+    document.body.classList.add('klaro--consent-modal-open');
+  } else {
+    document.body.classList.remove('klaro--consent-modal-open');
+  }
+},
+
