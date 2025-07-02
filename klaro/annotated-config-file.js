@@ -39,7 +39,7 @@ var klaroConfig = {
     services: [
         {
             name: 'spotify',
-            default: false,
+            default: true,
             translations: {
                 zz: {
                     title: 'Spotify',
@@ -59,6 +59,7 @@ var klaroConfig = {
             title: 'YouTube Embed',
             purposes: ['media'],
             contextualConsentOnly: false,
+            default: true,
             translations: {
                 de: {
                     description: 'YouTube wird verwendet, um Videos direkt auf der Website einzubetten.',
