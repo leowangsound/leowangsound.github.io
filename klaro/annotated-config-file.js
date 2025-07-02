@@ -22,7 +22,7 @@ var klaroConfig = {
             },
             consentModal: {
             title: 'Datenschutz-Einstellungen',
-            description: 'Hier kannst du einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind. Mehr dazu findest du in meiner <a href="https://leowangsound.de/datenschutzerklärung" target="_blank" style="color:#53ca89;">Datenschutzerklärung</a>.',
+            description: 'Hier können sie einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind.',
             },
             purposes: {
                 media: {
