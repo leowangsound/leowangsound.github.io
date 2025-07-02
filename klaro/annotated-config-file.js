@@ -21,8 +21,8 @@ var klaroConfig = {
                 description: 'Hallo! Ich verwende Cookies und externe Inhalte (z. B. Spotify), um meine Website nutzungsfreundlich zu gestalten. Du kannst selbst entscheiden, was geladen werden darf.',
             },
             consentModal: {
-                title: 'Datenschutz-Einstellungen',
-                description: 'Hier kannst du einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind.',
+            title: 'Datenschutz-Einstellungen',
+            description: 'Hier kannst du einsehen und anpassen, welche externen Dienste auf dieser Seite eingebunden sind. Mehr dazu findest du in meiner <a href="https://leowangsound.de/datenschutzerklärung" target="_blank" style="color:#53ca89;">Datenschutzerklärung</a>.',
             },
             purposes: {
                 media: {
