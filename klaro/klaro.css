@@ -738,3 +738,103 @@ to create a white background.
 .klaro .cookie-notice-hidden {
   display: none !important;
 }
+
+/* Klaro Cookie Banner Custom Design für Leo Wang Sound */
+
+.klaro {
+    /* Blurry, halbtransparenter Layer über gesamte Seite */
+    position: fixed !important;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 9999 !important;
+    pointer-events: none; /* lässt nur Modal durch, wird gleich überschrieben */
+}
+.klaro .cookie-modal {
+    /* Haupt-Banner am unteren Bildschirmrand, leicht "floating" */
+    position: fixed !important;
+    left: 50%;
+    bottom: 3vh;
+    transform: translateX(-50%);
+    width: 96vw; max-width: 540px;
+    background: rgba(20,22,25,0.88);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px #000b;
+    color: #F4F2F0;
+    font-family: 'Montserrat', sans-serif;
+    backdrop-filter: blur(16px) saturate(120%);
+    border: 1.5px solid #24292f77;
+    z-index: 10001 !important;
+    pointer-events: auto;
+    padding: 2.2rem 2rem 1.8rem 2rem;
+    text-align: left;
+}
+
+/* Optional: Schließe Button explizit am oberen rechten Rand */
+.klaro .cm-close {
+    position: absolute; top: 12px; right: 18px;
+    color: #C8D7D2;
+    font-size: 1.7rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.klaro .cm-header, .klaro .cm-title {
+    color: #C8D7D2;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.4em;
+    text-transform: uppercase;
+}
+.klaro .cm-description {
+    color: #F4F2F0;
+    font-size: 1.1rem;
+    margin-bottom: 1.2em;
+}
+
+.klaro .cm-list-input label {
+    color: #ff9500;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+.klaro .cm-btn {
+    background: #C8D7D2;
+    color: #000;
+    border-radius: 9px;
+    border: none;
+    padding: 12px 24px;
+    margin: 12px 10px 0 0;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 2px 12px #2228;
+    cursor: pointer;
+    transition: background 0.22s, color 0.22s;
+}
+.klaro .cm-btn.cm-btn-decline {
+    background: #333;
+    color: #fff;
+}
+.klaro .cm-btn:hover {
+    background: #ff9500;
+    color: #191919;
+}
+.klaro .cm-footer a {
+    color: #ff9500 !important;
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 1.03rem;
+}
+.klaro .cm-footer a:hover {
+    color: #C8D7D2 !important;
+}
+
+/* BLUR über gesamte Seite */
+body.klaro--consent-modal-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998 !important;
+    backdrop-filter: blur(8px) saturate(110%);
+    background: rgba(0,0,0,0.15);
+    pointer-events: none;
+}
