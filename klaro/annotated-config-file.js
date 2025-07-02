@@ -16,7 +16,7 @@ var klaroConfig = {
 
     translations: {
         de: {
-            privacyPolicyUrl: '/datenschutzerklaerung',
+            privacyPolicyUrl: 'https://leowangsound.de/datenschutzerkl%C3%A4rung',
             consentNotice: {
                 description: 'Hallo! Ich verwende Cookies und externe Inhalte (z. B. Spotify), um meine Website nutzungsfreundlich zu gestalten. Du kannst selbst entscheiden, was geladen werden darf.',
             },
